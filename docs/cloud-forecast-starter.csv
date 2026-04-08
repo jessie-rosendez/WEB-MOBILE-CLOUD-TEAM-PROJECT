@@ -1,0 +1,6 @@
+Tier,Name,Audience,HostingCompute,Storage,Database,CDN,Monitoring,AIAPI,Total
+Tier 1,Pilot Launch,1K monthly visitors,480,120,240,180,120,300,1440
+Tier 2,Campus Buzz,5K monthly visitors,960,240,540,360,240,780,3120
+Tier 3,Regional Traction,20K monthly visitors,2400,480,1200,840,480,1920,7320
+Tier 4,Kickstarter Surge,75K monthly visitors,6000,960,3000,2100,960,4500,17520
+Tier 5,National Scale,250K monthly visitors,13200,2100,6600,4800,1920,10200,38820

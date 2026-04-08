@@ -1,0 +1,5 @@
+- [User Profile](user_profile.md) — BTE400 student, Herbert Business School, Spring 2026, 5-person team, branch homepage-jessie
+- [Project Architecture](project_architecture.md) — File map, section-to-data map, rationale for single-page static build, TBD areas (GCP, Excel)
+- [Scope & Deliverables](scope_and_deliverables.md) — 5 deliverables with done/open tracking, tier cost table, Kickstarter perks, sprint goals
+- [Known Issues & Open Items](known_issues.md) — Catalog count (17 vs 14+1), no cart persistence, GCP not built, SCRUM roles TBD, no images
+- [Tools & Dependencies](tools_and_dependencies.md) — HTML/CSS/JS + Google Fonts confirmed; GCP, Excel, Kickstarter planned but not built

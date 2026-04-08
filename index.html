@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phantm | BTE400 Project Skeleton</title>
+    <meta
+      name="description"
+      content="A BTE400 gaming and accessories storefront skeleton for Phantm with a Razer-inspired catalog, the custom Phantm Spectre X chair, cart starter, agent data, forecast, Kickstarter preview, and Scrum roadmap."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="site-noise" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Phantm home">
+          <span class="brand-mark">PH</span>
+          <span class="brand-name">Phantm</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+        >
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-navigation" aria-label="Primary">
+          <a href="#dashboard">Project</a>
+          <a href="#catalog">Catalog</a>
+          <a href="#signature-product">Signature</a>
+          <a href="#agent">Agent Data</a>
+          <a href="#forecast">Forecast</a>
+          <a href="#kickstarter">Kickstarter</a>
+          <a href="#scrum">Scrum</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-chip" href="#kickstarter">Chair Campaign</a>
+          <button
+            class="header-chip header-chip-button cart-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="cart-panel"
+          >
+            Cart
+            <span class="cart-pill" data-cart-count>0</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="promo-bar">
+        <p>
+          Scrum board image check-in is due Wednesday.
+          <span data-countdown>00d 00h 00m 00s</span>
+        </p>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            Spring 2026 // BTE 400 // Instructor Wendy Chun // 5-person team
+          </p>
+          <h1>Phantm now has a Razer-style catalog spine and a standout custom chair.</h1>
+          <p class="hero-text">
+            I shifted the project toward your actual direction: a
+            Razer-inspired gaming storefront under the Phantm brand, benchmarked
+            against the current Razer lineup while reserving the signature slot
+            for a custom chair your team can own.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#catalog">Launch Catalog</a>
+            <a class="button button-secondary" href="#dashboard"
+              >View Deliverables</a
+            >
+          </div>
+
+          <div class="hero-metrics">
+            <article>
+              <strong>17</strong>
+              <span>Catalog products for a 5-person team</span>
+            </article>
+            <article>
+              <strong>1</strong>
+              <span>Custom chair positioned as the signature product</span>
+            </article>
+            <article>
+              <strong>5</strong>
+              <span>Kickstarter perks and cloud forecast tiers ready to refine</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-stage" aria-hidden="true">
+          <div class="stage-beam stage-beam-left"></div>
+          <div class="stage-beam stage-beam-right"></div>
+          <div class="stage-spine"></div>
+
+          <div class="chamber-panel chamber-panel-left"></div>
+          <div class="chamber-panel chamber-panel-right"></div>
+
+          <div class="command-chair"></div>
+          <div class="platform"></div>
+          <div class="headset"></div>
+          <div class="monitor"></div>
+          <div class="orb"></div>
+          <div class="keyboard"></div>
+          <div class="mouse"></div>
+
+          <div class="hero-stage-note hero-stage-note-left">
+            17-product lineup
+          </div>
+          <div class="hero-stage-note hero-stage-note-right">
+            Custom chair drop
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard" id="dashboard">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Project Dashboard</p>
+            <h2>Everything the assignment is asking for, mapped into the site</h2>
+            <p class="section-summary">
+              The skeleton below is built around
+              <strong>Gaming &amp; Accessories</strong> for
+              <strong>Phantm</strong>. The catalog intentionally uses current
+              Razer product names checked on <strong>April 7, 2026</strong>,
+              while <strong>Phantm Spectre X</strong> stays as the one original
+              extra signature product.
+            </p>
+          </div>
+          <a class="text-link" href="#tracker">See tracker</a>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <span class="status-pill status-live">Built</span>
+            <h3>Online Storefront</h3>
+            <p>
+              Homepage structure, catalog layout, product cards, and a front-end
+              cart starter are already in motion.
+            </p>
+          </article>
+
+          <article class="dashboard-card">
+            <span class="status-pill status-live">Locked</span>
+            <h3>Catalog Structure</h3>
+            <p>
+              This build now uses <strong>17 catalog products + 1 signature
+              chair</strong>, and the site keeps the exact Razer catalog names
+              while treating the Phantm chair as the additional original item.
+            </p>
+          </article>
+
+          <article class="dashboard-card">
+            <span class="status-pill status-live">Started</span>
+            <h3>Customer Service Agent Data</h3>
+            <p>
+              Contact info, location, service details, pricing, and FAQ copy are
+              seeded so your RAG work has something concrete to begin with.
+            </p>
+          </article>
+
+          <article class="dashboard-card">
+            <span class="status-pill status-live">Started</span>
+            <h3>Cloud Forecast</h3>
+            <p>
+              Five annual scale-up tiers, cost categories, and assumptions are
+              laid out for your spreadsheet and graph.
+            </p>
+          </article>
+
+          <article class="dashboard-card">
+            <span class="status-pill status-live">Started</span>
+            <h3>Kickstarter Preview</h3>
+            <p>
+              The custom chair, fixed-funding goal, five reward tiers, and
+              pitch-video requirements are framed for preview mode.
+            </p>
+          </article>
+
+          <article class="dashboard-card">
+            <span class="status-pill status-plan">Planned</span>
+            <h3>SCRUM Roadmap</h3>
+            <p>
+              Three sprints, role rotation reminders, and weekly Scrum board
+              checkpoints are now visible in the site itself.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="tracker" id="tracker">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Project Tracker</p>
+            <h2>Bird's-Eye Review And Running Checklist</h2>
+            <p class="section-summary">
+              This section is here to keep the team grounded. It shows what is
+              already working, what still needs real team decisions, and what
+              should be the next focused push instead of guessing.
+            </p>
+          </div>
+          <a class="text-link" href="#catalog">Jump to catalog</a>
+        </div>
+
+        <div class="tracker-summary" data-tracker-summary></div>
+        <div class="tracker-grid" data-checklist-grid></div>
+
+        <article class="review-card">
+          <h3>Audit Notes</h3>
+          <ul class="review-list" data-review-list></ul>
+        </article>
+      </section>
+
+      <section class="catalog-shell" id="catalog">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Online Shopping Cart Store</p>
+            <h2>Catalog Starter Build</h2>
+            <p class="section-summary">
+              The product names below now benchmark the current Razer lineup,
+              while the prices remain class-project placeholders so your team
+              can tune the business model later without chasing live storefront
+              numbers.
+            </p>
+          </div>
+          <div class="catalog-count-note">17 Razer products + 1 Phantm chair</div>
+        </div>
+
+        <div class="catalog-toolbar" data-filter-bar></div>
+
+        <div class="catalog-layout">
+          <div class="catalog-grid" data-catalog-grid></div>
+
+          <aside class="cart-panel" id="cart-panel">
+            <div class="cart-panel-header">
+              <div>
+                <p class="section-kicker">Cart</p>
+                <h3>Shopping Cart Demo</h3>
+              </div>
+              <button class="cart-close" type="button" aria-label="Close cart">
+                Close
+              </button>
+            </div>
+
+            <p class="cart-meta">
+              A clean front-end shopping cart gives your online store requirement
+              meaningful progress right away, even while pricing stays in
+              placeholder mode.
+            </p>
+
+            <div class="cart-items" data-cart-items aria-live="polite"></div>
+
+            <div class="cart-summary">
+              <div>
+                <span>Total items</span>
+                <strong data-cart-quantity>0</strong>
+              </div>
+              <div>
+                <span>Subtotal</span>
+                <strong data-cart-subtotal>$0.00</strong>
+              </div>
+            </div>
+
+            <button class="button button-primary cart-checkout" type="button">
+              Checkout Placeholder
+            </button>
+            <p class="checkout-note" data-checkout-note>
+              Checkout is a front-end placeholder right now. The next real step
+              would be persistence plus a checkout or order workflow.
+            </p>
+            <p class="cart-footnote">
+              Next step: persist cart state and connect a real checkout flow or
+              order form later.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="signature-product" id="signature-product">
+        <article class="signature-copy">
+          <p class="section-kicker">Signature Custom Product</p>
+          <h2>Phantm Spectre X</h2>
+          <p>
+            A flagship aggressive racing-style gaming chair concept built to
+            give your team something original beyond the benchmark catalog. The
+            shape is sharper, louder, and more performance-driven than a
+            standard ergonomic chair, but it still keeps the premium utility
+            features that make it feel like a serious product pitch.
+          </p>
+
+          <div class="spec-chips">
+            <span>Racing shell silhouette</span>
+            <span>Adaptive lumbar spine</span>
+            <span>Reactive under-seat lighting</span>
+            <span>Hidden gear storage tray</span>
+            <span>Modular headset + controller mounts</span>
+          </div>
+
+          <div class="signature-profile">
+            <article>
+              <span>Target Buyer</span>
+              <strong>Competitive gamer / streamer</strong>
+            </article>
+            <article>
+              <span>Target Price</span>
+              <strong>$799 early-backer</strong>
+            </article>
+            <article>
+              <span>Core Hook</span>
+              <strong>Racing form with creator utility</strong>
+            </article>
+          </div>
+
+          <ul class="feature-list">
+            <li>Made to anchor both the homepage story and Kickstarter preview.</li>
+            <li>Built around a sharper bucket-seat silhouette with winged shoulders and aggressive edge lines.</li>
+            <li>Distinct enough to feel original while the rest of the catalog benchmarks Razer.</li>
+            <li>Easy to pitch visually in a 1-5 minute campaign video because the form reads immediately.</li>
+          </ul>
+
+          <a class="button button-primary" href="#kickstarter"
+            >Open Campaign Preview</a
+          >
+        </article>
+
+        <article class="signature-visual" aria-hidden="true">
+          <div class="signature-ring"></div>
+          <div class="signature-chair-back"></div>
+          <div class="signature-chair-seat"></div>
+          <div class="signature-chair-base"></div>
+          <div class="signature-chair-arm signature-chair-arm-left"></div>
+          <div class="signature-chair-arm signature-chair-arm-right"></div>
+          <div class="signature-glow"></div>
+        </article>
+      </section>
+
+      <section class="agent-knowledge" id="agent">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Customer Service Agent</p>
+            <h2>Structured And Unstructured Data Starter</h2>
+            <p class="section-summary">
+              This content gives your future GCP support agent a useful first
+              knowledge base with Phantm contact details, chair-specific FAQ
+              language, and clear notes on the Razer catalog plus the original
+              Phantm chair.
+            </p>
+          </div>
+          <a class="text-link" href="#forecast">Jump to cloud spend</a>
+        </div>
+
+        <div class="agent-grid">
+          <article class="info-card">
+            <p class="info-label">Contact Information</p>
+            <ul class="info-list" data-contact-list></ul>
+          </article>
+
+          <article class="info-card">
+            <p class="info-label">Location</p>
+            <ul class="info-list" data-location-list></ul>
+          </article>
+
+          <article class="info-card">
+            <p class="info-label">Services</p>
+            <ul class="info-list" data-service-list></ul>
+          </article>
+
+          <article class="info-card">
+            <p class="info-label">Pricing Information</p>
+            <ul class="info-list" data-pricing-list></ul>
+          </article>
+
+          <article class="info-card info-card-wide">
+            <p class="info-label">FAQ / Unstructured Website Content</p>
+            <div class="faq-list" data-faq-list></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="forecast" id="forecast">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Cloud Operating Forecast</p>
+            <h2>Five Tier Yearly Scale-Up Starter</h2>
+            <p class="section-summary">
+              These estimates only include cloud categories: compute, storage,
+              database, CDN, monitoring, and AI/API usage. That keeps the scope
+              aligned with the assignment.
+            </p>
+          </div>
+          <a class="text-link" href="#kickstarter">See campaign preview</a>
+        </div>
+
+        <div class="forecast-grid">
+          <article class="forecast-chart-panel">
+            <h3>Annual Spend Graph</h3>
+            <div class="forecast-chart" data-forecast-chart></div>
+          </article>
+
+          <div class="forecast-cards" data-forecast-cards></div>
+        </div>
+
+        <article class="assumption-card">
+          <h3>Assumptions Used</h3>
+          <ul class="assumptions-list" data-assumptions-list></ul>
+        </article>
+      </section>
+
+      <section class="kickstarter" id="kickstarter">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Kickstarter Preview</p>
+            <h2>Campaign Skeleton For The Signature Product</h2>
+            <p class="section-summary">
+              This is preview-only content. It is structured to match the fixed
+              funding rule, the under-$10K goal requirement, and the
+              five-perk rule for your 5-person team.
+            </p>
+          </div>
+          <a class="text-link" href="#signature-product">Back to signature</a>
+        </div>
+
+        <div class="kickstarter-layout">
+          <article class="campaign-card">
+            <span class="campaign-badge">Preview Only</span>
+            <h3>Phantm Spectre X Kickstarter Outline</h3>
+
+            <div class="campaign-stats">
+              <div>
+                <span>Campaign goal</span>
+                <strong>$9,500</strong>
+              </div>
+              <div>
+                <span>Funding type</span>
+                <strong>Fixed funding</strong>
+              </div>
+              <div>
+                <span>Reward tiers</span>
+                <strong>5 perks</strong>
+              </div>
+              <div>
+                <span>Pitch video</span>
+                <strong>1-5 minutes</strong>
+              </div>
+              <div>
+                <span>Compliance focus</span>
+                <strong>Preview rules + funding tab only</strong>
+              </div>
+              <div>
+                <span>Core angle</span>
+                <strong>Aggressive racing chair + premium utility</strong>
+              </div>
+            </div>
+
+            <ul class="feature-list">
+              <li>Show only the goal and fixed funding fields in the funding tab.</li>
+              <li>Keep personal and payout details out of the preview stage.</li>
+              <li>Make sure the pitch stays focused on the problem, product, and value.</li>
+              <li>Lead the video with the racing silhouette first, then reveal the storage, lighting, and modular mounts.</li>
+              <li>Keep all 5 reward tiers active so the preview matches the team-size rule.</li>
+            </ul>
+          </article>
+
+          <div class="perk-grid" data-perk-grid></div>
+        </div>
+      </section>
+
+      <section class="scrum" id="scrum">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">SCRUM Framework</p>
+            <h2>Three Sprint Delivery Map</h2>
+            <p class="section-summary">
+              Rotate the Product Owner and Scrum Master roles each sprint while
+              keeping every team member contributing to the sprint deliverables.
+            </p>
+          </div>
+          <a class="text-link" href="#top">Back to top</a>
+        </div>
+
+        <div class="scrum-grid" data-sprint-grid></div>
+
+        <div class="scrum-reminders">
+          <article>
+            <strong>Every Wednesday</strong>
+            <span>Submit Scrum board images throughout the project timeline.</span>
+          </article>
+          <article>
+            <strong>2-5 Minutes</strong>
+            <span>Demo each sprint deliverable during the instructor review.</span>
+          </article>
+          <article>
+            <strong>Role Rotation</strong>
+            <span>Take turns as Product Owner and Scrum Master each sprint.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="next-steps">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Next Steps</p>
+            <h2>How To Keep The Momentum Going</h2>
+            <p class="section-summary">
+              You now have a strong skeleton. These are the next high-impact
+              moves that will turn it into your team’s real submission.
+            </p>
+          </div>
+        </div>
+
+        <div class="next-grid">
+          <article class="next-card">
+            <h3>1. Lock The Team Decisions</h3>
+            <p>
+              The biggest top-level decisions are now set. Use this space to
+              assign ownership for agent work, forecast work, Kickstarter work,
+              and presentation prep.
+            </p>
+          </article>
+
+          <article class="next-card">
+            <h3>2. Replace The Placeholder Details</h3>
+            <p>
+              Keep the Razer product names as your benchmark catalog, but start
+              replacing placeholder pricing notes, support details, chair specs,
+              and campaign copy with final team-approved content.
+            </p>
+          </article>
+
+          <article class="next-card">
+            <h3>3. Connect The Deliverables</h3>
+            <p>
+              Wire the cart to persistence, move the forecast into Excel, build
+              the agent knowledge base, and draft the Kickstarter pitch assets.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Phantm // BTE400 starter built to turn planning into visible progress.</p>
+      <div class="footer-links">
+        <a href="#catalog">Catalog</a>
+        <a href="#forecast">Forecast</a>
+        <a href="#scrum">Scrum</a>
+      </div>
+    </footer>
+  </body>
+</html>
