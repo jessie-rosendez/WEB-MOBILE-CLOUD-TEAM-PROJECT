@@ -64,6 +64,9 @@
   <p>Shop the full Phantm lineup — laptops, peripherals, audio, controllers, and the Phantm Spectre X.</p>
 </div>
 
+<!-- ── Featured Carousel (populated by initStore) ── -->
+<div id="storeFeatured"></div>
+
 <!-- ── Category Tabs ── -->
 <div class="category-tabs">
   <div class="tabs-inner" id="categoryTabs"></div>
@@ -132,6 +135,12 @@
     clearTimeout(window._toastTimer);
     window._toastTimer = setTimeout(() => toast.classList.remove("show"), 2000);
   };
+
+  // Handle carousel buy buttons
+  document.addEventListener("click", e => {
+    const buyBtn = e.target.closest(".cc-buy[data-buy]");
+    if (buyBtn) { cartAdd(buyBtn.dataset.buy); }
+  });
 </script>
 </body>
 </html>

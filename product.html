@@ -82,11 +82,15 @@
       <div id="pdpBadge" style="margin-bottom:16px"></div>
       <h1 class="pdp-name" id="pdpName">Loading…</h1>
       <p class="pdp-sub" id="pdpSub"></p>
+      <!-- Color / variant selector injected here -->
+      <div id="pdpVariants"></div>
       <p class="pdp-price" id="pdpPrice"></p>
       <div class="pdp-actions">
         <button class="btn-green" id="pdpBuyBtn" style="padding:14px 32px">Add to Cart</button>
         <a class="btn-outline" href="store.html">← Back to Store</a>
       </div>
+      <!-- Protection upsell injected here -->
+      <div id="pdpProtection"></div>
     </div>
   </div>
 </section>
@@ -101,6 +105,11 @@
     <p class="video-label" id="videoLabel">Watch: Product Video</p>
   </div>
 </section>
+
+<!-- ── Awards / Press Badges ── -->
+<div class="pdp-awards" id="pdpAwards">
+  <div class="pdp-awards-inner" id="awardsInner"></div>
+</div>
 
 <!-- ── Features ── -->
 <section class="features-section" id="pdp-features">
@@ -119,6 +128,15 @@
 <section class="compare-section" id="pdp-compare">
   <h2>Compare Models</h2>
   <div class="compare-table" id="compareTable"></div>
+</section>
+
+<!-- ── Top Picks With Your Purchase ── -->
+<section class="pdp-top-picks" id="pdpTopPicks">
+  <div class="pdp-top-picks-inner">
+    <h2>Top Picks With Your Purchase</h2>
+    <p class="tp-sub">Gear trusted by the same players who choose this product.</p>
+    <div class="top-picks-grid" id="topPicksGrid"></div>
+  </div>
 </section>
 
 <!-- ── Footer ── -->
@@ -365,6 +383,106 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pdp-compare").style.display = "none";
   }
 
+  /* ── Color / Variant Selector ── */
+  const variants = COLOR_OPTIONS[p.tag];
+  if (variants && variants.length > 1) {
+    document.getElementById("pdpVariants").innerHTML = `
+      <div class="pdp-variants">
+        <p class="pdp-variants-label">Color — <span id="selectedVariant">${variants[0].name}</span></p>
+        <div class="pdp-variant-swatches">
+          ${variants.map((v, i) => `
+            <button class="variant-swatch${i === 0 ? " active" : ""}" data-variant="${v.name}">
+              <span class="variant-dot" style="background:${v.hex}"></span>
+              ${v.name}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+    document.getElementById("pdpVariants").addEventListener("click", e => {
+      const sw = e.target.closest(".variant-swatch");
+      if (!sw) return;
+      document.querySelectorAll(".variant-swatch").forEach(b => b.classList.remove("active"));
+      sw.classList.add("active");
+      document.getElementById("selectedVariant").textContent = sw.dataset.variant;
+    });
+  }
+
+  /* ── Protection Upsell ── */
+  const protPrice = Math.round(p.price * 0.12 / 5) * 5; // ~12% of price rounded to $5
+  document.getElementById("pdpProtection").innerHTML = `
+    <div class="pdp-protection">
+      <p class="pdp-protection-title">Add Phantm Care Protection</p>
+      <div class="protection-options">
+        <label class="protection-opt selected">
+          <input type="radio" name="protection" value="2yr" checked>
+          <div class="protection-opt-info">
+            <h4>2-Year Coverage</h4>
+            <p>Covers defects, drops, and accidental damage. Free same-day replacement.</p>
+            <p class="protection-opt-price">+${fmt(protPrice)}</p>
+          </div>
+        </label>
+        <label class="protection-opt">
+          <input type="radio" name="protection" value="none">
+          <div class="protection-opt-info">
+            <h4>No Thanks</h4>
+            <p>Standard 1-year manufacturer warranty only.</p>
+            <p class="protection-opt-price">Free</p>
+          </div>
+        </label>
+      </div>
+    </div>
+  `;
+  document.getElementById("pdpProtection").addEventListener("change", e => {
+    document.querySelectorAll(".protection-opt").forEach(opt => {
+      opt.classList.toggle("selected", opt.querySelector("input").checked);
+    });
+  });
+
+  /* ── Awards / Press Badges ── */
+  const awards = AWARDS[p.tag];
+  if (awards && awards.length) {
+    document.getElementById("awardsInner").innerHTML = awards.map(a => `
+      <div class="award-badge">
+        <span class="award-icon">${a.icon}</span>
+        <span class="award-source">${a.source}</span>
+        <span class="award-label">${a.label}</span>
+      </div>
+    `).join("");
+  } else {
+    document.getElementById("pdpAwards").style.display = "none";
+  }
+
+  /* ── Top Picks ── */
+  const pickIds = TOP_PICKS_IDS[p.tag] || [];
+  const picks = pickIds.map(id => PRODUCTS.find(x => x.id === id)).filter(Boolean).slice(0, 4);
+  if (picks.length) {
+    document.getElementById("topPicksGrid").innerHTML = picks.map(pick => `
+      <div class="top-pick-card" style="--card-glow:${pick.glow}">
+        <a href="product.html?id=${pick.id}" class="top-pick-visual">
+          ${getIcon(pick.tag)}
+        </a>
+        <div class="top-pick-info">
+          <h4>${pick.name}</h4>
+          <p class="tp-price">${fmt(pick.price)}</p>
+          <a class="tp-learn" href="product.html?id=${pick.id}">Learn More &gt;</a>
+        </div>
+      </div>
+    `).join("");
+    /* Swap SVG for real images on top picks */
+    document.querySelectorAll(".top-pick-visual").forEach(el => {
+      const pick = picks.find(x => el.href.includes(x.id));
+      if (!pick) return;
+      const img = new Image();
+      img.onload = () => {
+        el.innerHTML = `<img src="src/images/${pick.id}.jpg" alt="${pick.name}" style="width:65%;object-fit:contain;filter:drop-shadow(0 0 12px ${pick.glow})"/>`;
+      };
+      img.src = `src/images/${pick.id}.jpg`;
+    });
+  } else {
+    document.getElementById("pdpTopPicks").style.display = "none";
+  }
+
   /* ── Add-to-cart ── */
   const addToCart = () => {
     cartAdd(p.id);
@@ -382,7 +500,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("buyBarBtn").addEventListener("click", addToCart);
 
   /* ── Subnav active link on scroll ── */
-  const sections = ["pdp-overview","pdp-features","pdp-specs","pdp-compare"].map(id => document.getElementById(id)).filter(Boolean);
+  const sections = ["pdp-overview","pdp-features","pdp-specs","pdp-compare","pdpTopPicks"].map(id => document.getElementById(id)).filter(Boolean);
   const navLinks = document.querySelectorAll(".subnav-links a");
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {

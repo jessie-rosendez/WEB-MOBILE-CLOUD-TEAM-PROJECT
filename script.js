@@ -122,6 +122,50 @@ function initStore() {
   const tabs = document.getElementById("categoryTabs");
   if (!grid || !tabs) return;
 
+  /* ── Featured carousel: "Fresh Off The Line" — NEW-badged products ── */
+  const featuredContainer = document.getElementById("storeFeatured");
+  if (featuredContainer) {
+    const featured = PRODUCTS.filter(p => p.badge === "NEW").slice(0, 8);
+    featuredContainer.innerHTML = `
+      <div class="store-featured">
+        <div class="store-featured-header">
+          <h2>Fresh Off The Line</h2>
+          <a href="store.html">View All &gt;</a>
+        </div>
+        <p class="store-featured-sub">Our newest drops — just launched and ready to ship.</p>
+        <div class="carousel-track" id="carouselTrack">
+          ${featured.map(p => {
+            const href = `product.html?id=${p.id}`;
+            return `
+            <div class="carousel-card" style="--card-glow:${p.glow}">
+              <a href="${href}" class="carousel-card-visual" data-cimg="src/images/${p.id}.jpg" data-ctag="${p.tag}">
+                ${getIcon(p.tag)}
+                ${p.badge ? `<span class="cc-badge-overlay">${p.badge}</span>` : ""}
+              </a>
+              <div class="carousel-card-info">
+                <h4>${p.name}</h4>
+                <p class="cc-sub">${p.sub}</p>
+                <p class="cc-price">${fmt(p.price)}</p>
+              </div>
+              <div class="carousel-card-cta">
+                <a class="cc-learn" href="${href}">Learn More</a>
+                <button class="cc-buy" data-buy="${p.id}">Buy</button>
+              </div>
+            </div>`;
+          }).join("")}
+        </div>
+      </div>
+    `;
+    /* Swap SVG for real images on carousel cards */
+    featuredContainer.querySelectorAll(".carousel-card-visual[data-cimg]").forEach(el => {
+      const img = new Image();
+      img.onload = () => {
+        el.innerHTML = `<img src="${el.dataset.cimg}" alt="" style="width:70%;max-width:160px;object-fit:contain;filter:drop-shadow(0 0 16px var(--card-glow))"/>`;
+      };
+      img.src = el.dataset.cimg;
+    });
+  }
+
   // Read ?cat= from URL to support nav deep-links (e.g. store.html?cat=PC)
   const urlCat = new URLSearchParams(location.search).get("cat") || "All";
   const validCats = ["All", ...new Set(PRODUCTS.map(p => p.cat))];
@@ -521,6 +565,70 @@ const COMPARE_TABLES = {
       { label:"Max Load",      vals:["299 lbs","299 lbs","299 lbs"] },
     ]
   },
+};
+
+/* ─── Color / Variant Options per product type ──────────────── */
+const COLOR_OPTIONS = {
+  Laptop:     [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury Silver", hex:"#b0b4b8" }],
+  Mouse:      [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
+  "Mouse Mat":[{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }],
+  Keyboard:   [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green Edition", hex:"#44D62C" }],
+  Headset:    [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
+  Speakers:   [{ name:"Phantom Black", hex:"#111" }],
+  Controller: [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
+  Dock:       [{ name:"Phantom Black", hex:"#111" }],
+  Charging:   [{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }],
+  Chair:      [{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }, { name:"Mercury White", hex:"#ddd" }],
+};
+
+/* ─── Top Picks (4 related product IDs per product type) ────── */
+const TOP_PICKS_IDS = {
+  Laptop:     ["viper-v4",   "bw-v4",     "bs-v3",    "tb5-dock"],
+  Mouse:      ["bw-v4",      "firefly",   "bs-v3",    "hunts-8k"],
+  "Mouse Mat":["viper-v4",   "bw-v4",     "bs-v3",    "hyperflux"],
+  Keyboard:   ["viper-v4",   "bs-v3",     "firefly",  "blade-16"],
+  Headset:    ["viper-v4",   "bw-v4",     "nommo-v2", "bs-v3"],
+  Speakers:   ["bs-v3",      "kraken-v4", "bw-v4",    "viper-v4"],
+  Controller: ["blade-16",   "bs-v3",     "bw-v4",    "kishi-v3"],
+  Dock:       ["blade-16",   "blade-18",  "blade-14", "tb5-dock"],
+  Charging:   ["viper-v4",   "firefly",   "bw-v4",    "hyperflux"],
+  Chair:      ["gigantus",   "hyperflux", "bw-v4",    "spectre-x"],
+};
+
+/* ─── Awards data per product type ──────────────────────────── */
+const AWARDS = {
+  Laptop:     [
+    { icon:"★★★★★", source:"Tom's Guide", label:"Best Gaming Laptop 2026" },
+    { icon:"⬡",     source:"PC Gamer",    label:"Editor's Choice" },
+    { icon:"✦",     source:"IGN",         label:"9.5 / 10" },
+    { icon:"▲",     source:"The Verge",   label:"Top Pick" },
+  ],
+  Mouse:      [
+    { icon:"★★★★★", source:"PC Gamer",    label:"Best Wireless Mouse" },
+    { icon:"⬡",     source:"Tom's Guide", label:"Editor's Choice" },
+    { icon:"✦",     source:"GamesRadar",  label:"5 Stars" },
+  ],
+  Keyboard:   [
+    { icon:"★★★★★", source:"Tom's Guide", label:"Best Gaming Keyboard" },
+    { icon:"⬡",     source:"PC Gamer",    label:"Editor's Choice" },
+    { icon:"✦",     source:"IGN",         label:"9.2 / 10" },
+  ],
+  Headset:    [
+    { icon:"★★★★★", source:"GamesRadar",  label:"Editor's Choice" },
+    { icon:"⬡",     source:"Tom's Guide", label:"Best Wireless Headset" },
+    { icon:"✦",     source:"Rtings",      label:"9.1 / 10" },
+    { icon:"▲",     source:"IGN",         label:"Top Pick 2026" },
+  ],
+  Controller: [
+    { icon:"★★★★★", source:"IGN",         label:"Best Pro Controller" },
+    { icon:"⬡",     source:"GamesRadar",  label:"5 Stars" },
+  ],
+  Chair:      [
+    { icon:"★★★★★", source:"PC Gamer",    label:"Best Gaming Chair 2026" },
+    { icon:"⬡",     source:"Tom's Guide", label:"Editor's Choice" },
+    { icon:"✦",     source:"GamesRadar",  label:"5 Stars" },
+    { icon:"▲",     source:"IGN",         label:"Top Pick" },
+  ],
 };
 
 /* ─── Chair add-to-cart (legacy — still called on chair.html redirect) ── */
