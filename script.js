@@ -133,12 +133,35 @@ function initStore() {
 
   renderGrid(activeCat);
 
+  // On store.html the nav category links (PC/Console/Mobile/Lifestyle) are
+  // redundant with the tabs below. Intercept them: switch tab instead of navigating.
+  document.querySelectorAll(".nav-links a[href*='store.html?cat=']").forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const cat = new URL(a.href).searchParams.get("cat");
+      switchTab(cat);
+      // Update URL without reload so Back button works
+      history.replaceState(null, "", `store.html?cat=${cat}`);
+    });
+    // Also visually mark these as "sub-filters", not top-level pages
+    a.classList.add("nav-cat-filter");
+  });
+  // Hide store-page nav category links (tabs handle filtering)
+  document.querySelector(".nav-links")?.classList.add("on-store");
+
+  function switchTab(cat) {
+    const resolved = validCats.includes(cat) ? cat : "All";
+    tabs.querySelectorAll(".tab-btn").forEach(b => {
+      b.classList.toggle("active", b.dataset.cat === resolved);
+    });
+    renderGrid(resolved);
+  }
+
   tabs.addEventListener("click", e => {
     const btn = e.target.closest(".tab-btn");
     if (!btn) return;
-    tabs.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    renderGrid(btn.dataset.cat);
+    switchTab(btn.dataset.cat);
+    history.replaceState(null, "", btn.dataset.cat === "All" ? "store.html" : `store.html?cat=${btn.dataset.cat}`);
   });
 
   grid.addEventListener("click", e => {

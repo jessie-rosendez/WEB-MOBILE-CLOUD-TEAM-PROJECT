@@ -1130,6 +1130,11 @@ ul { list-style: none; }
   color: var(--gray);
 }
 
+/* ─── Store page: hide redundant nav category links ─────── */
+/* When on store.html the tabs handle filtering — no need to show
+   PC/Console/Mobile/Lifestyle as separate nav items too.          */
+.nav-links.on-store .nav-cat-filter { display: none; }
+
 /* ─── Product Detail Page (product.html — all products) ─── */
 
 /* Sub-nav */
