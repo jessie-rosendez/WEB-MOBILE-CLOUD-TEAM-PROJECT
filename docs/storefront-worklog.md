@@ -181,6 +181,7 @@ What was completed:
 - replaced the Blade, Viper, and BlackShark homepage placeholder blocks with real image tags so the pushed assets actually render on the public homepage
 - confirmed the store page direction is now less cluttered, using a single Spectre X editorial banner instead of the heavier category showcase treatment
 - replaced the store-page Spectre X editorial PH placeholder render with the real `spectre-x.jpg` chair asset so the banner now reuses the actual chair image
+- removed the extra dual promo tile block from the bottom of `index.html` so the homepage now ends more cleanly at the footer
 
 Current blockers:
 - `src/images/spectre-x-room.jpg` is still optional/pending if a fuller chair lifestyle scene is needed
