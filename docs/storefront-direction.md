@@ -21,19 +21,21 @@ As of April 8, 2026, the public-facing site direction is:
 
 ## Build Status (April 2026)
 
-The storefront rebuild is **complete**. All five pages are live:
+The storefront is **fully built and unified**. All pages live:
 
-- `index.html` — Homepage: announcement bar, sticky nav, 4 scrolling product heroes (Spectre X, Blade 16, Viper V4 Pro, BlackShark V3 Pro), lifestyle panel, footer
-- `store.html` — Full 18-product grid with category tabs (All / PC / Mice / Keyboards / Audio / Console / Mobile / Lifestyle), hover Add to Cart
+- `index.html` — Homepage: announcement bar, sticky nav, 4 scrolling product heroes, lifestyle panel, footer
+- `store.html` — Full 18-product grid with category tabs; card image/icon is clickable to detail page
 - `cart.html` — Cart with qty controls, order summary sidebar, checkout button
-- `checkout.html` — Contact + address form (50-state dropdown), payment placeholder, order summary sidebar, dead-end confirmation modal
-- `chair.html` — Phantm Spectre X detail: hero, video placeholder, 6 features, spec grid, compare table, sticky buy bar
+- `checkout.html` — Contact + address form, payment placeholder, dead-end confirmation modal
+- `product.html` — **Unified dynamic detail page for ALL 18 products** (`?id=` URL param). Contains: sticky subnav, hero with image/SVG fallback, video placeholder, 6 feature cards, spec grid, compare table, sticky buy bar.
+- `chair.html` — Redirect → `product.html?id=spectre-x`
+
+Product CSS (subnav, features, compare, buy bar) is in `styles.css`. Product content data (features, video labels, compare tables, specs) is in `script.js` as `PDP_FEATURES`, `PDP_VIDEO`, `COMPARE_TABLES`, `SPEC_ROWS`.
 
 Non-storefront deliverables (SCRUM, forecast, agent, Kickstarter) are in `docs/` only.
 
 ## Remaining Open Questions
 
-1. **Product naming** — Public site currently keeps Razer benchmark names. Team needs to decide: keep as-is, or rename to Phantm equivalents.
-2. **Page depth** — Only the chair has its own detail page. Do other products need detail pages, or is the store grid + chair page sufficient?
-3. **Product images** — Cards currently use CSS SVG icon placeholders. Decide when/how to add real or AI-generated visuals.
-4. **Catalog count** — 18 products (17 Razer + 1 Phantm chair). Confirm with instructor whether exceeding the 14+1 minimum is acceptable.
+1. **Product images** — Cards and detail pages use SVG icon placeholders. Drop `src/images/{id}.jpg` per the README in that folder.
+2. **Catalog count** — 18 products (17 Phantm-branded + 1 Phantm Spectre X chair). Confirm with instructor whether exceeding 14+1 minimum is acceptable.
+3. **Final pricing** — Current prices are benchmarked from Razer April 2026 list prices. Team decision needed.

@@ -150,12 +150,13 @@ function initStore() {
     const list = cat === "All" ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
     grid.innerHTML = list.map(p => {
       const imgSrc = `src/images/${p.id}.jpg`;
+      const detailHref = p.id === "spectre-x" ? "product.html?id=spectre-x" : `product.html?id=${p.id}`;
       return `
       <article class="product-card" style="--card-glow:${p.glow}">
-        <div class="product-card-visual" data-img="${imgSrc}" data-icon="${p.tag}">
+        <a href="${detailHref}" class="product-card-visual" data-img="${imgSrc}" data-icon="${p.tag}" style="text-decoration:none;display:flex;align-items:center;justify-content:center;position:relative;">
           ${getIcon(p.tag)}
           <span class="ph-watermark">PH</span>
-        </div>
+        </a>
         <div class="product-card-info">
           ${p.badge ? `<span class="badge-${p.badge==="ONLY AT PHANTM"?"only":"new"} card-badge">${p.badge}</span>` : ""}
           <h3>${p.name}</h3>
@@ -260,7 +261,262 @@ function initCheckout() {
   `).join("") || `<p style="color:var(--gray);font-size:.88rem">No items in cart.</p>`;
 }
 
-/* ─── Chair add-to-cart ──────────────────────────────────── */
+/* ─── Product Detail Page Data ───────────────────────────── */
+
+/* Features: 6 cards per product type */
+const PDP_FEATURES = {
+  Laptop: {
+    heading: "Built For The Edge",
+    sub: "Every component chosen for peak performance in the most demanding sessions.",
+    cards: [
+      { title:"High-Refresh Display",   body:"QHD 240Hz panel with OLED-level contrast ratios and near-zero response time." },
+      { title:"Next-Gen GPU",            body:"NVIDIA RTX 40-series GPU with DLSS 3 and full ray-tracing support." },
+      { title:"Whisper Mode Cooling",    body:"Dual-fan vapor chamber keeps thermals quiet under sustained all-day load." },
+      { title:"Per-Key RGB",             body:"Full per-key Chroma RGB backlight with 16.8M color programmability." },
+      { title:"All-Day Battery",         body:"Up to 12 hours on a charge with the 80Wh cell and smart power management." },
+      { title:"CNC Aluminum Chassis",    body:"Milled from a single block of aerospace-grade aluminum. Under 2 kg." },
+    ]
+  },
+  Mouse: {
+    heading: "Precision Engineered",
+    sub: "From sensor to switch, every detail tuned for competitive play.",
+    cards: [
+      { title:"Focus Pro 35K Sensor",    body:"35,000 DPI optical sensor with zero smoothing, filtering, or acceleration." },
+      { title:"8000 Hz Polling Rate",     body:"Reports position 8× faster than standard mice for sub-millisecond response." },
+      { title:"HyperSpeed Wireless",      body:"Phantm's 2.4GHz wireless delivers <1ms latency — identical to wired." },
+      { title:"280-Hour Battery",         body:"Up to 280 hours of continuous play on a single charge." },
+      { title:"Optical Switches",         body:"70M click rated optical switches with zero debounce delay." },
+      { title:"Lightweight Build",        body:"Under 80g with honeycomb shell option for extended play without fatigue." },
+    ]
+  },
+  "Mouse Mat": {
+    heading: "The Foundation Of Your Setup",
+    sub: "Surface, lighting, and size engineered as one unified system.",
+    cards: [
+      { title:"Micro-Textured Cloth",    body:"Precision weave optimized for both high-DPI optical and laser sensors." },
+      { title:"Chroma RGB Underglow",    body:"19-zone addressable RGB lighting with 16.8M colors per zone." },
+      { title:"Anti-Slip Base",           body:"Rubberized base grips any desk surface — even glass." },
+      { title:"USB-A Passthrough",        body:"Built-in USB hub keeps your receiver or dongle cable-free on the desk." },
+      { title:"Extended XL Size",         body:"930×300mm — room for your keyboard, mouse, and full low-sensitivity sweeps." },
+      { title:"Spill-Resistant Surface",  body:"Nano-coated top layer repels water and light liquid spills." },
+    ]
+  },
+  Keyboard: {
+    heading: "Every Keystroke Counts",
+    sub: "Optical precision, 8000Hz polling, and full per-key control.",
+    cards: [
+      { title:"Optical Switches",         body:"Analog optical switches actuate at 1.5mm with 100M keystroke rating." },
+      { title:"8000 Hz Polling Rate",     body:"Keyboard state reported 8× faster than standard for zero input lag." },
+      { title:"Tri-Mode Connectivity",    body:"USB-C wired, 2.4GHz wireless, and Bluetooth — one keyboard, all devices." },
+      { title:"Per-Key Chroma RGB",       body:"Full per-key lighting with reactive, audio-responsive, and ambient modes." },
+      { title:"N-Key Rollover",           body:"Every key registered simultaneously — no ghosting under any condition." },
+      { title:"Detachable Wrist Rest",    body:"Magnetically attached memory foam wrist rest included in-box." },
+    ]
+  },
+  Headset: {
+    heading: "Hear Everything",
+    sub: "Immersive spatial audio with ANC built for long-session comfort.",
+    cards: [
+      { title:"50mm Titanium Drivers",    body:"Tuned for wide soundstage with extended bass response and crisp highs." },
+      { title:"THX Spatial Audio",        body:"Software-powered surround processing maps sound in three-dimensional space." },
+      { title:"Beamforming Mic + ANC",    body:"Dual microphone array isolates your voice and cancels background noise." },
+      { title:"70-Hour Battery",          body:"Up to 70 hours wireless on a single charge with ANC off." },
+      { title:"HyperSpeed Wireless",      body:"Sub-1ms 2.4GHz wireless. No perceptible latency in any game." },
+      { title:"Memory Foam Cushions",     body:"Breathable leatherette with pressure-equalizing foam for all-day wear." },
+    ]
+  },
+  Speakers: {
+    heading: "Feel The Game",
+    sub: "Room-filling audio with THX certification and Chroma immersion.",
+    cards: [
+      { title:"120W THX Certified",       body:"Full 120W RMS output across satellite drivers and an 8-inch subwoofer." },
+      { title:"8-Inch Subwoofer",         body:"Down-firing bass driver delivers physical impact at any volume level." },
+      { title:"THX Spatial Audio",        body:"Virtual surround processing for games, music, and cinema at your desk." },
+      { title:"Chroma RGB Lighting",      body:"Reactive Chroma underglow syncs with your in-game events and music." },
+      { title:"Multi-Source Input",       body:"USB, optical, and 3.5mm AUX — switch sources without unplugging." },
+      { title:"Bedside Remote Control",   body:"Wireless desktop controller for volume, EQ, and lighting presets." },
+    ]
+  },
+  Controller: {
+    heading: "Compete Without Compromise",
+    sub: "Pro-grade ergonomics and 8000Hz wireless for every platform.",
+    cards: [
+      { title:"8000 Hz Wireless",         body:"Phantm HyperSpeed wireless reports at 8000Hz — matches wired pro controllers." },
+      { title:"Hair-Trigger Locks",       body:"Two-stage trigger locks for hair-trigger mode in FPS titles." },
+      { title:"4 Remappable Buttons",     body:"Four rear paddles remap any face button or combo without software." },
+      { title:"Mecha-Tactile Bumpers",    body:"Clicky tactile bumpers with shorter travel and faster reset than standard." },
+      { title:"30-Hour Battery",          body:"30 hours of wireless play on a single charge via USB-C." },
+      { title:"Universal Compatibility",  body:"Works on PC, Xbox, PS5 (via adapter), and mobile via Bluetooth." },
+    ]
+  },
+  Dock: {
+    heading: "One Hub. Every Device.",
+    sub: "Thunderbolt 5 bandwidth for creators, streamers, and power users.",
+    cards: [
+      { title:"Thunderbolt 5 Interface",  body:"120Gbps bidirectional bandwidth — enough for dual 8K displays and full storage." },
+      { title:"Dual Display Output",      body:"Two DisplayPort 2.1 + one HDMI 2.1 outputs simultaneously." },
+      { title:"96W Pass-Through Power",   body:"Charges your laptop at full speed while powering all connected devices." },
+      { title:"4× USB-A 3.2",            body:"Full USB 3.2 Gen 2 on all four downstream ports." },
+      { title:"2× USB-C Downstream",     body:"Two USB-C ports with 20Gbps each for fast storage and peripherals." },
+      { title:"2.5G Ethernet",            body:"Integrated 2.5 Gigabit Ethernet port for stable low-latency network." },
+    ]
+  },
+  Charging: {
+    heading: "No Cables. No Interruptions.",
+    sub: "Extended wireless charging surface built for your gaming desk.",
+    cards: [
+      { title:"HyperFlux Technology",     body:"Proprietary wireless power delivery optimized for gaming mice in motion." },
+      { title:"Extended Surface",         body:"Full XL mat surface so your mouse charges anywhere it rests." },
+      { title:"15W Maximum Output",       body:"Charges compatible mice at full speed even during intense gameplay." },
+      { title:"Chroma RGB Edge Lighting", body:"16-zone addressable RGB border light reacts to in-game events." },
+      { title:"USB-C 1.8m Cable",         body:"Included 1.8m braided USB-C cable keeps the desk tidy." },
+      { title:"Simultaneous Charging",    body:"Charge mouse and phone (Qi) simultaneously from a single cable." },
+    ]
+  },
+  Chair: {
+    heading: "Built Different",
+    sub: "Every detail of the Spectre X was designed for the player who wants a sharper visual identity without sacrificing long-session comfort.",
+    cards: [
+      { title:"Adaptive Lumbar Spine",    body:"A four-zone adjustable lumbar system that adapts to your posture throughout long sessions." },
+      { title:"Reactive RGB Lighting",    body:"Programmable RGB lighting built into the base, visible from any angle in your setup." },
+      { title:"Hidden Gear Storage",      body:"A flush-fit sliding tray under the seat cushion for cable management and accessories." },
+      { title:"Modular Mount System",     body:"Snap-on side rails accept headset mount, controller holders, and phone arm accessories." },
+      { title:"Racing Shell Silhouette",  body:"Aggressive winged shoulders and bucket-seat profile for a sharper visual identity." },
+      { title:"4D Armrests",              body:"Height, pivot, depth, and lateral adjustment for ideal mouse and keyboard positioning." },
+    ]
+  },
+};
+
+/* Video label per product */
+const PDP_VIDEO = {
+  Laptop:     p => `Watch: ${p.name} — Engineering Deep Dive (2:00)`,
+  Mouse:      p => `Watch: ${p.name} — Sensor & Switch Breakdown (1:30)`,
+  "Mouse Mat":p => `Watch: ${p.name} — Setup Tour & RGB Demo (1:00)`,
+  Keyboard:   p => `Watch: ${p.name} — Switch Feel & Performance (1:30)`,
+  Headset:    p => `Watch: ${p.name} — Sound Demo & Mic Test (2:00)`,
+  Speakers:   p => `Watch: ${p.name} — Audio Demo & THX Walkthrough (2:00)`,
+  Controller: p => `Watch: ${p.name} — Pro Feel & Feature Tour (1:30)`,
+  Dock:       p => `Watch: ${p.name} — Full Setup Walkthrough (1:00)`,
+  Charging:   p => `Watch: ${p.name} — Desk Setup & Charging Demo (1:00)`,
+  Chair:      p => `Watch: ${p.name} — The Full Story (1:30)`,
+};
+
+/* Compare table per product type: [col2, col3, col4] competitor names + rows */
+const COMPARE_TABLES = {
+  Laptop: {
+    cols: ["Phantm", "ASUS ROG", "MSI Titan"],
+    rows: [
+      { label:"Price",         vals:[null, "from $2,299","from $2,199"] },
+      { label:"Display",       vals:["QHD 240Hz","QHD 240Hz","FHD 360Hz"] },
+      { label:"GPU",           vals:["RTX 40-Series","RTX 40-Series","RTX 40-Series"] },
+      { label:"Polling Rate",  vals:["8000 Hz","—","—"] },
+      { label:"Per-Key RGB",   vals:[true,true,true] },
+      { label:"Weight",        vals:["< 2 kg","2.1 kg","2.5 kg"] },
+    ]
+  },
+  Mouse: {
+    cols: ["Phantm","Logitech G Pro","SteelSeries Prime"],
+    rows: [
+      { label:"Price",         vals:[null,"$149","$129"] },
+      { label:"Max DPI",       vals:["35,000","25,600","18,000"] },
+      { label:"Polling Rate",  vals:["8000 Hz","8000 Hz","1000 Hz"] },
+      { label:"Wireless",      vals:[true,true,false] },
+      { label:"Battery",       vals:["280 hrs","95 hrs","—"] },
+      { label:"Optical Switch",vals:[true,false,true] },
+    ]
+  },
+  "Mouse Mat": {
+    cols: ["Phantm","SteelSeries QcK","Corsair MM700"],
+    rows: [
+      { label:"Price",         vals:[null,"$59","$89"] },
+      { label:"RGB",           vals:[true,false,true] },
+      { label:"USB Hub",       vals:[true,false,true] },
+      { label:"Spill Resist",  vals:[true,false,false] },
+      { label:"Size",          vals:["930×300mm","900×300mm","930×300mm"] },
+      { label:"Wireless Power",vals:[false,false,false] },
+    ]
+  },
+  Keyboard: {
+    cols: ["Phantm","Corsair K100","SteelSeries Apex Pro"],
+    rows: [
+      { label:"Price",         vals:[null,"$229","$199"] },
+      { label:"Switch",        vals:["Optical","Cherry MX","OmniPoint Mag"] },
+      { label:"Polling Rate",  vals:["8000 Hz","8000 Hz","8000 Hz"] },
+      { label:"Wireless",      vals:[true,false,false] },
+      { label:"Per-Key RGB",   vals:[true,true,true] },
+      { label:"Wrist Rest",    vals:[true,false,false] },
+    ]
+  },
+  Headset: {
+    cols: ["Phantm","SteelSeries Arctis Nova Pro","Astro A50"],
+    rows: [
+      { label:"Price",         vals:[null,"$349","$299"] },
+      { label:"Battery",       vals:["70 hrs","22 hrs","15 hrs"] },
+      { label:"ANC",           vals:[true,true,false] },
+      { label:"THX Audio",     vals:[true,false,false] },
+      { label:"Wireless",      vals:[true,true,true] },
+      { label:"Mic ANC",       vals:[true,true,false] },
+    ]
+  },
+  Speakers: {
+    cols: ["Phantm","Logitech G560","Corsair SP2500"],
+    rows: [
+      { label:"Price",         vals:[null,"$199","$299"] },
+      { label:"Total Power",   vals:["120W","240W","200W"] },
+      { label:"THX Certified", vals:[true,false,false] },
+      { label:"RGB",           vals:[true,true,false] },
+      { label:"Subwoofer",     vals:["8-inch","5.25-inch","5.25-inch"] },
+      { label:"USB Input",     vals:[true,true,false] },
+    ]
+  },
+  Controller: {
+    cols: ["Phantm","Xbox Elite S2","SCUF Instinct Pro"],
+    rows: [
+      { label:"Price",         vals:[null,"$179","$209"] },
+      { label:"Polling Rate",  vals:["8000 Hz","125 Hz","125 Hz"] },
+      { label:"Rear Paddles",  vals:["4","4","4"] },
+      { label:"Wireless",      vals:[true,true,true] },
+      { label:"Hair Triggers", vals:[true,true,true] },
+      { label:"Battery",       vals:["30 hrs","40 hrs","—"] },
+    ]
+  },
+  Dock: {
+    cols: ["Phantm","CalDigit TS4","OWC Thunderbolt 4"],
+    rows: [
+      { label:"Price",         vals:[null,"$379","$299"] },
+      { label:"Interface",     vals:["TB5","TB4","TB4"] },
+      { label:"Bandwidth",     vals:["120Gbps","40Gbps","40Gbps"] },
+      { label:"USB-A Ports",   vals:["4","5","3"] },
+      { label:"Power Delivery",vals:["96W","98W","60W"] },
+      { label:"2.5G Ethernet", vals:[true,true,false] },
+    ]
+  },
+  Charging: {
+    cols: ["Phantm","Corsair MM1000","SteelSeries QcK Charge"],
+    rows: [
+      { label:"Price",         vals:[null,"$99","$79"] },
+      { label:"Max Output",    vals:["15W","10W","10W"] },
+      { label:"RGB",           vals:[true,false,false] },
+      { label:"Qi Charging",   vals:[true,true,true] },
+      { label:"Mat Surface",   vals:[true,true,true] },
+      { label:"Extended Size", vals:[true,false,false] },
+    ]
+  },
+  Chair: {
+    cols: ["Phantm Spectre X","Razer Iskur V2","Razer Enki"],
+    rows: [
+      { label:"Price",         vals:[null,"$499","$299"] },
+      { label:"Lumbar",        vals:["Adaptive 4-Zone","Built-In","—"] },
+      { label:"Under-Seat RGB",vals:[true,false,false] },
+      { label:"Hidden Storage",vals:[true,false,false] },
+      { label:"Modular Mounts",vals:[true,false,false] },
+      { label:"Armrests",      vals:["4D","4D","4D"] },
+      { label:"Max Load",      vals:["299 lbs","299 lbs","299 lbs"] },
+    ]
+  },
+};
+
+/* ─── Chair add-to-cart (legacy — still called on chair.html redirect) ── */
 function initChair() {
   const btn = document.getElementById("chairAddToCart");
   if (!btn) return;

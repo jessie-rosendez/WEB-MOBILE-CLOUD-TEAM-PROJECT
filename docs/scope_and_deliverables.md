@@ -37,8 +37,12 @@ Build a functioning online storefront with at minimum 14 products plus 1 origina
 | Done | Front-end cart: add, remove, quantity tracking, subtotal display |
 | Done | Cart persistence added via localStorage |
 | Done | Refactor public site from combined prototype into storefront-only experience |
-| Done | Build multi-page category and product flow (index, store, cart, checkout, chair) |
+| Done | Build multi-page category and product flow (index, store, cart, checkout, product) |
 | Done | Build checkout / information-entry flow (contact + address form, payment placeholder, confirmation modal) |
+| Done | product.html — unified dynamic detail page for all 18 products (hero, video, 6 features, spec grid, compare table, sticky buy bar) |
+| Done | Store card image/icon clickable to product detail page |
+| Done | Rebrand all products from Razer to Phantm naming |
+| Done | Consolidate all product-page CSS into styles.css |
 | Open | Confirm whether 17 Razer products exceeds requirement or trim to 14 |
 | Open | Add final product images |
 | Open | Lock final pricing decisions (currently placeholders) |

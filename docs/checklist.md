@@ -12,10 +12,14 @@ Why this file exists:
 - [x] Refactor public site into storefront-only experience
 - [x] Build multi-page storefront flow (index, store, cart, checkout, chair)
 - [x] Build checkout information page
-- [x] Build individual product detail pages (product.html — dynamic template, all 17 non-chair products)
+- [x] Build individual product detail pages (product.html — dynamic template, all 18 products including chair)
+- [x] Product detail pages: subnav, hero, video placeholder, 6 features, spec grid, compare table, sticky buy bar
+- [x] Store card image/icon is now clickable — routes to product detail page
 - [x] Fix duplicate PC/Console/Mobile nav tab bug (nav links now pass ?cat= URL param)
 - [x] Rename all product names from Razer to Phantm branding
 - [x] Image fallback system: drop src/images/{id}.jpg to auto-populate cards and detail pages
+- [x] Consolidate all product-page CSS into styles.css (removed inline styles from chair.html)
+- [x] chair.html collapsed to redirect → product.html?id=spectre-x (all products unified)
 - [ ] Add final product images to src/images/ (see src/images/IMAGES-README.md for filenames)
 - [ ] Final pricing decisions locked
 

@@ -11,186 +11,14 @@
   <style>
     @keyframes badgeFlash { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
     .badge-flash { animation: badgeFlash 350ms ease; }
-
-    /* ── Product sub-nav ── */
-    .product-subnav {
-      position: sticky;
-      top: calc(var(--nav-h) + 2px);
-      z-index: 60;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .subnav-links { display: flex; }
-    .subnav-links a {
-      padding: 14px 18px;
-      font-size: .82rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gray);
-      border-bottom: 2px solid transparent;
-      transition: color 150ms, border-color 150ms;
-      white-space: nowrap;
-    }
-    .subnav-links a:hover { color: var(--white); }
-    .subnav-links a.active { color: var(--white); border-bottom-color: var(--green); }
-    .subnav-price { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--white); }
-    .subnav-buy { display: flex; align-items: center; gap: 10px; }
-
-    /* ── Hero ── */
-    .pdp-hero {
-      min-height: 72vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 80px 24px;
-    }
-    .pdp-hero-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 55% at 50% 50%, var(--glow-color, rgba(68,214,44,0.18)), transparent 72%);
-      pointer-events: none;
-    }
-    .pdp-hero-inner {
-      max-width: 1080px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    .pdp-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .pdp-visual img {
-      width: 100%;
-      max-width: 480px;
-      border-radius: 4px;
-      display: block;
-    }
-    .pdp-visual-fallback {
-      width: 260px;
-      height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--glow-color, var(--green));
-      opacity: 0.75;
-    }
-    .pdp-visual-fallback svg { width: 100%; height: 100%; }
-    .pdp-info {}
-    .pdp-badge { display: inline-block; margin-bottom: 16px; }
-    .pdp-name {
-      font-family: var(--display);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .pdp-sub {
-      font-size: 1.1rem;
-      color: var(--gray-lt);
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-    .pdp-price {
-      font-family: var(--display);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 32px;
-    }
-    .pdp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-    /* ── Details section ── */
-    .pdp-details {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 80px 24px;
-    }
-    .pdp-details h2 {
-      font-family: var(--display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 32px;
-      color: var(--green);
-    }
-    .pdp-spec-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 64px;
-    }
-    .pdp-spec-cell {
-      background: var(--dark);
-      padding: 24px 20px;
-    }
-    .spec-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 6px;
-    }
-    .spec-value {
-      font-family: var(--display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-
-    /* ── Buy bar ── */
-    .pdp-buy-bar {
-      position: sticky;
-      bottom: 0;
-      z-index: 80;
-      background: rgba(0,0,0,0.95);
-      border-top: 1px solid var(--border);
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 20px;
-    }
-    .pdp-buy-bar-name {
-      font-family: var(--display);
-      font-size: .9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--gray-lt);
-      flex: 1;
-    }
-    .pdp-buy-bar-price {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    @media (max-width: 768px) {
-      .pdp-hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .pdp-visual { order: -1; }
-      .pdp-visual-fallback { width: 180px; height: 180px; }
+    @media(max-width:768px) {
+      .pdp-hero-inner { grid-template-columns:1fr; gap:40px; }
+      .pdp-visual { order:-1; }
+      .pdp-visual-fallback { width:180px; height:180px; }
+      .features-grid { grid-template-columns:1fr; }
+      .compare-table { overflow-x:auto; display:block; }
+      .compare-header,.compare-row { min-width:640px; }
+      .subnav-buy { display:none; }
     }
   </style>
 </head>
@@ -199,7 +27,7 @@
 <!-- ── Header ── -->
 <header class="site-header">
   <div class="announce-bar">
-    <p>Phantm Spectre X — Early Backer pricing now available.&nbsp;&nbsp;<a href="chair.html">Learn More &gt;</a></p>
+    <p>Phantm Spectre X — Early Backer pricing now available.&nbsp;&nbsp;<a href="product.html?id=spectre-x">Learn More &gt;</a></p>
   </div>
   <nav class="main-nav">
     <div class="nav-inner">
@@ -212,7 +40,7 @@
         <li><a href="store.html?cat=PC">PC</a></li>
         <li><a href="store.html?cat=Console">Console</a></li>
         <li><a href="store.html?cat=Mobile">Mobile</a></li>
-        <li><a href="chair.html">Furniture &amp; Lifestyle</a></li>
+        <li><a href="store.html?cat=Lifestyle">Furniture &amp; Lifestyle</a></li>
         <li><a href="#">Support</a></li>
       </ul>
       <div class="nav-actions">
@@ -232,10 +60,12 @@
 </header>
 
 <!-- ── Product Sub-nav ── -->
-<div class="product-subnav" id="productSubnav">
+<div class="product-subnav">
   <div class="subnav-links">
-    <a href="#pdp-hero" class="active">Overview</a>
-    <a href="#pdp-specs">Tech Specs</a>
+    <a href="#pdp-overview" class="active" data-section="pdp-overview">Overview</a>
+    <a href="#pdp-features" data-section="pdp-features">Features</a>
+    <a href="#pdp-specs" data-section="pdp-specs">Tech Specs</a>
+    <a href="#pdp-compare" data-section="pdp-compare">Compare</a>
   </div>
   <div class="subnav-buy">
     <span class="subnav-price" id="subnavPrice"></span>
@@ -244,12 +74,12 @@
 </div>
 
 <!-- ── Hero ── -->
-<section class="pdp-hero" id="pdp-hero">
+<section class="pdp-hero" id="pdp-overview">
   <div class="pdp-hero-glow" id="heroGlow"></div>
   <div class="pdp-hero-inner">
     <div class="pdp-visual" id="pdpVisual"></div>
     <div class="pdp-info">
-      <div class="pdp-badge" id="pdpBadge"></div>
+      <div id="pdpBadge" style="margin-bottom:16px"></div>
       <h1 class="pdp-name" id="pdpName">Loading…</h1>
       <p class="pdp-sub" id="pdpSub"></p>
       <p class="pdp-price" id="pdpPrice"></p>
@@ -261,15 +91,34 @@
   </div>
 </section>
 
-<!-- ── Specs ── -->
-<section id="pdp-specs">
-  <div class="pdp-details">
-    <h2>Tech Specs</h2>
-    <div class="pdp-spec-grid" id="pdpSpecGrid"></div>
-    <a href="store.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:.9rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
-      ← View All Products
-    </a>
+<!-- ── Video Placeholder ── -->
+<section class="video-section" id="pdp-video">
+  <div class="video-bg"></div>
+  <div class="video-inner">
+    <button class="video-play-btn" aria-label="Play video">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 5l18 9-18 9V5z" fill="currentColor"/></svg>
+    </button>
+    <p class="video-label" id="videoLabel">Watch: Product Video</p>
   </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="features-section" id="pdp-features">
+  <h2 id="featuresHeading">Key Features</h2>
+  <p class="features-sub" id="featuresSub"></p>
+  <div class="features-grid" id="featuresGrid"></div>
+</section>
+
+<!-- ── Tech Specs ── -->
+<section class="spec-section" id="pdp-specs">
+  <h2>Tech Specs</h2>
+  <div class="spec-grid" id="pdpSpecGrid"></div>
+</section>
+
+<!-- ── Compare ── -->
+<section class="compare-section" id="pdp-compare">
+  <h2>Compare Models</h2>
+  <div class="compare-table" id="compareTable"></div>
 </section>
 
 <!-- ── Footer ── -->
@@ -283,7 +132,7 @@
           <li><a href="store.html?cat=PC">PC</a></li>
           <li><a href="store.html?cat=Console">Console</a></li>
           <li><a href="store.html?cat=Mobile">Mobile</a></li>
-          <li><a href="chair.html">Furniture &amp; Lifestyle</a></li>
+          <li><a href="store.html?cat=Lifestyle">Furniture &amp; Lifestyle</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -327,120 +176,115 @@
 
 <script src="script.js"></script>
 <script>
-/* ── Spec templates per product tag ── */
-const SPEC_TEMPLATES = {
-  Laptop: p => [
-    { label: "Category",       value: "Gaming Laptop" },
-    { label: "Form Factor",    value: "Ultra-thin" },
-    { label: "Display",        value: "QHD 240Hz" },
-    { label: "GPU",            value: "NVIDIA RTX 40-Series" },
-    { label: "RAM",            value: "16GB DDR5" },
-    { label: "Storage",        value: "1TB NVMe SSD" },
-    { label: "Battery",        value: "80Wh" },
-    { label: "Price",          value: fmt(p.price) },
+/* ── Spec rows per product type ── */
+const SPEC_ROWS = {
+  Laptop:      p => [
+    { label:"Category",      value:"Gaming Laptop" },
+    { label:"Display",       value:"QHD 240Hz" },
+    { label:"GPU",           value:"NVIDIA RTX 40-Series" },
+    { label:"RAM",           value:"16 GB DDR5" },
+    { label:"Storage",       value:"1 TB NVMe SSD" },
+    { label:"Battery",       value:"80 Wh" },
   ],
-  Mouse: p => [
-    { label: "Category",       value: "Gaming Mouse" },
-    { label: "Sensor",         value: "Phantm Focus Pro 35K" },
-    { label: "DPI Range",      value: "100–35,000 DPI" },
-    { label: "Polling Rate",   value: "8000 Hz" },
-    { label: "Buttons",        value: "5 Programmable" },
-    { label: "Connectivity",   value: "HyperSpeed Wireless" },
-    { label: "Battery",        value: "Up to 280 hours" },
-    { label: "Price",          value: fmt(p.price) },
+  Mouse:       p => [
+    { label:"Sensor",        value:"Focus Pro 35K" },
+    { label:"Max DPI",       value:"35,000" },
+    { label:"Polling Rate",  value:"8000 Hz" },
+    { label:"Buttons",       value:"5 Programmable" },
+    { label:"Connectivity",  value:"HyperSpeed Wireless" },
+    { label:"Battery",       value:"Up to 280 hrs" },
   ],
   "Mouse Mat": p => [
-    { label: "Category",       value: "Gaming Mouse Mat" },
-    { label: "Surface",        value: "Micro-textured cloth" },
-    { label: "Base",           value: "Non-slip rubber" },
-    { label: "Lighting",       value: "Chroma RGB underglow" },
-    { label: "USB",            value: "USB-A passthrough" },
-    { label: "Size",           value: "Extended XL" },
-    { label: "Thickness",      value: "3mm" },
-    { label: "Price",          value: fmt(p.price) },
+    { label:"Surface",       value:"Micro-textured cloth" },
+    { label:"Base",          value:"Non-slip rubber" },
+    { label:"Lighting",      value:"19-zone Chroma RGB" },
+    { label:"USB",           value:"USB-A passthrough" },
+    { label:"Size",          value:"930×300 mm" },
+    { label:"Thickness",     value:"3 mm" },
   ],
-  Keyboard: p => [
-    { label: "Category",       value: "Gaming Keyboard" },
-    { label: "Switch Type",    value: "Phantm Optical" },
-    { label: "Actuation",      value: "1.5mm" },
-    { label: "Polling Rate",   value: "8000 Hz" },
-    { label: "Connectivity",   value: "USB-C / Wireless" },
-    { label: "Backlight",      value: "Per-key Chroma RGB" },
-    { label: "Anti-ghosting",  value: "Full N-Key Rollover" },
-    { label: "Price",          value: fmt(p.price) },
+  Keyboard:    p => [
+    { label:"Switch",        value:"Phantm Optical" },
+    { label:"Actuation",     value:"1.5 mm" },
+    { label:"Polling Rate",  value:"8000 Hz" },
+    { label:"Connectivity",  value:"Tri-Mode (USB-C / 2.4G / BT)" },
+    { label:"Backlight",     value:"Per-key Chroma RGB" },
+    { label:"Anti-ghosting", value:"Full N-Key Rollover" },
   ],
-  Headset: p => [
-    { label: "Category",       value: "Gaming Headset" },
-    { label: "Drivers",        value: "50mm Titanium" },
-    { label: "Frequency",      value: "20Hz–20kHz" },
-    { label: "Microphone",     value: "Beamforming + ANC" },
-    { label: "Connectivity",   value: "HyperSpeed Wireless" },
-    { label: "Battery",        value: "Up to 70 hours" },
-    { label: "Surround",       value: "THX Spatial Audio" },
-    { label: "Price",          value: fmt(p.price) },
+  Headset:     p => [
+    { label:"Drivers",       value:"50 mm Titanium" },
+    { label:"Frequency",     value:"20 Hz – 20 kHz" },
+    { label:"Microphone",    value:"Beamforming + ANC" },
+    { label:"Connectivity",  value:"HyperSpeed Wireless" },
+    { label:"Battery",       value:"Up to 70 hrs" },
+    { label:"Surround",      value:"THX Spatial Audio" },
   ],
-  Speakers: p => [
-    { label: "Category",       value: "Desktop Speakers" },
-    { label: "Total Power",    value: "120W RMS" },
-    { label: "Subwoofer",      value: "8-inch Down-firing" },
-    { label: "THX",            value: "THX Certified" },
-    { label: "Connectivity",   value: "USB / Optical / AUX" },
-    { label: "Lighting",       value: "Chroma RGB" },
-    { label: "Control",        value: "Bedside remote" },
-    { label: "Price",          value: fmt(p.price) },
+  Speakers:    p => [
+    { label:"Total Power",   value:"120 W RMS" },
+    { label:"Subwoofer",     value:"8-inch Down-firing" },
+    { label:"Certification", value:"THX Certified" },
+    { label:"Connectivity",  value:"USB / Optical / AUX" },
+    { label:"Lighting",      value:"Chroma RGB" },
+    { label:"Control",       value:"Wireless desktop remote" },
   ],
-  Controller: p => [
-    { label: "Category",       value: "Gaming Controller" },
-    { label: "Connectivity",   value: "HyperSpeed Wireless" },
-    { label: "Polling Rate",   value: "8000 Hz" },
-    { label: "Triggers",       value: "Hair-trigger locks" },
-    { label: "Buttons",        value: "4 Remappable rear" },
-    { label: "Battery",        value: "Up to 30 hours" },
-    { label: "Compatibility",  value: "PC / Console / Mobile" },
-    { label: "Price",          value: fmt(p.price) },
+  Controller:  p => [
+    { label:"Connectivity",  value:"HyperSpeed Wireless" },
+    { label:"Polling Rate",  value:"8000 Hz" },
+    { label:"Triggers",      value:"Hair-trigger locks" },
+    { label:"Rear Buttons",  value:"4 Remappable paddles" },
+    { label:"Battery",       value:"Up to 30 hrs" },
+    { label:"Compatibility", value:"PC / Console / Mobile" },
   ],
-  Dock: p => [
-    { label: "Category",       value: "Thunderbolt Dock" },
-    { label: "Interface",      value: "Thunderbolt 5" },
-    { label: "Bandwidth",      value: "Up to 120Gbps" },
-    { label: "USB-A Ports",    value: "4× USB-A 3.2" },
-    { label: "USB-C Ports",    value: "2× USB-C" },
-    { label: "Display Out",    value: "2× DP2.1 + 1× HDMI" },
-    { label: "Power Delivery", value: "96W Pass-through" },
-    { label: "Price",          value: fmt(p.price) },
+  Dock:        p => [
+    { label:"Interface",     value:"Thunderbolt 5" },
+    { label:"Bandwidth",     value:"Up to 120 Gbps" },
+    { label:"USB-A Ports",   value:"4× USB-A 3.2" },
+    { label:"USB-C Ports",   value:"2× USB-C" },
+    { label:"Display Out",   value:"2× DP2.1 + 1× HDMI 2.1" },
+    { label:"Power Delivery",value:"96 W Pass-through" },
   ],
-  Charging: p => [
-    { label: "Category",       value: "Wireless Charging" },
-    { label: "Technology",     value: "HyperFlux Wireless" },
-    { label: "Output",         value: "Up to 15W" },
-    { label: "Compatible",     value: "HyperFlux Mice" },
-    { label: "Surface",        value: "Extended mat surface" },
-    { label: "Lighting",       value: "Chroma RGB edge" },
-    { label: "Cable",          value: "USB-C 1.8m" },
-    { label: "Price",          value: fmt(p.price) },
+  Charging:    p => [
+    { label:"Technology",    value:"HyperFlux Wireless" },
+    { label:"Max Output",    value:"15 W" },
+    { label:"Compatible",    value:"HyperFlux Mice + Qi Phones" },
+    { label:"Surface",       value:"Extended XL mat" },
+    { label:"Lighting",      value:"16-zone Chroma RGB" },
+    { label:"Cable",         value:"USB-C 1.8 m" },
+  ],
+  Chair:       p => [
+    { label:"Max Load",      value:"< 136 kg / 299 lbs" },
+    { label:"Height Range",  value:"160 – 200 cm / 5'3\"– 6'7\"" },
+    { label:"Back Support",  value:"Adaptive 4-Zone Lumbar" },
+    { label:"Armrests",      value:"4D (Height, Pivot, Depth, Lateral)" },
+    { label:"Seat Material", value:"Gen-2 EPU Leather w/ CoolTouch" },
+    { label:"Recline",       value:"90° – 140° with tilt lock" },
   ],
 };
+
+/* ── Feature card SVG icons (one per feature card slot, green tone) ── */
+const FC_ICONS = [
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.8"/><path d="M15 22l5 5 9-10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><path d="M22 4C13 4 8 10 8 18v6c0 10 5.5 16 14 16s14-6 14-16v-6C36 10 31 4 22 4z" stroke="currentColor" stroke-width="1.8"/><path d="M14 22h16" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/></svg>`,
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="6" y="20" width="32" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M14 20v-6a8 8 0 0116 0v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="10" y="6" width="24" height="32" rx="4" stroke="currentColor" stroke-width="1.8"/><line x1="16" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/><line x1="16" y1="22" x2="28" y2="22" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/></svg>`,
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.8"/><path d="M22 14v8l5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  `<svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="8" y="12" width="28" height="20" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M14 32v4M30 32v4M10 36h24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
-
   if (!id) { location.replace("store.html"); return; }
-
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) { location.replace("store.html"); return; }
 
-  // If someone somehow lands on product.html for the chair, redirect
-  if (id === "spectre-x") { location.replace("chair.html"); return; }
-
-  // Update page title
+  /* ── Page title ── */
   document.title = `${p.name} | Phantm`;
 
-  // Glow
-  document.getElementById("heroGlow").style.setProperty("--glow-color", p.glow);
+  /* ── Glow color ── */
+  document.getElementById("heroGlow").style.cssText = `--glow-color:${p.glow}`;
   document.querySelector(".pdp-hero").style.setProperty("--glow-color", p.glow);
 
-  // Visual — try image first, fallback to SVG icon
+  /* ── Visual: real image or SVG fallback ── */
   const visual = document.getElementById("pdpVisual");
   const imgSrc = `src/images/${p.id}.jpg`;
   const img = new Image();
@@ -448,49 +292,106 @@ document.addEventListener("DOMContentLoaded", () => {
     visual.innerHTML = `<img src="${imgSrc}" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
   };
   img.onerror = () => {
-    visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow.replace(/,[^,]+\)/, ',1)')}">${getIcon(p.tag)}</div>`;
+    visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow}">${getIcon(p.tag)}</div>`;
   };
   img.src = imgSrc;
 
-  // Badge
-  const badgeEl = document.getElementById("pdpBadge");
+  /* ── Badge ── */
   if (p.badge) {
     const cls = p.badge === "ONLY AT PHANTM" ? "badge-only" : "badge-new";
-    badgeEl.innerHTML = `<span class="${cls}">${p.badge}</span>`;
+    document.getElementById("pdpBadge").innerHTML = `<span class="${cls}">${p.badge}</span>`;
   }
 
-  // Text
-  document.getElementById("pdpName").textContent = p.name;
-  document.getElementById("pdpSub").textContent = p.sub;
+  /* ── Text fields ── */
+  document.getElementById("pdpName").textContent  = p.name;
+  document.getElementById("pdpSub").textContent   = p.sub;
   document.getElementById("pdpPrice").textContent = fmt(p.price);
-  document.getElementById("subnavPrice").textContent = fmt(p.price);
-  document.getElementById("buyBarName").textContent = p.name;
-  document.getElementById("buyBarPrice").textContent = fmt(p.price);
+  document.getElementById("subnavPrice").textContent    = fmt(p.price);
+  document.getElementById("buyBarName").textContent     = p.name;
+  document.getElementById("buyBarPrice").textContent    = fmt(p.price);
   document.getElementById("buyBarPriceInline").textContent = fmt(p.price);
 
-  // Spec grid
-  const specFn = SPEC_TEMPLATES[p.tag];
-  const specs = specFn ? specFn(p) : [{ label: "Price", value: fmt(p.price) }];
-  document.getElementById("pdpSpecGrid").innerHTML = specs.map(s => `
-    <div class="pdp-spec-cell">
+  /* ── Video label ── */
+  const videoFn = PDP_VIDEO[p.tag];
+  document.getElementById("videoLabel").textContent = videoFn ? videoFn(p) : `Watch: ${p.name} (Coming Soon)`;
+
+  /* ── Features ── */
+  const fd = PDP_FEATURES[p.tag] || PDP_FEATURES.Laptop;
+  document.getElementById("featuresHeading").textContent = fd.heading;
+  document.getElementById("featuresSub").textContent = fd.sub;
+  document.getElementById("featuresGrid").innerHTML = fd.cards.map((c, i) => `
+    <div class="feature-card">
+      ${FC_ICONS[i % FC_ICONS.length]}
+      <h3>${c.title}</h3>
+      <p>${c.body}</p>
+    </div>
+  `).join("");
+
+  /* ── Tech Specs ── */
+  const specFn = SPEC_ROWS[p.tag] || SPEC_ROWS.Laptop;
+  document.getElementById("pdpSpecGrid").innerHTML = specFn(p).map(s => `
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
       <p class="spec-label">${s.label}</p>
       <p class="spec-value">${s.value}</p>
     </div>
   `).join("");
 
-  // Buy buttons
+  /* ── Compare table ── */
+  const ct = COMPARE_TABLES[p.tag];
+  if (ct) {
+    const colNames = [p.name, ...ct.cols.slice(1)];
+    document.getElementById("compareTable").innerHTML = `
+      <div class="compare-header">
+        <div class="compare-header-cell"></div>
+        ${colNames.map((c, i) => `<div class="compare-header-cell${i===0?" highlight":""}">${c}</div>`).join("")}
+      </div>
+      ${ct.rows.map(row => `
+        <div class="compare-row">
+          <div class="compare-cell">${row.label}</div>
+          ${row.vals.map((v, i) => {
+            const hl = i === 0 ? " hl" : "";
+            if (v === null) return `<div class="compare-cell${hl}"><span class="cv">${fmt(p.price)}</span></div>`;
+            if (v === true)  return `<div class="compare-cell${hl}"><span class="check-green">✓</span></div>`;
+            if (v === false) return `<div class="compare-cell${hl}"><span class="check-gray">–</span></div>`;
+            return `<div class="compare-cell${hl}"><span class="cv">${v}</span></div>`;
+          }).join("")}
+        </div>
+      `).join("")}
+    `;
+  } else {
+    document.getElementById("pdp-compare").style.display = "none";
+  }
+
+  /* ── Add-to-cart ── */
   const addToCart = () => {
     cartAdd(p.id);
-    document.getElementById("pdpBuyBtn").textContent = "Added ✓";
-    document.getElementById("subnavBuy").textContent = "Added ✓";
-    setTimeout(() => {
-      document.getElementById("pdpBuyBtn").textContent = "Add to Cart";
-      document.getElementById("subnavBuy").textContent = "Buy Now";
-    }, 1800);
+    ["pdpBuyBtn","subnavBuy","buyBarBtn"].forEach(btnId => {
+      const el = document.getElementById(btnId);
+      if (!el) return;
+      const orig = el.innerHTML;
+      el.innerHTML = "Added ✓";
+      el.disabled = true;
+      setTimeout(() => { el.innerHTML = orig; el.disabled = false; }, 1800);
+    });
   };
   document.getElementById("pdpBuyBtn").addEventListener("click", addToCart);
   document.getElementById("subnavBuy").addEventListener("click", addToCart);
   document.getElementById("buyBarBtn").addEventListener("click", addToCart);
+
+  /* ── Subnav active link on scroll ── */
+  const sections = ["pdp-overview","pdp-features","pdp-specs","pdp-compare"].map(id => document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll(".subnav-links a");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle("active", a.dataset.section === e.target.id));
+      }
+    });
+  }, { rootMargin:"-40% 0px -55% 0px" });
+  sections.forEach(s => observer.observe(s));
 });
 </script>
 </body>
