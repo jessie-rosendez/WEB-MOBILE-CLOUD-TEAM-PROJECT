@@ -49,6 +49,80 @@ const getIcon = (tag) => ICONS[tag] || ICONS.Dock;
 /* ─── Currency ───────────────────────────────────────────── */
 const fmt = (n) => new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n);
 
+/* ─── Category Showcase Copy ─────────────────────────────── */
+const CATEGORY_SHOWCASES = {
+  All: {
+    kicker: "Build The Full Setup",
+    title: "A Phantm Loadout For Every Playstyle",
+    body: "Shop across laptops, keyboards, headsets, controllers, and lifestyle gear from one storefront built to feel premium, cinematic, and competition-ready.",
+    theme: "arsenal",
+    products: ["blade-16", "hunts-8k", "bs-v3", "spectre-x"],
+  },
+  PC: {
+    kicker: "Phantm PC",
+    title: "Gaming Laptops",
+    body: "From compact performance to desktop-class power, the Blade lineup anchors the Phantm PC tier with cleaner silhouettes and stronger battlestation presence.",
+    theme: "pc",
+    products: ["blade-14", "blade-16", "blade-18"],
+  },
+  Mice: {
+    kicker: "Phantm Precision",
+    title: "Gaming Mice",
+    body: "Ultralight control, ergonomic comfort, and RGB surface gear built to move as one system instead of separate parts.",
+    theme: "mice",
+    products: ["viper-v4", "da-v4", "firefly"],
+  },
+  Keyboards: {
+    kicker: "Phantm Input",
+    title: "Gaming Keyboards",
+    body: "Mechanical and optical boards tuned for speed, full-size control, and low-profile desk setups with unmistakable RGB drama.",
+    theme: "keyboards",
+    products: ["bw-v4", "hunts-8k", "ds-v2"],
+  },
+  Audio: {
+    kicker: "Phantm Audio",
+    title: "Gaming Headsets",
+    body: "Wireless ANC, immersive spatial sound, and hero-product presentation shaped to feel closer to a premium launch campaign than a flat catalog grid.",
+    theme: "audio",
+    products: ["bs-v3", "kraken-v4", "nommo-v2"],
+  },
+  Console: {
+    kicker: "Phantm Console",
+    title: "Pro Controllers",
+    body: "Competitive controller hardware with clean industrial forms, fast wireless response, and merchandising that feels more flagship than filler.",
+    theme: "console",
+    products: ["wolv-v3"],
+  },
+  Mobile: {
+    kicker: "Phantm Mobile",
+    title: "Mobile Gaming",
+    body: "Portable control and all-day flexibility for players who move between handheld, phone, and desktop ecosystems.",
+    theme: "mobile",
+    products: ["kishi-v3"],
+  },
+  Lifestyle: {
+    kicker: "Furniture & Lifestyle",
+    title: "Gaming Chairs",
+    body: "Performance seating and battlestation essentials presented with the same showroom feel as the rest of the storefront, led by the Spectre X signature chair.",
+    theme: "lifestyle",
+    products: ["spectre-x", "hyperflux", "gigantus"],
+    panels: [
+      {
+        title: "Phantm Spectre X // Black / Green",
+        sub: "Engineered for ergonomics. Crafted for comfort.",
+        href: "product.html?id=spectre-x",
+        action: "Learn More",
+      },
+      {
+        title: "Phantm Spectre X // Quartz / Light Gray",
+        sub: "Concept finish direction for premium campaign visuals.",
+        href: "product.html?id=spectre-x",
+        action: "View Product",
+      },
+    ],
+  },
+};
+
 /* ─── Cart ───────────────────────────────────────────────── */
 const CART_KEY = "phantm-cart-v2";
 
@@ -120,6 +194,7 @@ function initNav() {
 function initStore() {
   const grid = document.getElementById("productGrid");
   const tabs = document.getElementById("categoryTabs");
+  const showcase = document.getElementById("categoryShowcase");
   if (!grid || !tabs) return;
 
   /* ── Featured carousel: "Fresh Off The Line" — NEW-badged products ── */
@@ -175,6 +250,7 @@ function initStore() {
     <button class="tab-btn${c===activeCat?" active":""}" data-cat="${c}">${c}</button>
   `).join("");
 
+  renderShowcase(activeCat);
   renderGrid(activeCat);
 
   function switchTab(cat) {
@@ -182,6 +258,7 @@ function initStore() {
     tabs.querySelectorAll(".tab-btn").forEach(b => {
       b.classList.toggle("active", b.dataset.cat === resolved);
     });
+    renderShowcase(resolved);
     renderGrid(resolved);
   }
 
@@ -229,6 +306,57 @@ function initStore() {
         el.innerHTML = `<img src="${src}" alt="" style="width:60%;max-width:220px;object-fit:contain;filter:drop-shadow(0 0 20px var(--card-glow))"/>`;
       };
       img.src = src;
+    });
+  }
+
+  function renderShowcase(cat) {
+    if (!showcase) return;
+    const data = CATEGORY_SHOWCASES[cat] || CATEGORY_SHOWCASES.All;
+    const products = (data.products || [])
+      .map(id => PRODUCTS.find(p => p.id === id))
+      .filter(Boolean);
+
+    showcase.innerHTML = `
+      <section class="category-showcase category-showcase--${data.theme}">
+        <div class="category-showcase-copy">
+          <p class="category-showcase-kicker">${data.kicker}</p>
+          <h2>${data.title}</h2>
+          <p>${data.body}</p>
+        </div>
+        <div class="category-showcase-stage">
+          ${products.map((p, index) => `
+            <a class="showcase-product-card showcase-product-card--${index === 0 ? "lead" : "support"}" href="product.html?id=${p.id}" style="--card-glow:${p.glow}">
+              <span class="showcase-card-badge">${p.badge || p.tag}</span>
+              <div class="showcase-product-visual" data-showcase-img="src/images/${p.id}.jpg" data-showcase-id="${p.id}">
+                ${getIcon(p.tag)}
+              </div>
+              <div class="showcase-product-info">
+                <h3>${p.name}</h3>
+                <p>${p.sub}</p>
+              </div>
+            </a>
+          `).join("")}
+        </div>
+        ${data.panels ? `
+          <div class="category-showcase-panels">
+            ${data.panels.map(panel => `
+              <a class="category-showcase-panel" href="${panel.href}">
+                <h3>${panel.title}</h3>
+                <p>${panel.sub}</p>
+                <span>${panel.action} &gt;</span>
+              </a>
+            `).join("")}
+          </div>
+        ` : ""}
+      </section>
+    `;
+
+    showcase.querySelectorAll(".showcase-product-visual[data-showcase-img]").forEach(el => {
+      const img = new Image();
+      img.onload = () => {
+        el.innerHTML = `<img src="${el.dataset.showcaseImg}" alt="" style="width:72%;max-width:260px;object-fit:contain;filter:drop-shadow(0 0 26px var(--card-glow))"/>`;
+      };
+      img.src = el.dataset.showcaseImg;
     });
   }
 }
@@ -570,15 +698,34 @@ const COMPARE_TABLES = {
 /* ─── Color / Variant Options per product type ──────────────── */
 const COLOR_OPTIONS = {
   Laptop:     [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury Silver", hex:"#b0b4b8" }],
-  Mouse:      [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
+  Mouse:      [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }],
   "Mouse Mat":[{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }],
   Keyboard:   [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green Edition", hex:"#44D62C" }],
-  Headset:    [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
+  Headset:    [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Phantom Green Edition", hex:"#0b3f18" }, { name:"Phantom White Edition", hex:"#e9ecef" }],
   Speakers:   [{ name:"Phantom Black", hex:"#111" }],
   Controller: [{ name:"Phantom Black", hex:"#111" }, { name:"Mercury White", hex:"#ddd" }, { name:"Esports Green", hex:"#44D62C" }],
   Dock:       [{ name:"Phantom Black", hex:"#111" }],
   Charging:   [{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }],
-  Chair:      [{ name:"Phantom Black", hex:"#111" }, { name:"Esports Green", hex:"#44D62C" }, { name:"Mercury White", hex:"#ddd" }],
+  Chair:      [{ name:"Black / Green", hex:"#44D62C" }, { name:"Phantom Black", hex:"#111" }, { name:"Quartz", hex:"#f2aebf" }, { name:"Light Gray", hex:"#c9ccd1" }],
+};
+
+const PDP_OPTION_GROUPS = {
+  Keyboard: [{ label:"Size", options:["Full Size", "Tenkeyless"] }],
+  Headset: [{ label:"Platform", options:["PC", "PlayStation", "Xbox"] }],
+  Controller: [{ label:"Platform", options:["PlayStation & PC", "Xbox & PC", "Tournament Black"] }],
+};
+
+const PDP_MEDIA_FRAMES = {
+  Laptop: ["Studio Shot", "Display Glow", "Keyboard Deck", "Profile View"],
+  Mouse: ["Main Angle", "Charging Setup", "Desk Shot", "Profile View"],
+  "Mouse Mat": ["Full Surface", "RGB Edge", "Desk Setup", "Texture Detail"],
+  Keyboard: ["Main Setup", "Keycap Glow", "Desk Angle", "Low Profile"],
+  Headset: ["Hero Angle", "White Variant", "Desk Setup", "Cup Detail"],
+  Speakers: ["Desk Pair", "Subwoofer", "RGB Demo", "Control Detail"],
+  Controller: ["Hero Shot", "Rear View", "Angle Detail", "In-Hand Setup"],
+  Dock: ["Front Ports", "Desk Setup", "Rear I/O", "Creator Rig"],
+  Charging: ["Surface View", "Charging Glow", "Desk Setup", "Detail"],
+  Chair: ["Studio Hero", "Rear Silhouette", "Battlestation Scene", "Lumbar Detail"],
 };
 
 /* ─── Top Picks (4 related product IDs per product type) ────── */

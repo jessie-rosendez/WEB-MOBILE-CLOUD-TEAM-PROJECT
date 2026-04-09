@@ -2,7 +2,9 @@
 - [Project Architecture](project_architecture.md) — File map, current section-to-data map, direction shift toward storefront-only IA, TBD areas (GCP, Excel)
 - [Scope & Deliverables](scope_and_deliverables.md) — 5 deliverables with done/open tracking, storefront-only direction, tier cost table, Kickstarter perks, sprint goals
 - [Known Issues & Open Items](known_issues.md) — Catalog count (18 vs 14+1), no product images yet, GCP/Excel/Kickstarter/SCRUM open
-- [Storefront Direction](storefront-direction.md) — Build complete: product.html unified all 18 products, chair.html redirects, nav dedup fixed
+- [Storefront Direction](storefront-direction.md) — Current screenshot-driven storefront direction, current live page state, real-asset needs, and next QA pass
+- [Storefront Worklog](storefront-worklog.md) — Running screenshot mapping, changed files, assumptions, open gaps, and exact stop-state for the next session
+- [Claude Handoff](claude-handoff.md) — High-signal summary of the latest storefront change set, touched files, and safest next steps
 - [Next Builds](next-builds.md) — Birds-eye prioritized build list across all 5 deliverables with owners and dependency map
 - [Checklist](checklist.md) — Editable team checklist mirroring current storefront + deliverable status
 - [Catalog Tab Distribution](catalog-tab-distribution.md) — Current catalog items grouped into screenshot-style tabs and a balanced 6-tab option

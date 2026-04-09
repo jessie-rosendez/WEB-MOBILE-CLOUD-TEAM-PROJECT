@@ -18,14 +18,21 @@ Why this file exists:
 - [x] Fix duplicate nav/tab bug: category links hidden on store page, tabs are single source of filtering
 - [x] Rename all product names from Razer to Phantm branding
 - [x] Image fallback system: drop src/images/{id}.jpg to auto-populate cards and detail pages
-- [x] Consolidate all product-page CSS into styles.css (removed inline styles from chair.html)
-- [x] chair.html collapsed to redirect → product.html?id=spectre-x (all products unified)
+- [x] Consolidate all product-page CSS into styles.css
+- [x] Upgrade homepage heroes into screenshot-style showcase sections
+- [x] Add category showcase section above the store grid
+- [x] Upgrade PDP layout with thumbnail rail, media shell, and highlights
+- [x] Add PDP configuration groups for relevant categories
+- [x] Rebuild `chair.html` into a real gaming chairs landing page
 - [ ] Add final product images to src/images/ (see src/images/IMAGES-README.md for filenames)
+- [ ] Add screenshot-style quick-view / purchase modal overlay
+- [ ] Refine sticky purchase rail to match screenshot direction more closely
 - [ ] Final pricing decisions locked
 
 ## Signature Product
 - [x] `Phantm Spectre X` chosen
 - [x] Racing-style concept defined
+- [x] Dedicated chair landing page built
 - [ ] Final specs locked
 - [ ] Final visuals/mockups added
 

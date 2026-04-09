@@ -6,68 +6,86 @@ type: project
 
 ## Confirmed Direction
 
-As of April 8, 2026, the public-facing site direction is:
+As of April 9, 2026, the public-facing site direction is:
 
-- Build a **pure Phantm e-commerce storefront** inspired by the Razer site structure and visual language.
-- Keep the public site focused on **shopping only**: navigation, category pages, product listings, product detail views, cart behavior, and a checkout-style information page.
-- Keep the site **separate from project-management content**. SCRUM, cloud forecast, RAG notes, and other class-process content should live in `docs/` and other deliverable artifacts, not in the storefront UI.
-- Move toward a **multi-page storefront** rather than a single page that mixes every deliverable together.
-- Show **all current catalog items** in the storefront flow, including the custom `Phantm Spectre X` chair.
-- Use **Phantm branding** throughout the experience, even when the catalog structure is benchmarked against Razer.
-- Plan for **AI-generated product visuals** that resemble the benchmark products while replacing visible branding with Phantm.
-- Include a **chair-focused learn-more experience** and a **placeholder brand/chair video section**.
-- Keep the cart **front-end only** for now, but it should show product prices, quantities, subtotal behavior, and lead into a final information-entry step.
-- The final checkout/info page can be a **dead end after entering information**. No live payment or backend processing is required right now.
+- build a **pure Phantm e-commerce storefront** inspired by the Razer site structure and visual language
+- keep the public site focused on **shopping only**: navigation, category pages, product listings, product detail views, cart behavior, chair marketing, and a checkout-style information page
+- keep the site **separate from project-management content**; SCRUM, cloud forecast, RAG notes, and Kickstarter planning remain in `docs/` and other submission artifacts
+- keep the storefront **multi-page**
+- show **all current catalog items**, including the custom `Phantm Spectre X` chair
+- keep **Phantm branding** throughout, even when the page structure is benchmarked against Razer
+- use **AI-generated or recreated visuals** rather than direct Razer asset reuse
+- keep the cart **front-end only** for now, but preserve pricing, quantity changes, subtotal behavior, and the dead-end info-entry checkout flow
 
 ---
 
-## Screenshot → Site Mapping (April 8 Build)
+## Screenshot → Site Mapping (April 9 Build)
 
-7 razer.com screenshots were provided. All patterns implemented as Phantm.
+The current screenshot batch pushed the storefront closer to flagship Razer-style merchandising.
 
-| Screenshot | Razer Reference | Phantm Implementation | Status |
-|---|---|---|---|
-| 1 | Blade 16 homepage hero (horizontal split, full-bleed) | `index.html` hero--blade → `.hero-split` class, "Only At Phantm" badge | ✅ Done |
-| 2 | Viper V4 Pro hero (dual colorway, reversed layout) | `index.html` hero--viper → `.hero-split.row-reverse`, red glow | ✅ Done |
-| 3 | Raiju V3 Pro PDP — color selector, protection upsell, top picks | `product.html` — variants, upsell, top picks modules | ✅ Done |
-| 4 | Enki chair — lifestyle room photo section | `product.html?id=spectre-x` — image slot added, needs photo | ✅ Slot done, photo needed |
-| 5 | BlackShark V3 Pro PDP — platform/variant selector, awards | `product.html` — variant selector + awards badges module | ✅ Done |
-| 6 | Best-selling keyboards carousel | `store.html` — "Fresh Off The Line" carousel above tabs | ✅ Done |
-| 7 | Headset grid with NEW badge overlay | `store.html` cards — `.cc-badge-overlay` on carousel | ✅ Done |
-
----
-
-## Components Added (April 8)
-
-### index.html — Hero upgrades
-All non-chair heroes use `.hero-split` class — horizontal layout, content left, visual slot right.
-- hero--blade: "Only At Phantm" gold badge, `hero-img-slot` with teal glow + AI prompt comment
-- hero--viper: `row-reverse` so image is left, text right. Red glow slot.
-- hero--audio: Standard split, purple/indigo glow slot.
-
-### store.html — "Fresh Off The Line" Carousel
-- `<div id="storeFeatured">` lives above category tabs
-- Populated by `initStore()` in `script.js` — selects all `badge:"NEW"` products
-- Cards have: glow visual, NEW badge overlay, name, sub, price, Learn More + Buy CTA
-
-### product.html — 4 New PDP Modules (all injected by inline script)
-1. **Color / Variant Selector** — reads `COLOR_OPTIONS[p.tag]`; styled swatches with dots
-2. **Protection Upsell** — "Phantm Care Protection" 2-yr or none; auto-priced at ~12% of product
-3. **Awards Badges** — reads `AWARDS[p.tag]`; icons + source + label; hidden if not defined for type
-4. **Top Picks With Your Purchase** — reads `TOP_PICKS_IDS[p.tag]`; 4-item 2×2 grid
+| Screenshot Direction | Phantm Implementation | Status |
+|---|---|---|
+| Blade-style cinematic homepage hero | `index.html` hero--blade moved into showcase-style hero treatment | ✅ Implemented |
+| Viper dual-color homepage hero | `index.html` hero--viper uses dual-device showcase fallback composition | ✅ Implemented |
+| Audio campaign-style homepage hero | `index.html` hero--audio uses stronger cinematic showcase layout | ✅ Implemented |
+| Gaming keyboards category landing feel | `store.html` + `script.js` category showcase for `Keyboards` | ✅ Implemented |
+| Gaming headsets category landing feel | `store.html` + `script.js` category showcase for `Audio` | ✅ Implemented |
+| Lifestyle / gaming chairs landing feel | `chair.html` rebuilt as a real landing page | ✅ Implemented |
+| Keyboard PDP with color + size selectors | `product.html` + `script.js` config groups for keyboards | ✅ Implemented |
+| Headset PDP with richer merchandising | `product.html` + `script.js` gallery, options, awards, top picks | ✅ Implemented |
+| Mouse / controller PDP with gallery rail | `product.html` thumb rail + media shell + highlights | ✅ Implemented |
+| Chair product quick-view / purchase overlay | Not yet built as a true modal overlay | ⏳ Open |
+| Bottom purchase / delivery rail feel | Existing sticky buy bar is live, but not a full Razer-style commerce rail | ⏳ Open |
 
 ---
 
-## Build Status (April 8, 2026)
+## Current Storefront State
 
-All pages live:
-- `index.html` — 4 hero sections (chair CSS render + 3 split-layout image slots), lifestyle panel
-- `store.html` — "Fresh Off The Line" carousel + category tabs + 18-product grid
-- `cart.html` — Cart with qty controls, order summary sidebar, checkout button
-- `checkout.html` — Contact + address form, dead-end confirmation
-- `product.html` — Dynamic detail page for ALL 18 products: subnav, hero, video placeholder, **variant selector**, **protection upsell**, **awards badges**, features, specs, compare, **top picks**, sticky buy bar
-- `support.html` — Search hero, 6 topic cards, FAQ accordion, contact sidebar
-- `chair.html` — Redirect → `product.html?id=spectre-x`
+### Homepage
+- `index.html` now uses stronger showcase-style product heroes instead of flatter split sections
+- the Blade, Viper, and Audio sections have richer fallback compositions while waiting for final assets
+
+### Store
+- `store.html` has:
+  - the existing `Fresh Off The Line` carousel
+  - category tabs
+  - a new screenshot-inspired category showcase area above the standard grid
+  - the full 18-product grid below
+
+### Product Detail Pages
+- `product.html` is the shared PDP for all products
+- current PDP modules include:
+  - thumbnail rail
+  - main media shell
+  - media highlights
+  - color / design selector
+  - secondary configuration groups for relevant product types
+  - protection upsell
+  - awards badges
+  - top picks
+  - sticky buy bar
+
+### Chair Landing
+- `chair.html` is now a true gaming chairs landing page
+- it includes:
+  - category intro
+  - lineup hero composition
+  - featured Spectre X card
+  - finish-concept card
+  - video placeholder banner
+
+---
+
+## Build Status (April 9, 2026)
+
+Pages live now:
+- `index.html` — flagship homepage with showcase heroes and lifestyle panel
+- `store.html` — featured carousel, category showcase, category tabs, and 18-product grid
+- `cart.html` — cart with quantity controls, subtotal, and checkout transition
+- `checkout.html` — information-entry page with dead-end confirmation flow
+- `product.html` — shared PDP for all 18 products with gallery, options, protection, awards, specs, compare, top picks, and sticky buy
+- `support.html` — support / FAQ page
+- `chair.html` — standalone gaming chairs landing page
 
 ---
 
@@ -114,24 +132,24 @@ When videos exist, add `src/videos/{id}.mp4` and wire up the `<video>` tag in pr
 
 ## STOP STATE — Next Steps
 
-**Completed last session:** All 7 screenshot UI patterns implemented.
+**Completed this session:** screenshot-driven structural pass across homepage, store, PDP, and chairs landing.
 
 **Priority queue for next session:**
 
-1. **Images** — Generate/source 18 product photos using prompts above. Drop into `src/images/{id}.jpg`. The image slot is already wired; SVG disappears automatically when the image loads.
-2. **Spectre X lifestyle room photo** — Drop as `src/images/spectre-x-room.jpg` and wire into the hero--chair section.
-3. **Platform selector for headsets** — Screenshots showed PC / Xbox / PlayStation tab row. Can be added as a second row in the variant section; add `PLATFORM_OPTIONS` object to script.js for Headset type.
-4. **Push to GitHub Pages** — `git add -A && git commit -m "…" && git push origin homepage-jessie`
-5. **GCP RAG Agent** (Pavel) — Not started
-6. **Excel forecast** (Mason) — Not started
-7. **Kickstarter page** — Not started
-8. **SCRUM role assignment** — Not started
+1. **Images** — Generate or source 18 product photos using the prompts above. Drop them into `src/images/{id}.jpg`. The image slots are already wired.
+2. **Spectre X lifestyle room photo** — Add `src/images/spectre-x-room.jpg` and decide whether it belongs on `index.html`, `chair.html`, or both.
+3. **Quick-view modal** — Build the screenshot-style purchase overlay for chair / controller / mouse flows.
+4. **Commerce rail refinement** — Upgrade the current sticky buy bar if a closer Razer-style rail is still wanted.
+5. **Responsive QA** — Test homepage, store, PDP, chair, cart, and checkout on mobile widths before push.
+6. **GCP RAG Agent** (Pavel) — separate deliverable, not storefront UI
+7. **Excel forecast** (Mason) — separate deliverable, not storefront UI
 
 **Quick test checklist before push:**
-- [ ] `index.html` — hero--blade shows left/right split with "Only At Phantm" badge
-- [ ] `index.html` — hero--viper shows reversed split (image left, text right)
-- [ ] `store.html` — "Fresh Off The Line" carousel appears above tabs with NEW-badged products
-- [ ] `product.html?id=bs-v3` — variant swatches, protection upsell, awards badges, top picks all render
-- [ ] `product.html?id=spectre-x` — chair-specific content correct, top picks show lifestyle items
-- [ ] `cart.html` — no regressions on add/remove
-- [ ] Mobile 390px — heroes stack vertically, carousel scrolls horizontally
+- [ ] `index.html` — showcase heroes render cleanly with no layout collapse
+- [ ] `store.html` — category showcase appears above the product grid
+- [ ] `product.html?id=hunts-8k` — color and size options render
+- [ ] `product.html?id=bs-v3` — gallery, options, protection, awards, and top picks render
+- [ ] `product.html?id=viper-v4` — thumb rail and sticky buy bar render correctly
+- [ ] `chair.html` — lineup hero, cards, and cinema banner render cleanly
+- [ ] `cart.html` / `checkout.html` — no cart regression
+- [ ] Mobile 390px — heroes and PDP media stack correctly

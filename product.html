@@ -13,7 +13,7 @@
     .badge-flash { animation: badgeFlash 350ms ease; }
     @media(max-width:768px) {
       .pdp-hero-inner { grid-template-columns:1fr; gap:40px; }
-      .pdp-visual { order:-1; }
+      .pdp-media-column { order:-1; }
       .pdp-visual-fallback { width:180px; height:180px; }
       .features-grid { grid-template-columns:1fr; }
       .compare-table { overflow-x:auto; display:block; }
@@ -77,13 +77,22 @@
 <section class="pdp-hero" id="pdp-overview">
   <div class="pdp-hero-glow" id="heroGlow"></div>
   <div class="pdp-hero-inner">
-    <div class="pdp-visual" id="pdpVisual"></div>
+    <div class="pdp-media-column">
+      <div class="pdp-thumb-rail" id="pdpThumbRail"></div>
+      <div class="pdp-media-stack">
+        <div class="pdp-visual-shell">
+          <div class="pdp-visual" id="pdpVisual"></div>
+        </div>
+        <div class="pdp-media-meta" id="pdpMediaMeta"></div>
+      </div>
+    </div>
     <div class="pdp-info">
       <div id="pdpBadge" style="margin-bottom:16px"></div>
       <h1 class="pdp-name" id="pdpName">Loading…</h1>
       <p class="pdp-sub" id="pdpSub"></p>
       <!-- Color / variant selector injected here -->
       <div id="pdpVariants"></div>
+      <div id="pdpOptionGroups"></div>
       <p class="pdp-price" id="pdpPrice"></p>
       <div class="pdp-actions">
         <button class="btn-green" id="pdpBuyBtn" style="padding:14px 32px">Add to Cart</button>
@@ -302,17 +311,50 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("heroGlow").style.cssText = `--glow-color:${p.glow}`;
   document.querySelector(".pdp-hero").style.setProperty("--glow-color", p.glow);
 
-  /* ── Visual: real image or SVG fallback ── */
+  /* ── Media gallery: main frame + thumb rail ── */
   const visual = document.getElementById("pdpVisual");
-  const imgSrc = `src/images/${p.id}.jpg`;
-  const img = new Image();
-  img.onload = () => {
-    visual.innerHTML = `<img src="${imgSrc}" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+  const thumbRail = document.getElementById("pdpThumbRail");
+  const mediaFrames = (PDP_MEDIA_FRAMES[p.tag] || PDP_MEDIA_FRAMES.Laptop).map((label, index) => ({
+    label,
+    src: index === 0 ? `src/images/${p.id}.jpg` : `src/images/${p.id}-${index + 1}.jpg`,
+  }));
+
+  const renderMediaFrame = (frameIndex) => {
+    const frame = mediaFrames[frameIndex];
+    if (!frame) return;
+    thumbRail.querySelectorAll(".pdp-thumb").forEach((thumb, index) => {
+      thumb.classList.toggle("active", index === frameIndex);
+    });
+
+    const img = new Image();
+    img.onload = () => {
+      visual.innerHTML = `<img src="${frame.src}" alt="${p.name} — ${frame.label}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+    };
+    img.onerror = () => {
+      visual.innerHTML = `
+        <div class="pdp-visual-fallback" style="color:${p.glow}">
+          ${getIcon(p.tag)}
+          <span class="pdp-fallback-caption">${frame.label}</span>
+        </div>
+      `;
+    };
+    img.src = frame.src;
   };
-  img.onerror = () => {
-    visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow}">${getIcon(p.tag)}</div>`;
-  };
-  img.src = imgSrc;
+
+  thumbRail.innerHTML = mediaFrames.map((frame, index) => `
+    <button class="pdp-thumb${index === 0 ? " active" : ""}" data-frame-index="${index}" aria-label="${frame.label}">
+      <span class="pdp-thumb-media">${getIcon(p.tag)}</span>
+      <span class="pdp-thumb-label">${index + 1}</span>
+    </button>
+  `).join("");
+
+  thumbRail.addEventListener("click", e => {
+    const thumb = e.target.closest(".pdp-thumb");
+    if (!thumb) return;
+    renderMediaFrame(Number(thumb.dataset.frameIndex));
+  });
+
+  renderMediaFrame(0);
 
   /* ── Badge ── */
   if (p.badge) {
@@ -344,6 +386,13 @@ document.addEventListener("DOMContentLoaded", () => {
       <p>${c.body}</p>
     </div>
   `).join("");
+
+  document.getElementById("pdpMediaMeta").innerHTML = `
+    <a class="pdp-gallery-link" href="#pdp-video">View Gallery</a>
+    <ul class="pdp-media-highlights">
+      ${fd.cards.slice(0, 3).map(card => `<li>${card.title}</li>`).join("")}
+    </ul>
+  `;
 
   /* ── Tech Specs ── */
   const specFn = SPEC_ROWS[p.tag] || SPEC_ROWS.Laptop;
@@ -388,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (variants && variants.length > 1) {
     document.getElementById("pdpVariants").innerHTML = `
       <div class="pdp-variants">
-        <p class="pdp-variants-label">Color — <span id="selectedVariant">${variants[0].name}</span></p>
+        <p class="pdp-variants-label">Color / Design — <span id="selectedVariant">${variants[0].name}</span></p>
         <div class="pdp-variant-swatches">
           ${variants.map((v, i) => `
             <button class="variant-swatch${i === 0 ? " active" : ""}" data-variant="${v.name}">
@@ -402,9 +451,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pdpVariants").addEventListener("click", e => {
       const sw = e.target.closest(".variant-swatch");
       if (!sw) return;
-      document.querySelectorAll(".variant-swatch").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll("#pdpVariants .variant-swatch").forEach(b => b.classList.remove("active"));
       sw.classList.add("active");
       document.getElementById("selectedVariant").textContent = sw.dataset.variant;
+    });
+  }
+
+  /* ── Screenshot-style secondary option groups ── */
+  const optionGroups = PDP_OPTION_GROUPS[p.tag] || [];
+  if (optionGroups.length) {
+    document.getElementById("pdpOptionGroups").innerHTML = optionGroups.map(group => `
+      <div class="pdp-config-group">
+        <p class="pdp-config-label">${group.label}</p>
+        <div class="pdp-config-options">
+          ${group.options.map((opt, index) => `
+            <button class="pdp-config-option${index === 0 ? " active" : ""}" data-config-group="${group.label}" data-config-option="${opt}">
+              ${opt}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `).join("");
+    document.getElementById("pdpOptionGroups").addEventListener("click", e => {
+      const button = e.target.closest(".pdp-config-option");
+      if (!button) return;
+      const group = button.dataset.configGroup;
+      document.querySelectorAll(`.pdp-config-option[data-config-group="${group}"]`).forEach(opt => opt.classList.remove("active"));
+      button.classList.add("active");
     });
   }
 
