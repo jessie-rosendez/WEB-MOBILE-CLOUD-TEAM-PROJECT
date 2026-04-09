@@ -3,29 +3,29 @@
 /* ─── Product Catalog ─────────────────────────────────────── */
 const PRODUCTS = [
   /* Laptops */
-  { id:"blade-14",  name:"Razer Blade 14",             sub:"Ultra-Portable Gaming Powerhouse",      cat:"PC",      tag:"Laptop",      price:2399, glow:"rgba(117,255,145,0.28)" },
-  { id:"blade-16",  name:"Razer Blade 16",             sub:"Slim. Immersive. Infinite.",            cat:"PC",      tag:"Laptop",      price:2999, glow:"rgba(77,208,255,0.28)",  badge:"NEW" },
-  { id:"blade-18",  name:"Razer Blade 18",             sub:"Desktop-Class Performance. Portable.",  cat:"PC",      tag:"Laptop",      price:3499, glow:"rgba(181,105,255,0.24)" },
+  { id:"blade-14",  name:"Phantm Blade 14",            sub:"Ultra-Portable Gaming Powerhouse",      cat:"PC",      tag:"Laptop",      price:2399, glow:"rgba(117,255,145,0.28)" },
+  { id:"blade-16",  name:"Phantm Blade 16",            sub:"Slim. Immersive. Infinite.",            cat:"PC",      tag:"Laptop",      price:2999, glow:"rgba(77,208,255,0.28)",  badge:"NEW" },
+  { id:"blade-18",  name:"Phantm Blade 18",            sub:"Desktop-Class Performance. Portable.",  cat:"PC",      tag:"Laptop",      price:3499, glow:"rgba(181,105,255,0.24)" },
   /* Mice */
-  { id:"viper-v4",  name:"Razer Viper V4 Pro",         sub:"For The Pro.",                          cat:"Mice",    tag:"Mouse",       price:179,  glow:"rgba(255,80,80,0.24)",   badge:"NEW" },
-  { id:"da-v4",     name:"Razer DeathAdder V4 Pro",    sub:"Ergonomic Esports Mouse.",              cat:"Mice",    tag:"Mouse",       price:169,  glow:"rgba(255,118,160,0.22)" },
-  { id:"firefly",   name:"Razer Firefly V2 Pro",       sub:"The Only RGB Mouse Mat.",               cat:"Mice",    tag:"Mouse Mat",   price:109,  glow:"rgba(181,105,255,0.22)" },
+  { id:"viper-v4",  name:"Phantm Viper V4 Pro",        sub:"For The Pro.",                          cat:"Mice",    tag:"Mouse",       price:179,  glow:"rgba(255,80,80,0.24)",   badge:"NEW" },
+  { id:"da-v4",     name:"Phantm DeathAdder V4 Pro",   sub:"Ergonomic Esports Mouse.",              cat:"Mice",    tag:"Mouse",       price:169,  glow:"rgba(255,118,160,0.22)" },
+  { id:"firefly",   name:"Phantm Firefly V2 Pro",      sub:"The Only RGB Mouse Mat.",               cat:"Mice",    tag:"Mouse Mat",   price:109,  glow:"rgba(181,105,255,0.22)" },
   /* Keyboards */
-  { id:"bw-v4",     name:"Razer BlackWidow V4 Pro",    sub:"Full-Size Mechanical Mastery.",         cat:"Keyboards",tag:"Keyboard",   price:229,  glow:"rgba(117,255,145,0.26)" },
-  { id:"hunts-8k",  name:"Razer Huntsman V3 Pro 8KHz", sub:"Analog Optical Esports Keyboard.",      cat:"Keyboards",tag:"Keyboard",   price:299,  glow:"rgba(77,208,255,0.22)",  badge:"NEW" },
-  { id:"ds-v2",     name:"Razer DeathStalker V2 Pro",  sub:"Low-Profile Wireless Gaming.",          cat:"Keyboards",tag:"Keyboard",   price:249,  glow:"rgba(181,105,255,0.22)" },
+  { id:"bw-v4",     name:"Phantm BlackWidow V4 Pro",   sub:"Full-Size Mechanical Mastery.",         cat:"Keyboards",tag:"Keyboard",   price:229,  glow:"rgba(117,255,145,0.26)" },
+  { id:"hunts-8k",  name:"Phantm Huntsman V3 Pro",     sub:"Analog Optical Esports Keyboard.",      cat:"Keyboards",tag:"Keyboard",   price:299,  glow:"rgba(77,208,255,0.22)",  badge:"NEW" },
+  { id:"ds-v2",     name:"Phantm DeathStalker V2 Pro", sub:"Low-Profile Wireless Gaming.",          cat:"Keyboards",tag:"Keyboard",   price:249,  glow:"rgba(181,105,255,0.22)" },
   /* Audio */
-  { id:"bs-v3",     name:"Razer BlackShark V3 Pro",    sub:"Wireless ANC Esports Headset.",         cat:"Audio",   tag:"Headset",     price:249,  glow:"rgba(255,177,75,0.2)",   badge:"NEW" },
-  { id:"kraken-v4", name:"Razer Kraken V4 Pro",        sub:"Immersive THX Spatial Audio.",          cat:"Audio",   tag:"Headset",     price:399,  glow:"rgba(117,255,145,0.22)" },
-  { id:"nommo-v2",  name:"Razer Nommo V2 Pro",         sub:"Desktop Speakers. Redefined.",          cat:"Audio",   tag:"Speakers",    price:449,  glow:"rgba(77,208,255,0.2)" },
+  { id:"bs-v3",     name:"Phantm BlackShark V3 Pro",   sub:"Wireless ANC Esports Headset.",         cat:"Audio",   tag:"Headset",     price:249,  glow:"rgba(255,177,75,0.2)",   badge:"NEW" },
+  { id:"kraken-v4", name:"Phantm Kraken V4 Pro",       sub:"Immersive THX Spatial Audio.",          cat:"Audio",   tag:"Headset",     price:399,  glow:"rgba(117,255,145,0.22)" },
+  { id:"nommo-v2",  name:"Phantm Nommo V2 Pro",        sub:"Desktop Speakers. Redefined.",          cat:"Audio",   tag:"Speakers",    price:449,  glow:"rgba(77,208,255,0.2)" },
   /* Controllers */
-  { id:"wolv-v3",   name:"Razer Wolverine V3 Pro",     sub:"Native 8000 Hz Wireless Controller.",   cat:"Console", tag:"Controller",  price:199,  glow:"rgba(255,177,75,0.22)",  badge:"NEW" },
-  { id:"kishi-v3",  name:"Razer Kishi V3 Pro",         sub:"Pro Mobile Gaming Controller.",         cat:"Mobile",  tag:"Controller",  price:149,  glow:"rgba(255,118,160,0.2)" },
+  { id:"wolv-v3",   name:"Phantm Wolverine V3 Pro",    sub:"Native 8000 Hz Wireless Controller.",   cat:"Console", tag:"Controller",  price:199,  glow:"rgba(255,177,75,0.22)",  badge:"NEW" },
+  { id:"kishi-v3",  name:"Phantm Kishi V3 Pro",        sub:"Pro Mobile Gaming Controller.",         cat:"Mobile",  tag:"Controller",  price:149,  glow:"rgba(255,118,160,0.2)" },
   /* Connectivity */
-  { id:"tb5-dock",  name:"Razer Thunderbolt 5 Dock",   sub:"The Creator's Hub.",                    cat:"PC",      tag:"Dock",        price:399,  glow:"rgba(77,208,255,0.22)" },
+  { id:"tb5-dock",  name:"Phantm Thunderbolt 5 Dock",  sub:"The Creator's Hub.",                    cat:"PC",      tag:"Dock",        price:399,  glow:"rgba(77,208,255,0.22)" },
   /* Desk Setup */
-  { id:"gigantus",  name:"Razer Gigantus V2",          sub:"Precision For Every Playstyle.",        cat:"Lifestyle",tag:"Mouse Mat",  price:39,   glow:"rgba(117,255,145,0.2)" },
-  { id:"hyperflux", name:"Razer HyperFlux V2",         sub:"Wireless Charging. Redefined.",         cat:"Lifestyle",tag:"Charging",   price:119,  glow:"rgba(255,118,160,0.2)" },
+  { id:"gigantus",  name:"Phantm Gigantus V2",         sub:"Precision For Every Playstyle.",        cat:"Lifestyle",tag:"Mouse Mat",  price:39,   glow:"rgba(117,255,145,0.2)" },
+  { id:"hyperflux", name:"Phantm HyperFlux V2",        sub:"Wireless Charging. Redefined.",         cat:"Lifestyle",tag:"Charging",   price:119,  glow:"rgba(255,118,160,0.2)" },
   /* Signature Chair */
   { id:"spectre-x", name:"Phantm Spectre X",           sub:"Racing Shell. Creator Utility.",        cat:"Lifestyle",tag:"Chair",      price:799,  glow:"rgba(68,214,44,0.3)",    badge:"ONLY AT PHANTM" },
 ];
@@ -122,13 +122,16 @@ function initStore() {
   const tabs = document.getElementById("categoryTabs");
   if (!grid || !tabs) return;
 
-  const cats = ["All", ...new Set(PRODUCTS.map(p => p.cat))];
+  // Read ?cat= from URL to support nav deep-links (e.g. store.html?cat=PC)
+  const urlCat = new URLSearchParams(location.search).get("cat") || "All";
+  const validCats = ["All", ...new Set(PRODUCTS.map(p => p.cat))];
+  const activeCat = validCats.includes(urlCat) ? urlCat : "All";
 
-  tabs.innerHTML = cats.map(c => `
-    <button class="tab-btn${c==="All"?" active":""}" data-cat="${c}">${c}</button>
+  tabs.innerHTML = validCats.map(c => `
+    <button class="tab-btn${c===activeCat?" active":""}" data-cat="${c}">${c}</button>
   `).join("");
 
-  renderGrid("All");
+  renderGrid(activeCat);
 
   tabs.addEventListener("click", e => {
     const btn = e.target.closest(".tab-btn");
@@ -145,9 +148,11 @@ function initStore() {
 
   function renderGrid(cat) {
     const list = cat === "All" ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
-    grid.innerHTML = list.map(p => `
+    grid.innerHTML = list.map(p => {
+      const imgSrc = `src/images/${p.id}.jpg`;
+      return `
       <article class="product-card" style="--card-glow:${p.glow}">
-        <div class="product-card-visual">
+        <div class="product-card-visual" data-img="${imgSrc}" data-icon="${p.tag}">
           ${getIcon(p.tag)}
           <span class="ph-watermark">PH</span>
         </div>
@@ -158,11 +163,21 @@ function initStore() {
           <p class="card-price">${fmt(p.price)}</p>
         </div>
         <div class="card-ctas">
-          <a class="card-cta-learn" href="${p.id==="spectre-x"?"chair.html":"#"}">Learn More &gt;</a>
+          <a class="card-cta-learn" href="${p.id==="spectre-x"?"chair.html":"product.html?id="+p.id}">Learn More &gt;</a>
           <button class="card-cta-buy" data-buy="${p.id}">Buy &gt;</button>
         </div>
       </article>
-    `).join("");
+    `}).join("");
+
+    // Swap SVG icons for real images where available
+    grid.querySelectorAll(".product-card-visual[data-img]").forEach(el => {
+      const src = el.dataset.img;
+      const img = new Image();
+      img.onload = () => {
+        el.innerHTML = `<img src="${src}" alt="" style="width:60%;max-width:220px;object-fit:contain;filter:drop-shadow(0 0 20px var(--card-glow))"/>`;
+      };
+      img.src = src;
+    });
   }
 }
 

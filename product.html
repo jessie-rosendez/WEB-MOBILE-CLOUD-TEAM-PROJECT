@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Product | Phantm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    @keyframes badgeFlash { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
+    .badge-flash { animation: badgeFlash 350ms ease; }
+
+    /* ── Product sub-nav ── */
+    .product-subnav {
+      position: sticky;
+      top: calc(var(--nav-h) + 2px);
+      z-index: 60;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .subnav-links { display: flex; }
+    .subnav-links a {
+      padding: 14px 18px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-bottom: 2px solid transparent;
+      transition: color 150ms, border-color 150ms;
+      white-space: nowrap;
+    }
+    .subnav-links a:hover { color: var(--white); }
+    .subnav-links a.active { color: var(--white); border-bottom-color: var(--green); }
+    .subnav-price { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--white); }
+    .subnav-buy { display: flex; align-items: center; gap: 10px; }
+
+    /* ── Hero ── */
+    .pdp-hero {
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px;
+    }
+    .pdp-hero-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, var(--glow-color, rgba(68,214,44,0.18)), transparent 72%);
+      pointer-events: none;
+    }
+    .pdp-hero-inner {
+      max-width: 1080px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .pdp-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pdp-visual img {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 4px;
+      display: block;
+    }
+    .pdp-visual-fallback {
+      width: 260px;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--glow-color, var(--green));
+      opacity: 0.75;
+    }
+    .pdp-visual-fallback svg { width: 100%; height: 100%; }
+    .pdp-info {}
+    .pdp-badge { display: inline-block; margin-bottom: 16px; }
+    .pdp-name {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .pdp-sub {
+      font-size: 1.1rem;
+      color: var(--gray-lt);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .pdp-price {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .pdp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Details section ── */
+    .pdp-details {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .pdp-details h2 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 32px;
+      color: var(--green);
+    }
+    .pdp-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+    .pdp-spec-cell {
+      background: var(--dark);
+      padding: 24px 20px;
+    }
+    .spec-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .spec-value {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* ── Buy bar ── */
+    .pdp-buy-bar {
+      position: sticky;
+      bottom: 0;
+      z-index: 80;
+      background: rgba(0,0,0,0.95);
+      border-top: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+    .pdp-buy-bar-name {
+      font-family: var(--display);
+      font-size: .9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--gray-lt);
+      flex: 1;
+    }
+    .pdp-buy-bar-price {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .pdp-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .pdp-visual { order: -1; }
+      .pdp-visual-fallback { width: 180px; height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <div class="announce-bar">
+    <p>Phantm Spectre X — Early Backer pricing now available.&nbsp;&nbsp;<a href="chair.html">Learn More &gt;</a></p>
+  </div>
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-mark">PH</div>
+        <span class="logo-name">Phantm</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="store.html">Store</a></li>
+        <li><a href="store.html?cat=PC">PC</a></li>
+        <li><a href="store.html?cat=Console">Console</a></li>
+        <li><a href="store.html?cat=Mobile">Mobile</a></li>
+        <li><a href="chair.html">Furniture &amp; Lifestyle</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <a class="nav-icon-btn" href="cart.html" aria-label="Cart">
+          <svg width="22" height="20" viewBox="0 0 22 20" fill="none"><path d="M1 1h3l2.2 10.5a2 2 0 002 1.5h9.2a2 2 0 001.96-1.6L21 5H5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17.5" r="1.5" fill="currentColor"/><circle cx="17" cy="17.5" r="1.5" fill="currentColor"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M1 1h20M1 8h20M1 15h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Product Sub-nav ── -->
+<div class="product-subnav" id="productSubnav">
+  <div class="subnav-links">
+    <a href="#pdp-hero" class="active">Overview</a>
+    <a href="#pdp-specs">Tech Specs</a>
+  </div>
+  <div class="subnav-buy">
+    <span class="subnav-price" id="subnavPrice"></span>
+    <button class="btn-green" id="subnavBuy" style="padding:10px 24px;font-size:.82rem">Buy Now</button>
+  </div>
+</div>
+
+<!-- ── Hero ── -->
+<section class="pdp-hero" id="pdp-hero">
+  <div class="pdp-hero-glow" id="heroGlow"></div>
+  <div class="pdp-hero-inner">
+    <div class="pdp-visual" id="pdpVisual"></div>
+    <div class="pdp-info">
+      <div class="pdp-badge" id="pdpBadge"></div>
+      <h1 class="pdp-name" id="pdpName">Loading…</h1>
+      <p class="pdp-sub" id="pdpSub"></p>
+      <p class="pdp-price" id="pdpPrice"></p>
+      <div class="pdp-actions">
+        <button class="btn-green" id="pdpBuyBtn" style="padding:14px 32px">Add to Cart</button>
+        <a class="btn-outline" href="store.html">← Back to Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Specs ── -->
+<section id="pdp-specs">
+  <div class="pdp-details">
+    <h2>Tech Specs</h2>
+    <div class="pdp-spec-grid" id="pdpSpecGrid"></div>
+    <a href="store.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:.9rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+      ← View All Products
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="store.html">All Products</a></li>
+          <li><a href="store.html?cat=PC">PC</a></li>
+          <li><a href="store.html?cat=Console">Console</a></li>
+          <li><a href="store.html?cat=Mobile">Mobile</a></li>
+          <li><a href="chair.html">Furniture &amp; Lifestyle</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Get Help</a></li>
+          <li><a href="#">Warranty &amp; Returns</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Phantm</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Settings</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tagline">For Gamers. By Gamers.™</span>
+      <span class="footer-legal">© 2026 Phantm. BTE 400 Spring 2026 Class Project.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Sticky Buy Bar ── -->
+<div class="pdp-buy-bar">
+  <span class="pdp-buy-bar-name" id="buyBarName"></span>
+  <span class="pdp-buy-bar-price" id="buyBarPrice"></span>
+  <button class="btn-green" id="buyBarBtn" style="padding:10px 24px;font-size:.85rem">Buy Now — <span id="buyBarPriceInline"></span></button>
+</div>
+
+<script src="script.js"></script>
+<script>
+/* ── Spec templates per product tag ── */
+const SPEC_TEMPLATES = {
+  Laptop: p => [
+    { label: "Category",       value: "Gaming Laptop" },
+    { label: "Form Factor",    value: "Ultra-thin" },
+    { label: "Display",        value: "QHD 240Hz" },
+    { label: "GPU",            value: "NVIDIA RTX 40-Series" },
+    { label: "RAM",            value: "16GB DDR5" },
+    { label: "Storage",        value: "1TB NVMe SSD" },
+    { label: "Battery",        value: "80Wh" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Mouse: p => [
+    { label: "Category",       value: "Gaming Mouse" },
+    { label: "Sensor",         value: "Phantm Focus Pro 35K" },
+    { label: "DPI Range",      value: "100–35,000 DPI" },
+    { label: "Polling Rate",   value: "8000 Hz" },
+    { label: "Buttons",        value: "5 Programmable" },
+    { label: "Connectivity",   value: "HyperSpeed Wireless" },
+    { label: "Battery",        value: "Up to 280 hours" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  "Mouse Mat": p => [
+    { label: "Category",       value: "Gaming Mouse Mat" },
+    { label: "Surface",        value: "Micro-textured cloth" },
+    { label: "Base",           value: "Non-slip rubber" },
+    { label: "Lighting",       value: "Chroma RGB underglow" },
+    { label: "USB",            value: "USB-A passthrough" },
+    { label: "Size",           value: "Extended XL" },
+    { label: "Thickness",      value: "3mm" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Keyboard: p => [
+    { label: "Category",       value: "Gaming Keyboard" },
+    { label: "Switch Type",    value: "Phantm Optical" },
+    { label: "Actuation",      value: "1.5mm" },
+    { label: "Polling Rate",   value: "8000 Hz" },
+    { label: "Connectivity",   value: "USB-C / Wireless" },
+    { label: "Backlight",      value: "Per-key Chroma RGB" },
+    { label: "Anti-ghosting",  value: "Full N-Key Rollover" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Headset: p => [
+    { label: "Category",       value: "Gaming Headset" },
+    { label: "Drivers",        value: "50mm Titanium" },
+    { label: "Frequency",      value: "20Hz–20kHz" },
+    { label: "Microphone",     value: "Beamforming + ANC" },
+    { label: "Connectivity",   value: "HyperSpeed Wireless" },
+    { label: "Battery",        value: "Up to 70 hours" },
+    { label: "Surround",       value: "THX Spatial Audio" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Speakers: p => [
+    { label: "Category",       value: "Desktop Speakers" },
+    { label: "Total Power",    value: "120W RMS" },
+    { label: "Subwoofer",      value: "8-inch Down-firing" },
+    { label: "THX",            value: "THX Certified" },
+    { label: "Connectivity",   value: "USB / Optical / AUX" },
+    { label: "Lighting",       value: "Chroma RGB" },
+    { label: "Control",        value: "Bedside remote" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Controller: p => [
+    { label: "Category",       value: "Gaming Controller" },
+    { label: "Connectivity",   value: "HyperSpeed Wireless" },
+    { label: "Polling Rate",   value: "8000 Hz" },
+    { label: "Triggers",       value: "Hair-trigger locks" },
+    { label: "Buttons",        value: "4 Remappable rear" },
+    { label: "Battery",        value: "Up to 30 hours" },
+    { label: "Compatibility",  value: "PC / Console / Mobile" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Dock: p => [
+    { label: "Category",       value: "Thunderbolt Dock" },
+    { label: "Interface",      value: "Thunderbolt 5" },
+    { label: "Bandwidth",      value: "Up to 120Gbps" },
+    { label: "USB-A Ports",    value: "4× USB-A 3.2" },
+    { label: "USB-C Ports",    value: "2× USB-C" },
+    { label: "Display Out",    value: "2× DP2.1 + 1× HDMI" },
+    { label: "Power Delivery", value: "96W Pass-through" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+  Charging: p => [
+    { label: "Category",       value: "Wireless Charging" },
+    { label: "Technology",     value: "HyperFlux Wireless" },
+    { label: "Output",         value: "Up to 15W" },
+    { label: "Compatible",     value: "HyperFlux Mice" },
+    { label: "Surface",        value: "Extended mat surface" },
+    { label: "Lighting",       value: "Chroma RGB edge" },
+    { label: "Cable",          value: "USB-C 1.8m" },
+    { label: "Price",          value: fmt(p.price) },
+  ],
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+
+  if (!id) { location.replace("store.html"); return; }
+
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) { location.replace("store.html"); return; }
+
+  // If someone somehow lands on product.html for the chair, redirect
+  if (id === "spectre-x") { location.replace("chair.html"); return; }
+
+  // Update page title
+  document.title = `${p.name} | Phantm`;
+
+  // Glow
+  document.getElementById("heroGlow").style.setProperty("--glow-color", p.glow);
+  document.querySelector(".pdp-hero").style.setProperty("--glow-color", p.glow);
+
+  // Visual — try image first, fallback to SVG icon
+  const visual = document.getElementById("pdpVisual");
+  const imgSrc = `src/images/${p.id}.jpg`;
+  const img = new Image();
+  img.onload = () => {
+    visual.innerHTML = `<img src="${imgSrc}" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+  };
+  img.onerror = () => {
+    visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow.replace(/,[^,]+\)/, ',1)')}">${getIcon(p.tag)}</div>`;
+  };
+  img.src = imgSrc;
+
+  // Badge
+  const badgeEl = document.getElementById("pdpBadge");
+  if (p.badge) {
+    const cls = p.badge === "ONLY AT PHANTM" ? "badge-only" : "badge-new";
+    badgeEl.innerHTML = `<span class="${cls}">${p.badge}</span>`;
+  }
+
+  // Text
+  document.getElementById("pdpName").textContent = p.name;
+  document.getElementById("pdpSub").textContent = p.sub;
+  document.getElementById("pdpPrice").textContent = fmt(p.price);
+  document.getElementById("subnavPrice").textContent = fmt(p.price);
+  document.getElementById("buyBarName").textContent = p.name;
+  document.getElementById("buyBarPrice").textContent = fmt(p.price);
+  document.getElementById("buyBarPriceInline").textContent = fmt(p.price);
+
+  // Spec grid
+  const specFn = SPEC_TEMPLATES[p.tag];
+  const specs = specFn ? specFn(p) : [{ label: "Price", value: fmt(p.price) }];
+  document.getElementById("pdpSpecGrid").innerHTML = specs.map(s => `
+    <div class="pdp-spec-cell">
+      <p class="spec-label">${s.label}</p>
+      <p class="spec-value">${s.value}</p>
+    </div>
+  `).join("");
+
+  // Buy buttons
+  const addToCart = () => {
+    cartAdd(p.id);
+    document.getElementById("pdpBuyBtn").textContent = "Added ✓";
+    document.getElementById("subnavBuy").textContent = "Added ✓";
+    setTimeout(() => {
+      document.getElementById("pdpBuyBtn").textContent = "Add to Cart";
+      document.getElementById("subnavBuy").textContent = "Buy Now";
+    }, 1800);
+  };
+  document.getElementById("pdpBuyBtn").addEventListener("click", addToCart);
+  document.getElementById("subnavBuy").addEventListener("click", addToCart);
+  document.getElementById("buyBarBtn").addEventListener("click", addToCart);
+});
+</script>
+</body>
+</html>

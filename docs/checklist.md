@@ -12,8 +12,12 @@ Why this file exists:
 - [x] Refactor public site into storefront-only experience
 - [x] Build multi-page storefront flow (index, store, cart, checkout, chair)
 - [x] Build checkout information page
-- [ ] Final product images added
-- [ ] Final pricing decisions added
+- [x] Build individual product detail pages (product.html — dynamic template, all 17 non-chair products)
+- [x] Fix duplicate PC/Console/Mobile nav tab bug (nav links now pass ?cat= URL param)
+- [x] Rename all product names from Razer to Phantm branding
+- [x] Image fallback system: drop src/images/{id}.jpg to auto-populate cards and detail pages
+- [ ] Add final product images to src/images/ (see src/images/IMAGES-README.md for filenames)
+- [ ] Final pricing decisions locked
 
 ## Signature Product
 - [x] `Phantm Spectre X` chosen
