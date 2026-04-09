@@ -105,15 +105,15 @@ python3 -m pip install --user openai
 | `blade-14` | `src/images/blade-14.jpg` | Added | Compact gaming laptop, more portable look, green RGB accents, dark carbon background |
 | `blade-18` | `src/images/blade-18.jpg` | Added | Large 18-inch gaming laptop, powerful aesthetic, purple/violet atmospheric glow, premium studio shot |
 | `viper-v4` | `src/images/viper-v4.jpg` | Added | Two gaming mice side-by-side (matte black + mercury white), angled 3/4 view on dark charcoal surface, red LED glow under sensor, clean product photography, no Razer logos |
-| `da-v4` | `src/images/da-v4.jpg` | Pending | Ergonomic right-hand gaming mouse, soft shape, rose/pink atmospheric glow, dark background |
+| `da-v4` | `src/images/da-v4.jpg` | Added | Ergonomic right-hand gaming mouse, soft shape, rose/pink atmospheric glow, dark background |
 | `bw-v4` | `src/images/bw-v4.jpg` | Added | Full-size mechanical keyboard top-down shot, green optical switches visible through keycaps, green per-key RGB glow, dark matte surface |
 | `hunts-8k` | `src/images/hunts-8k.jpg` | Added | Tenkeyless optical gaming keyboard, floating from dark background, blue/white key illumination, modern clean aesthetic |
 | `ds-v2` | `src/images/ds-v2.jpg` | Added | Slim low-profile wireless keyboard, sleek chiclet keys, purple side-glow lighting |
 | `bs-v3` | `src/images/bs-v3.jpg` | Added | Over-ear gaming headset (black chassis, green accents), floating against dark indigo background, dramatic rim lighting from below, no Razer branding |
-| `kraken-v4` | `src/images/kraken-v4.jpg` | Pending | Large gaming headset with oversized plush ear cups, green RGB lighting on cups, green atmospheric glow |
+| `kraken-v4` | `src/images/kraken-v4.jpg` | Added | Large gaming headset with oversized plush ear cups, green RGB lighting on cups, green atmospheric glow |
 | `nommo-v2` | `src/images/nommo-v2.jpg` | Added | Pair of desktop gaming speakers with matching subwoofer, teal/cyan RGB underglow, dark desk setting |
 | `wolv-v3` | `src/images/wolv-v3.jpg` | Added | Pro gaming controller (Xbox form factor), matte black with green accent lines, angled beauty shot, dark background |
-| `kishi-v3` | `src/images/kishi-v3.jpg` | Pending | Mobile phone gaming controller clip, rose/magenta accent color, attached to smartphone or floating |
+| `kishi-v3` | `src/images/kishi-v3.jpg` | Added | Mobile phone gaming controller clip, rose/magenta accent color, attached to smartphone or floating |
 | `tb5-dock` | `src/images/tb5-dock.jpg` | Added | Thunderbolt 5 dock hub, multiple ports visible on front panel, blue port glow, dark desk context |
 | `firefly` | `src/images/firefly.jpg` | Added | RGB gaming mouse mat, colorful addressable LED edge lighting (rainbow or green), flat angle shot from above |
 | `gigantus` | `src/images/gigantus.jpg` | Pending | Large cloth mouse mat, simple flat aerial shot, matte surface texture visible |
@@ -166,6 +166,9 @@ Preparation completed:
 - `src/images/blade-14.jpg` added
 - `src/images/blade-18.jpg` added
 - `src/images/tb5-dock.jpg` added
+- `src/images/da-v4.jpg` added
+- `src/images/kraken-v4.jpg` added
+- `src/images/kishi-v3.jpg` added
 
 Blocked on:
 - local `OPENAI_API_KEY`
