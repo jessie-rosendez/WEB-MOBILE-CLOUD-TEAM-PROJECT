@@ -161,6 +161,9 @@ What was completed:
   - resume steps
 - renamed the first chair asset into `src/images/spectre-x.jpg`
 - replaced the homepage Spectre X placeholder render with the real chair image
+- added `src/images/blade-16.jpg`
+- added `src/images/viper-v4.jpg`
+- added `src/images/bs-v3.jpg`
 
 Current blockers:
 - `OPENAI_API_KEY` missing
