@@ -113,6 +113,7 @@ Key intent for this pass:
 - exact delivery / pickup / fulfillment rail shown in some screenshots is not replicated yet
 - the bottom sticky purchase band could be pushed closer to the screenshot treatment
 - the chair page still uses rendered/placeholder visuals instead of final Phantm chair assets
+- image generation is prepared but blocked pending local secret setup and package install; see `docs/imagegen-runbook.md`
 
 ---
 
@@ -142,3 +143,28 @@ If the next session resumes from here, start with:
 Highest-value next build:
 - reusable screenshot-style commerce modal
 - final real imagery
+
+---
+
+## Image Generation Prep — April 9, 2026
+
+Image generation did not start yet.
+
+What was completed:
+- added `.gitignore` entries for `.env.local`, `tmp/imagegen/`, and `output/imagegen/`
+- added `.env.local.example` as the safe local secret template
+- added `docs/imagegen-runbook.md` with:
+  - private-env policy
+  - prompt queue
+  - exact output filenames
+  - current blockers
+  - resume steps
+- renamed the first chair asset into `src/images/spectre-x.jpg`
+- replaced the homepage Spectre X placeholder render with the real chair image
+
+Current blockers:
+- `OPENAI_API_KEY` missing
+- Python `openai` package missing
+
+Resume point:
+- read `docs/imagegen-runbook.md` first

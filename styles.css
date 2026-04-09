@@ -368,6 +368,20 @@ ul { list-style: none; }
 .hero--chair::before {
   background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(68,214,44,0.18) 0%, transparent 70%);
 }
+.hero-chair-asset {
+  width: min(78vw, 560px);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 34px rgba(68,214,44,0.22));
+}
+.hero-chair-asset img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 .hero--blade::before {
   background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(30,120,200,0.22) 0%, transparent 70%);
 }
@@ -2328,6 +2342,7 @@ ul { list-style: none; }
   .hero.hero-split { flex-direction: column; text-align: center; padding: 80px 24px 60px; }
   .hero.hero-split .hero-ctas { justify-content: center; }
   .hero.hero-split .hero-render { max-width: 480px; }
+  .hero-chair-asset { width: min(86vw, 460px); }
   .top-picks-grid { grid-template-columns: repeat(2, 1fr); }
   .category-showcase-stage,
   .category-showcase--arsenal .category-showcase-stage,

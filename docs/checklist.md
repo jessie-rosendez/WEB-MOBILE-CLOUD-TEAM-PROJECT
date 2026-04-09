@@ -24,6 +24,8 @@ Why this file exists:
 - [x] Upgrade PDP layout with thumbnail rail, media shell, and highlights
 - [x] Add PDP configuration groups for relevant categories
 - [x] Rebuild `chair.html` into a real gaming chairs landing page
+- [x] Add private local image-gen secret pattern (`.env.local.example` + `.gitignore`)
+- [x] Add markdown image-gen runbook so prompts and status survive between sessions
 - [ ] Add final product images to src/images/ (see src/images/IMAGES-README.md for filenames)
 - [ ] Add screenshot-style quick-view / purchase modal overlay
 - [ ] Refine sticky purchase rail to match screenshot direction more closely

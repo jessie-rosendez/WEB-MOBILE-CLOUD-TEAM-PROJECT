@@ -5,6 +5,7 @@
 - [Storefront Direction](storefront-direction.md) — Current screenshot-driven storefront direction, current live page state, real-asset needs, and next QA pass
 - [Storefront Worklog](storefront-worklog.md) — Running screenshot mapping, changed files, assumptions, open gaps, and exact stop-state for the next session
 - [Claude Handoff](claude-handoff.md) — High-signal summary of the latest storefront change set, touched files, and safest next steps
+- [Image Generation Runbook](imagegen-runbook.md) — Private-env setup, prompt queue, output filenames, blockers, and exact resume steps for product image generation
 - [Next Builds](next-builds.md) — Birds-eye prioritized build list across all 5 deliverables with owners and dependency map
 - [Checklist](checklist.md) — Editable team checklist mirroring current storefront + deliverable status
 - [Catalog Tab Distribution](catalog-tab-distribution.md) — Current catalog items grouped into screenshot-style tabs and a balanced 6-tab option
