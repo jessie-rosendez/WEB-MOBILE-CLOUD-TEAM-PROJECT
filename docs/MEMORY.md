@@ -1,7 +1,9 @@
 - [User Profile](user_profile.md) — BTE400 student, Herbert Business School, Spring 2026, 5-person team, branch homepage-jessie
 - [Project Architecture](project_architecture.md) — File map, current section-to-data map, direction shift toward storefront-only IA, TBD areas (GCP, Excel)
 - [Scope & Deliverables](scope_and_deliverables.md) — 5 deliverables with done/open tracking, storefront-only direction, tier cost table, Kickstarter perks, sprint goals
-- [Known Issues & Open Items](known_issues.md) — Storefront scope mismatch, branding ambiguity, catalog count, checkout gap, GCP/Excel/Kickstarter/SCRUM open items
-- [Storefront Direction](storefront-direction.md) — Confirmed storefront-only direction, current mismatches, essential open questions, and recommended build order
+- [Known Issues & Open Items](known_issues.md) — Catalog count (18 vs 14+1), no product images yet, GCP/Excel/Kickstarter/SCRUM open
+- [Storefront Direction](storefront-direction.md) — Build complete: product.html unified all 18 products, chair.html redirects, nav dedup fixed
+- [Next Builds](next-builds.md) — Birds-eye prioritized build list across all 5 deliverables with owners and dependency map
+- [Checklist](checklist.md) — Editable team checklist mirroring current storefront + deliverable status
 - [Catalog Tab Distribution](catalog-tab-distribution.md) — Current catalog items grouped into screenshot-style tabs and a balanced 6-tab option
 - [Tools & Dependencies](tools_and_dependencies.md) — HTML/CSS/JS + Google Fonts confirmed; GCP, Excel, Kickstarter planned but not built

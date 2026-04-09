@@ -10,18 +10,14 @@ type: project
 - **Resolution:** Full multi-page storefront rebuilt (April 2026). All project-management sections removed from the public site. Non-storefront deliverables now live in `docs/` only.
 - **Pages live:** `index.html`, `store.html`, `cart.html`, `checkout.html`, `chair.html`
 
-### 2. Branding and naming ambiguity
-- **Problem:** The desired visual direction is Phantm-branded, but the live product data still uses direct Razer benchmark names in the public catalog.
-- **Impact:** The team has not fully locked whether the storefront should keep benchmark names, rename products, or present them as Phantm equivalents.
-- **Decision needed:** Confirm the public naming strategy before building product pages and image assets.
-- **Status:** Open — branding decision required
-- **File:** `script.js` `catalogProducts` array
+### 2. ~~Branding and naming ambiguity~~ — RESOLVED
+- **Resolution:** All 17 benchmark products renamed from "Razer X" to "Phantm X" in `script.js` PRODUCTS array (April 2026). Phantm branding is now consistent across all pages.
 
-### 3. Catalog count discrepancy — 17 vs. required 14 + 1
-- **Problem:** The assignment requires 14 catalog products + 1 custom original. The current site has 17 Razer-benchmarked products + 1 Phantm chair = 18 total.
-- **Decision needed:** Trim catalog to 14 Razer products, or confirm with instructor that exceeding the minimum is acceptable.
-- **Status:** Open — team decision required
-- **File:** script.js `catalogProducts` array
+### 3. Catalog count — 18 vs. required 14 + 1
+- **Problem:** The assignment requires 14 catalog products + 1 custom original. The site has 17 Phantm-branded products + 1 Phantm Spectre X chair = 18 total.
+- **Decision needed:** Confirm with instructor that exceeding the minimum is acceptable, or trim to 14.
+- **Status:** Open — instructor confirmation needed
+- **File:** `script.js` PRODUCTS array
 
 ### 4. ~~Checkout flow remains a placeholder~~ — RESOLVED
 - **Resolution:** `checkout.html` built with full contact/address form (50-state dropdown), payment placeholder, order summary sidebar, and confirmation modal. Cart clears on submit. Dead-end by design.
@@ -53,13 +49,16 @@ type: project
 - **Status:** Open — team business-model decision required
 
 ### 10. No product images
-- **Problem:** Product cards render without any images. Image slots exist in the HTML layout but no assets have been added.
-- **Status:** Open — design decision for Sprint 2 or 3
+- **Problem:** Product cards and detail pages render without real images. The image fallback system is live — dropping `src/images/{id}.jpg` auto-populates everywhere.
+- **Status:** Open — team needs to source or generate Phantm-branded product visuals
+- **File:** `src/images/` — see `src/images/IMAGES-README.md` for exact filenames
+
+### 11. Store nav category links duplicated by tabs — RESOLVED
+- **Resolution:** On `store.html`, PC/Console/Mobile/Lifestyle nav links are now hidden via CSS (`.nav-links.on-store .nav-cat-filter { display:none }`). Clicking those links from other pages lands on store with the correct tab pre-selected.
 
 ---
 
 ## Resolved / By-Design Items
 
 ### Razer product names in the catalog
-- **Why it looks like an issue:** A real storefront wouldn't use a competitor's brand names.
-- **Why it isn't automatically one:** The benchmark strategy is intentional in the project docs. The open question now is only how much of that benchmark naming should remain visible in the public storefront once the Phantm-branded rebuild begins.
+- **Resolution:** All products renamed to Phantm equivalents (April 2026). Razer names no longer appear on the public storefront.

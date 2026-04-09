@@ -15,7 +15,7 @@ Why this file exists:
 - [x] Build individual product detail pages (product.html — dynamic template, all 18 products including chair)
 - [x] Product detail pages: subnav, hero, video placeholder, 6 features, spec grid, compare table, sticky buy bar
 - [x] Store card image/icon is now clickable — routes to product detail page
-- [x] Fix duplicate PC/Console/Mobile nav tab bug (nav links now pass ?cat= URL param)
+- [x] Fix duplicate nav/tab bug: category links hidden on store page, tabs are single source of filtering
 - [x] Rename all product names from Razer to Phantm branding
 - [x] Image fallback system: drop src/images/{id}.jpg to auto-populate cards and detail pages
 - [x] Consolidate all product-page CSS into styles.css (removed inline styles from chair.html)
