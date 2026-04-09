@@ -170,7 +170,11 @@ What was completed:
 - added `src/images/wolv-v3.jpg`
 - added `src/images/firefly.jpg`
 - added `src/images/nommo-v2.jpg`
+- added `src/images/blade-14.jpg`
+- added `src/images/blade-18.jpg`
+- added `src/images/tb5-dock.jpg`
 - replaced the Blade, Viper, and BlackShark homepage placeholder blocks with real image tags so the pushed assets actually render on the public homepage
+- confirmed the store page direction is now less cluttered, using a single Spectre X editorial banner instead of the heavier category showcase treatment
 
 Current blockers:
 - `OPENAI_API_KEY` missing
