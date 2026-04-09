@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Phantm Spectre X | Phantm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    @keyframes badgeFlash { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
+    .badge-flash { animation: badgeFlash 350ms ease; }
+
+    /* Product sub-nav (like Razer product pages) */
+    .product-subnav {
+      position: sticky;
+      top: calc(var(--nav-h) + 2px);
+      z-index: 60;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .subnav-links {
+      display: flex;
+    }
+    .subnav-links a {
+      padding: 14px 18px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-bottom: 2px solid transparent;
+      transition: color 150ms, border-color 150ms;
+      white-space: nowrap;
+    }
+    .subnav-links a:hover { color: var(--white); }
+    .subnav-links a.active { color: var(--white); border-bottom-color: var(--green); }
+    .subnav-price {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .subnav-buy { display: flex; align-items: center; gap: 10px; }
+
+    /* Features section */
+    .features-section {
+      background: var(--black);
+      padding: 80px 24px;
+    }
+    .features-section h2 {
+      font-family: var(--display);
+      font-size: clamp(1.4rem,3vw,2.2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .features-section .features-sub {
+      text-align: center;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+    .features-grid {
+      max-width: var(--content);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .feature-card {
+      background: var(--dark);
+      padding: 36px 28px;
+    }
+    .feature-card .fc-icon {
+      width: 44px; height: 44px;
+      margin-bottom: 16px;
+      color: var(--green);
+    }
+    .feature-card h3 {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: .88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* Comparison table */
+    .compare-section {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+    .compare-section h2 {
+      font-family: var(--display);
+      font-size: clamp(1.4rem,3vw,2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .compare-table {
+      max-width: 960px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    .compare-header {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr;
+      background: #111;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-header-cell {
+      padding: 20px 16px;
+      text-align: center;
+      font-family: var(--display);
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      border-left: 1px solid var(--border);
+    }
+    .compare-header-cell:first-child { border-left: none; text-align: left; color: var(--gray); }
+    .compare-header-cell.highlight { color: var(--green); border-bottom: 2px solid var(--green); }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:nth-child(even) { background: rgba(255,255,255,0.015); }
+    .compare-cell {
+      padding: 16px;
+      font-size: .88rem;
+      border-left: 1px solid #1a1a1a;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .compare-cell:first-child {
+      text-align: left;
+      align-items: flex-start;
+      font-size: .76rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-left: none;
+      font-weight: 600;
+    }
+    .compare-cell .cv {
+      font-family: var(--display);
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .compare-cell .cl {
+      font-size: .75rem;
+      color: var(--gray);
+    }
+    .compare-cell.highlight-col { background: rgba(68,214,44,0.04); }
+    .check-green { color: var(--green); font-size: 1.1rem; }
+    .check-gray { color: var(--gray); font-size: 1.1rem; }
+
+    @media(max-width:768px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .compare-table { overflow-x: auto; display: block; }
+      .compare-header, .compare-row { min-width: 640px; }
+      .subnav-buy { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <div class="announce-bar">
+    <p>Phantm Spectre X — Early Backer pricing now available. Limited quantity.&nbsp;&nbsp;<a href="#buy">Reserve Yours &gt;</a></p>
+  </div>
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-mark">PH</div>
+        <span class="logo-name">Phantm</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="store.html">Store</a></li>
+        <li><a href="store.html">PC</a></li>
+        <li><a href="store.html">Console</a></li>
+        <li><a href="store.html">Mobile</a></li>
+        <li><a href="chair.html" class="active">Furniture &amp; Lifestyle</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <a class="nav-icon-btn" href="cart.html" aria-label="Cart">
+          <svg width="22" height="20" viewBox="0 0 22 20" fill="none"><path d="M1 1h3l2.2 10.5a2 2 0 002 1.5h9.2a2 2 0 001.96-1.6L21 5H5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17.5" r="1.5" fill="currentColor"/><circle cx="17" cy="17.5" r="1.5" fill="currentColor"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M1 1h20M1 8h20M1 15h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Product Sub-Nav ── -->
+<div class="product-subnav">
+  <div style="display:flex;align-items:baseline;gap:12px;padding:10px 0">
+    <span style="font-family:var(--display);font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em">Phantm Spectre X</span>
+    <span style="font-size:.82rem;color:var(--gray)">Starting from US$799</span>
+  </div>
+  <nav class="subnav-links">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#specs">Tech Specs</a>
+    <a href="#compare">Compare</a>
+  </nav>
+  <div class="subnav-buy">
+    <span class="subnav-price">US$799</span>
+    <button class="btn-green" id="chairAddToCart" style="padding:9px 22px;font-size:.82rem">Buy Now</button>
+  </div>
+</div>
+
+<!-- ── Chair Hero ── -->
+<section class="chair-hero" id="overview">
+  <span class="badge-only">Only At Phantm</span>
+  <h1>Phantm Spectre X</h1>
+  <p class="chair-tagline">Racing Shell. Creator Utility. Built for the Long Session.</p>
+  <div class="hero-ctas">
+    <a class="btn-outline" href="#specs">View Specs &gt;</a>
+    <button class="btn-green" id="chairAddToCartHero" style="padding:12px 32px">Buy Now — US$799</button>
+  </div>
+
+  <!-- CSS Chair Render -->
+  <div class="chair-hero-render">
+    <div class="render-chair" style="width:320px;height:380px">
+      <div class="chair-back" style="width:200px;height:270px;top:0;border-radius:70px 70px 24px 24px;box-shadow:0 0 80px rgba(68,214,44,0.3),inset 0 0 40px rgba(0,0,0,0.8)"></div>
+      <div class="chair-arm chair-arm--l" style="width:32px;height:72px;bottom:100px;left:24px"></div>
+      <div class="chair-arm chair-arm--r" style="width:32px;height:72px;bottom:100px;right:24px"></div>
+      <div class="chair-seat" style="width:240px;height:60px;bottom:72px;border-radius:14px;border-color:rgba(68,214,44,0.4)"></div>
+      <div class="chair-base" style="width:260px;bottom:0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Video Placeholder ── -->
+<section class="video-section">
+  <div class="video-bg"></div>
+  <div class="video-inner">
+    <button class="video-play-btn" aria-label="Play video">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 5l18 9-18 9V5z" fill="currentColor"/></svg>
+    </button>
+    <p class="video-label">Watch: Phantm Spectre X — The Full Story (1:30)</p>
+  </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="features-section">
+  <h2>Built Different</h2>
+  <p class="features-sub">Every detail of the Spectre X was designed for the player who wants a sharper visual identity without sacrificing long-session comfort or creator utility.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><path d="M22 4C13 4 8 10 8 18v6c0 10 5.5 16 14 16s14-6 14-16v-6C36 10 31 4 22 4z" stroke="currentColor" stroke-width="1.8"/><path d="M14 22h16" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/></svg>
+      <h3>Adaptive Lumbar Spine</h3>
+      <p>A four-zone adjustable lumbar system that adapts to your posture throughout long gaming and streaming sessions.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.8"/><path d="M22 14v8l5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <h3>Reactive Under-Seat Lighting</h3>
+      <p>Programmable RGB lighting built into the base of the chair, visible from any angle in your setup.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="6" y="20" width="32" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M14 20v-6a8 8 0 0116 0v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <h3>Hidden Gear Storage Tray</h3>
+      <p>A flush-fit sliding tray under the seat cushion for cable management, controllers, and small accessories.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="10" y="6" width="24" height="32" rx="4" stroke="currentColor" stroke-width="1.8"/><line x1="16" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/><line x1="16" y1="22" x2="28" y2="22" stroke="currentColor" stroke-width="1.5" opacity=".5" stroke-linecap="round"/></svg>
+      <h3>Modular Mount System</h3>
+      <p>Snap-on side rails accept the optional headset mount, controller holders, and phone arm accessories.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><path d="M22 8C13.2 8 6 15.2 6 24s7.2 16 16 16 16-7.2 16-16S30.8 8 22 8z" stroke="currentColor" stroke-width="1.8"/><path d="M15 24l5 5 9-10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Racing Shell Silhouette</h3>
+      <p>Aggressive winged shoulders and a bucket-seat profile built around a sharper visual identity than standard ergonomic chairs.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="fc-icon" viewBox="0 0 44 44" fill="none"><rect x="8" y="12" width="28" height="20" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M14 32v4M30 32v4M10 36h24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M18 20l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></svg>
+      <h3>4D Armrests</h3>
+      <p>Height, pivot, depth, and lateral adjustment so your arms are always in the right position for mouse and keyboard control.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Tech Specs ── -->
+<section class="spec-section" id="specs">
+  <h2>Tech Specs</h2>
+  <div class="spec-grid">
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 2 3 6 3 10v4c0 5 3.5 8 9 8s9-3 9-8v-4C21 6 17 2 12 2z" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <p class="spec-label">Maximum Load</p>
+      <p class="spec-value">&lt; 136 kg / 299 lbs</p>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1.6"/><path d="M6 8h12M6 16h12" stroke="currentColor" stroke-width="1.3" opacity=".5" stroke-linecap="round"/></svg>
+      </div>
+      <p class="spec-label">Recommended Height</p>
+      <p class="spec-value">160 – 200 cm / 5'3" – 6'7"</p>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 8V6a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <p class="spec-label">Back Support</p>
+      <p class="spec-value">Adaptive 4-Zone Lumbar</p>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <p class="spec-label">Armrests</p>
+      <p class="spec-value">4D (Height, Pivot, Depth, Lateral)</p>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.3" opacity=".5" stroke-linecap="round"/></svg>
+      </div>
+      <p class="spec-label">Seat Material</p>
+      <p class="spec-value">Gen-2 EPU Leather w/ CoolTouch</p>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <p class="spec-label">Recline</p>
+      <p class="spec-value">90° – 140° with tilt lock</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Compare ── -->
+<section class="compare-section" id="compare">
+  <h2>Compare Models</h2>
+  <div class="compare-table">
+    <div class="compare-header">
+      <div class="compare-header-cell"></div>
+      <div class="compare-header-cell highlight">Phantm Spectre X</div>
+      <div class="compare-header-cell">Razer Iskur V2</div>
+      <div class="compare-header-cell">Razer Enki</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Price</div>
+      <div class="compare-cell highlight-col"><span class="cv">US$799</span><span class="cl">Early Backer</span></div>
+      <div class="compare-cell"><span class="cv">US$499</span></div>
+      <div class="compare-cell"><span class="cv">US$299</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Lumbar Support</div>
+      <div class="compare-cell highlight-col"><span class="check-green">✓</span><span class="cl">Adaptive 4-Zone</span></div>
+      <div class="compare-cell"><span class="check-green">✓</span><span class="cl">Built-In</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Under-Seat RGB</div>
+      <div class="compare-cell highlight-col"><span class="check-green">✓</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Hidden Storage</div>
+      <div class="compare-cell highlight-col"><span class="check-green">✓</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Modular Mounts</div>
+      <div class="compare-cell highlight-col"><span class="check-green">✓</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+      <div class="compare-cell"><span class="check-gray">–</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Armrests</div>
+      <div class="compare-cell highlight-col"><span class="cv">4D</span></div>
+      <div class="compare-cell"><span class="cv">4D</span></div>
+      <div class="compare-cell"><span class="cv">4D</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell">Max Load</div>
+      <div class="compare-cell highlight-col"><span class="cv">299 lbs</span></div>
+      <div class="compare-cell"><span class="cv">299 lbs</span></div>
+      <div class="compare-cell"><span class="cv">299 lbs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Buy Bar ── -->
+<div class="chair-buy-bar" id="buy">
+  <div class="chair-buy-info">
+    <h4>Phantm Spectre X</h4>
+    <p>Early Backer — Limited Quantity</p>
+  </div>
+  <span class="chair-price">US$799</span>
+  <div class="chair-buy-actions">
+    <a class="btn-outline" href="store.html">← Back to Store</a>
+    <button class="btn-green" id="chairAddToCart" style="padding:12px 28px">Buy Now</button>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="store.html">All Products</a></li>
+          <li><a href="chair.html">Phantm Spectre X</a></li>
+          <li><a href="store.html">PC</a></li>
+          <li><a href="store.html">Console</a></li>
+          <li><a href="store.html">Mobile</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#">About Phantm</a></li>
+          <li><a href="#">Kickstarter Preview</a></li>
+          <li><a href="#">Battlestation Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Get Help</a></li>
+          <li><a href="#">Warranty</a></li>
+          <li><a href="#">Chair Assembly</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tagline">For Gamers. By Gamers.™</span>
+      <span class="footer-legal">© 2026 Phantm. BTE 400 Spring 2026 Class Project.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Both hero and buy-bar buttons call initChair via script.js
+  document.getElementById("chairAddToCartHero").addEventListener("click", () => {
+    cartAdd("spectre-x");
+    const btn = document.getElementById("chairAddToCartHero");
+    btn.textContent = "Added to Cart ✓";
+    btn.style.background = "#5aff3c";
+    setTimeout(() => { btn.textContent = "Buy Now — US$799"; btn.style.background = ""; }, 1800);
+  });
+</script>
+</body>
+</html>

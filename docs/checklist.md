@@ -8,6 +8,10 @@ Why this file exists:
 - [x] Homepage skeleton built
 - [x] 17-product catalog seeded
 - [x] Cart demo added
+- [x] Cart persistence added
+- [x] Refactor public site into storefront-only experience
+- [x] Build multi-page storefront flow (index, store, cart, checkout, chair)
+- [x] Build checkout information page
 - [ ] Final product images added
 - [ ] Final pricing decisions added
 

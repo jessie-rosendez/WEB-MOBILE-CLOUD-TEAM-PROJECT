@@ -14,6 +14,15 @@ Build a complete e-commerce concept in a chosen product category, supported by c
 **Signature product:** Phantm Spectre X (racing-style gaming chair)
 **Catalog strategy:** Razer-benchmarked products as the catalog spine + 1 original custom product
 
+## Current Public Site Direction
+
+The public-facing site direction is now:
+
+- Keep the main site focused on the **storefront only**
+- Make the storefront **Razer-inspired** in structure and visual tone, but branded as **Phantm**
+- Move toward a **multi-page shopping experience**
+- Keep non-storefront deliverables such as SCRUM, forecast, RAG staging content, and planning notes in `docs/` and other submission artifacts rather than the storefront UI
+
 ---
 
 ## Deliverable 1 — Online Shopping Cart (14 + 1 products)
@@ -26,11 +35,13 @@ Build a functioning online storefront with at minimum 14 products plus 1 origina
 | Done | 17 Razer-benchmarked catalog products seeded in script.js |
 | Done | Phantm Spectre X added as the +1 signature custom product |
 | Done | Front-end cart: add, remove, quantity tracking, subtotal display |
+| Done | Cart persistence added via localStorage |
+| Done | Refactor public site from combined prototype into storefront-only experience |
+| Done | Build multi-page category and product flow (index, store, cart, checkout, chair) |
+| Done | Build checkout / information-entry flow (contact + address form, payment placeholder, confirmation modal) |
 | Open | Confirm whether 17 Razer products exceeds requirement or trim to 14 |
 | Open | Add final product images |
 | Open | Lock final pricing decisions (currently placeholders) |
-| Open | Cart persistence (currently resets on page reload) |
-| Open | Checkout flow (currently a placeholder button) |
 
 ---
 

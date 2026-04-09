@@ -11,4 +11,14 @@ Student in BTE 400 at the University of Miami Herbert Business School, Spring 20
 
 This is a class project — not a production system. Decisions should be scoped to what earns full credit and demonstrates understanding, not to what scales in the real world.
 
-Jessie appears to be the teammate who set up the project structure and is driving the storefront work. The rest of the team's names and roles are not yet documented.
+## Team Role Assignments (confirmed as of April 2026)
+
+| Member | Deliverable ownership |
+|---|---|
+| Jessie | Storefront (index.html, script.js, styles.css) |
+| Pavel | GCP customer service RAG agent |
+| Mason | Excel cloud operating forecast |
+| TBD | Kickstarter preview campaign |
+| TBD | 2 teammates not yet named |
+
+SCRUM roles (PO / Scrum Master per sprint) not yet assigned.
