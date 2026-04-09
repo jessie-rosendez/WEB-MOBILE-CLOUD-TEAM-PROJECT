@@ -157,6 +157,22 @@ function cartUpdate(productId, action) {
 function cartTotal(cart) { return cart.reduce((s,i) => s + i.price * i.qty, 0); }
 function cartCount(cart) { return cart.reduce((s,i) => s + i.qty, 0); }
 
+function getProductThumbMarkup(item) {
+  const src = `src/images/${item.id}.jpg`;
+  return `
+    <img
+      src="${src}"
+      alt="${item.name}"
+      class="product-thumb-image"
+      loading="lazy"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="product-thumb-fallback" style="display:none">
+      ${getIcon(item.tag)}
+    </div>
+  `;
+}
+
 /* Update the nav cart badge on every page */
 function updateCartBadge() {
   const badge = document.getElementById("cartBadge");
@@ -290,7 +306,9 @@ function initCart() {
 
     container.innerHTML = cart.map(item => `
       <div class="cart-item" data-id="${item.id}">
-        <div class="cart-item-thumb">${getIcon(item.tag)}</div>
+        <div class="cart-item-thumb">
+          ${getProductThumbMarkup(item)}
+        </div>
         <div class="cart-item-info">
           <h4>${item.name}</h4>
           <p class="item-price">${fmt(item.price)} each</p>
@@ -334,7 +352,7 @@ function initCheckout() {
   orderItems.innerHTML = cart.map(item => `
     <div class="order-item">
       <div class="order-item-thumb">
-        ${getIcon(item.tag)}
+        ${getProductThumbMarkup(item)}
         <span class="order-item-qty">${item.qty}</span>
       </div>
       <span class="order-item-name">${item.name}</span>
