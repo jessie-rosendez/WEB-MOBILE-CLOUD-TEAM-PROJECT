@@ -111,11 +111,11 @@ python3 -m pip install --user openai
 | `ds-v2` | `src/images/ds-v2.jpg` | Added | Slim low-profile wireless keyboard, sleek chiclet keys, purple side-glow lighting |
 | `bs-v3` | `src/images/bs-v3.jpg` | Added | Over-ear gaming headset (black chassis, green accents), floating against dark indigo background, dramatic rim lighting from below, no Razer branding |
 | `kraken-v4` | `src/images/kraken-v4.jpg` | Pending | Large gaming headset with oversized plush ear cups, green RGB lighting on cups, green atmospheric glow |
-| `nommo-v2` | `src/images/nommo-v2.jpg` | Pending | Pair of desktop gaming speakers with matching subwoofer, teal/cyan RGB underglow, dark desk setting |
-| `wolv-v3` | `src/images/wolv-v3.jpg` | Pending | Pro gaming controller (Xbox form factor), matte black with green accent lines, angled beauty shot, dark background |
+| `nommo-v2` | `src/images/nommo-v2.jpg` | Added | Pair of desktop gaming speakers with matching subwoofer, teal/cyan RGB underglow, dark desk setting |
+| `wolv-v3` | `src/images/wolv-v3.jpg` | Added | Pro gaming controller (Xbox form factor), matte black with green accent lines, angled beauty shot, dark background |
 | `kishi-v3` | `src/images/kishi-v3.jpg` | Pending | Mobile phone gaming controller clip, rose/magenta accent color, attached to smartphone or floating |
 | `tb5-dock` | `src/images/tb5-dock.jpg` | Pending | Thunderbolt 5 dock hub, multiple ports visible on front panel, blue port glow, dark desk context |
-| `firefly` | `src/images/firefly.jpg` | Pending | RGB gaming mouse mat, colorful addressable LED edge lighting (rainbow or green), flat angle shot from above |
+| `firefly` | `src/images/firefly.jpg` | Added | RGB gaming mouse mat, colorful addressable LED edge lighting (rainbow or green), flat angle shot from above |
 | `gigantus` | `src/images/gigantus.jpg` | Pending | Large cloth mouse mat, simple flat aerial shot, matte surface texture visible |
 | `hyperflux` | `src/images/hyperflux.jpg` | Pending | Wireless charging mouse mat, subtle charging glow indicator, minimalist dark surface |
 | `spectre-x` | `src/images/spectre-x.jpg` | Added | Phantm Spectre X racing-shell gaming chair, matte black with green RGB base and accent lines, dramatic studio lighting, gaming room atmosphere with ultrawide monitors in background, no Razer logos anywhere |
@@ -160,6 +160,9 @@ Preparation completed:
 - `src/images/hunts-8k.jpg` added
 - `src/images/bw-v4.jpg` added
 - `src/images/ds-v2.jpg` added
+- `src/images/wolv-v3.jpg` added
+- `src/images/firefly.jpg` added
+- `src/images/nommo-v2.jpg` added
 
 Blocked on:
 - local `OPENAI_API_KEY`
