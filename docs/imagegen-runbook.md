@@ -116,8 +116,8 @@ python3 -m pip install --user openai
 | `kishi-v3` | `src/images/kishi-v3.jpg` | Added | Mobile phone gaming controller clip, rose/magenta accent color, attached to smartphone or floating |
 | `tb5-dock` | `src/images/tb5-dock.jpg` | Added | Thunderbolt 5 dock hub, multiple ports visible on front panel, blue port glow, dark desk context |
 | `firefly` | `src/images/firefly.jpg` | Added | RGB gaming mouse mat, colorful addressable LED edge lighting (rainbow or green), flat angle shot from above |
-| `gigantus` | `src/images/gigantus.jpg` | Pending | Large cloth mouse mat, simple flat aerial shot, matte surface texture visible |
-| `hyperflux` | `src/images/hyperflux.jpg` | Pending | Wireless charging mouse mat, subtle charging glow indicator, minimalist dark surface |
+| `gigantus` | `src/images/gigantus.jpg` | Added | Large cloth mouse mat, simple flat aerial shot, matte surface texture visible |
+| `hyperflux` | `src/images/hyperflux.jpg` | Added | Wireless charging mouse mat, subtle charging glow indicator, minimalist dark surface |
 | `spectre-x` | `src/images/spectre-x.jpg` | Added | Phantm Spectre X racing-shell gaming chair, matte black with green RGB base and accent lines, dramatic studio lighting, gaming room atmosphere with ultrawide monitors in background, no Razer logos anywhere |
 
 ---
@@ -146,7 +146,9 @@ Generate in this order so the storefront improves visibly fastest:
 
 ## Exact Stop-State
 
-No image generation API calls have been made yet in this repo session.
+Local API-based image generation was not used in this repo session.
+The core catalog image set was generated externally and placed into `src/images/`.
+The only remaining optional lifestyle asset in this runbook is `spectre-x-room.jpg`.
 
 Preparation completed:
 - private env pattern added
@@ -168,6 +170,9 @@ Preparation completed:
 - `src/images/tb5-dock.jpg` added
 - `src/images/da-v4.jpg` added
 - `src/images/kraken-v4.jpg` added
+- `src/images/kishi-v3.jpg` added
+- `src/images/gigantus.jpg` added
+- `src/images/hyperflux.jpg` added
 - `src/images/kishi-v3.jpg` added
 
 Blocked on:

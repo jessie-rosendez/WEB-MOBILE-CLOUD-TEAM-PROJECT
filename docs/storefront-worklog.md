@@ -108,12 +108,12 @@ Key intent for this pass:
 
 ## Still Open
 
-- real product images are still needed in `src/images/`
+- `src/images/spectre-x-room.jpg` is still optional/pending if we want a stronger lifestyle scene
 - exact Razer-style quick-view modal / side commerce overlay is not built yet
 - exact delivery / pickup / fulfillment rail shown in some screenshots is not replicated yet
 - the bottom sticky purchase band could be pushed closer to the screenshot treatment
-- the chair page still uses rendered/placeholder visuals instead of final Phantm chair assets
-- image generation is prepared but blocked pending local secret setup and package install; see `docs/imagegen-runbook.md`
+- some chair/editorial sections still use designed placeholder treatments instead of a full photography set
+- image generation is no longer blocked for the core catalog set; only optional remaining assets are tracked in `docs/imagegen-runbook.md`
 
 ---
 
@@ -146,9 +146,9 @@ Highest-value next build:
 
 ---
 
-## Image Generation Prep — April 9, 2026
+## Image Generation Track — April 9, 2026
 
-Image generation did not start yet.
+The core catalog image set is now in the repo.
 
 What was completed:
 - added `.gitignore` entries for `.env.local`, `tmp/imagegen/`, and `output/imagegen/`
@@ -176,13 +176,15 @@ What was completed:
 - added `src/images/da-v4.jpg`
 - added `src/images/kraken-v4.jpg`
 - added `src/images/kishi-v3.jpg`
+- added `src/images/gigantus.jpg`
+- added `src/images/hyperflux.jpg`
 - replaced the Blade, Viper, and BlackShark homepage placeholder blocks with real image tags so the pushed assets actually render on the public homepage
 - confirmed the store page direction is now less cluttered, using a single Spectre X editorial banner instead of the heavier category showcase treatment
 - replaced the store-page Spectre X editorial PH placeholder render with the real `spectre-x.jpg` chair asset so the banner now reuses the actual chair image
 
 Current blockers:
-- `OPENAI_API_KEY` missing
-- Python `openai` package missing
+- `src/images/spectre-x-room.jpg` is still optional/pending if a fuller chair lifestyle scene is needed
+- some PDP/editorial areas could still use secondary gallery images beyond the main asset set
 
 Resume point:
 - read `docs/imagegen-runbook.md` first
