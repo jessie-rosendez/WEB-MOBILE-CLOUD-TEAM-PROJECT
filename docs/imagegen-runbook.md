@@ -106,9 +106,9 @@ python3 -m pip install --user openai
 | `blade-18` | `src/images/blade-18.jpg` | Pending | Large 18-inch gaming laptop, powerful aesthetic, purple/violet atmospheric glow, premium studio shot |
 | `viper-v4` | `src/images/viper-v4.jpg` | Added | Two gaming mice side-by-side (matte black + mercury white), angled 3/4 view on dark charcoal surface, red LED glow under sensor, clean product photography, no Razer logos |
 | `da-v4` | `src/images/da-v4.jpg` | Pending | Ergonomic right-hand gaming mouse, soft shape, rose/pink atmospheric glow, dark background |
-| `bw-v4` | `src/images/bw-v4.jpg` | Pending | Full-size mechanical keyboard top-down shot, green optical switches visible through keycaps, green per-key RGB glow, dark matte surface |
-| `hunts-8k` | `src/images/hunts-8k.jpg` | Pending | Tenkeyless optical gaming keyboard, floating from dark background, blue/white key illumination, modern clean aesthetic |
-| `ds-v2` | `src/images/ds-v2.jpg` | Pending | Slim low-profile wireless keyboard, sleek chiclet keys, purple side-glow lighting |
+| `bw-v4` | `src/images/bw-v4.jpg` | Added | Full-size mechanical keyboard top-down shot, green optical switches visible through keycaps, green per-key RGB glow, dark matte surface |
+| `hunts-8k` | `src/images/hunts-8k.jpg` | Added | Tenkeyless optical gaming keyboard, floating from dark background, blue/white key illumination, modern clean aesthetic |
+| `ds-v2` | `src/images/ds-v2.jpg` | Added | Slim low-profile wireless keyboard, sleek chiclet keys, purple side-glow lighting |
 | `bs-v3` | `src/images/bs-v3.jpg` | Added | Over-ear gaming headset (black chassis, green accents), floating against dark indigo background, dramatic rim lighting from below, no Razer branding |
 | `kraken-v4` | `src/images/kraken-v4.jpg` | Pending | Large gaming headset with oversized plush ear cups, green RGB lighting on cups, green atmospheric glow |
 | `nommo-v2` | `src/images/nommo-v2.jpg` | Pending | Pair of desktop gaming speakers with matching subwoofer, teal/cyan RGB underglow, dark desk setting |
@@ -157,6 +157,9 @@ Preparation completed:
 - `src/images/blade-16.jpg` added
 - `src/images/viper-v4.jpg` added
 - `src/images/bs-v3.jpg` added
+- `src/images/hunts-8k.jpg` added
+- `src/images/bw-v4.jpg` added
+- `src/images/ds-v2.jpg` added
 
 Blocked on:
 - local `OPENAI_API_KEY`

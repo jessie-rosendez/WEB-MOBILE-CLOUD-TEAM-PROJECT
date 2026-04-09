@@ -164,6 +164,9 @@ What was completed:
 - added `src/images/blade-16.jpg`
 - added `src/images/viper-v4.jpg`
 - added `src/images/bs-v3.jpg`
+- added `src/images/hunts-8k.jpg`
+- added `src/images/bw-v4.jpg`
+- added `src/images/ds-v2.jpg`
 - replaced the Blade, Viper, and BlackShark homepage placeholder blocks with real image tags so the pushed assets actually render on the public homepage
 
 Current blockers:
