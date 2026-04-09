@@ -1659,29 +1659,63 @@ ul { list-style: none; }
 .check-green { color: var(--green); font-size: 1.1rem; }
 .check-gray { color: var(--gray); font-size: 1.1rem; }
 
-/* Sticky buy bar */
+/* Sticky buy bar — 3-column commerce rail matching screenshot style */
 .pdp-buy-bar {
   position: sticky;
   bottom: 0;
   z-index: 80;
-  background: rgba(0,0,0,0.95);
-  border-top: 1px solid var(--border);
-  padding: 14px 24px;
-  display: flex;
+  background: rgba(5,5,5,0.97);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid #1c1c1c;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 24px;
+  min-height: 64px;
 }
+/* Left: product name + points */
+.pdp-buy-bar-left { display: flex; flex-direction: column; gap: 2px; padding: 12px 0; }
 .pdp-buy-bar-name {
   font-family: var(--display);
-  font-size: .9rem;
+  font-size: .82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--gray-lt);
-  flex: 1;
+  color: var(--white);
+  line-height: 1.2;
 }
-.pdp-buy-bar-price { font-family: var(--display); font-size: 1.1rem; font-weight: 700; }
+.pdp-buy-bar-points {
+  font-size: 0.72rem;
+  color: var(--green);
+  letter-spacing: 0.04em;
+}
+.pdp-buy-bar-points span { font-weight: 700; }
+/* Center: delivery info */
+.pdp-buy-bar-delivery {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 0;
+  border-left: 1px solid #1c1c1c;
+  padding-left: 24px;
+}
+.pdp-buy-bar-delivery p {
+  font-size: 0.75rem; color: var(--gray-lt); line-height: 1.4;
+}
+.pdp-buy-bar-delivery .delivery-free { color: var(--green); font-weight: 600; }
+/* Right: price + CTA */
+.pdp-buy-bar-right {
+  display: flex; align-items: center; gap: 18px;
+  padding: 12px 0;
+}
+.pdp-buy-bar-price {
+  font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+  color: var(--white); white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .pdp-buy-bar { grid-template-columns: 1fr auto; gap: 12px; }
+  .pdp-buy-bar-delivery { display: none; }
+  .pdp-buy-bar-left { padding: 10px 0; }
+}
 
 /* ─── Hero Split Layout (horizontal, content-left / visual-right) ── */
 .hero.hero-split {
@@ -1813,28 +1847,41 @@ ul { list-style: none; }
 .cc-buy:hover { background: #5aff3c; }
 
 /* ─── Product Detail: Color / Variant Selector ────────────── */
-.pdp-variants { margin-bottom: 24px; }
+.pdp-variants { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .pdp-variants-label {
-  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gray); margin-bottom: 10px; font-weight: 600;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 14px; font-weight: 700;
+  font-family: var(--display);
 }
-.pdp-variant-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.pdp-variants-label span { color: var(--gray); font-weight: 400; }
+.pdp-variant-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+/* Large color tile boxes — matches screenshot style */
 .variant-swatch {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 14px; border: 1px solid var(--border); cursor: pointer;
-  font-size: 0.8rem; font-family: var(--display); font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-lt);
-  background: transparent; transition: border-color 150ms, color 150ms;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 0; border: 2px solid transparent; cursor: pointer;
+  background: transparent; transition: border-color 150ms;
+  outline: none;
 }
-.variant-swatch:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
-.variant-swatch.active { border-color: var(--green); color: var(--green); }
-.variant-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.25); flex-shrink: 0;
+.variant-swatch:hover .variant-color-box { border-color: rgba(255,255,255,0.4); }
+.variant-swatch.active .variant-color-box { border-color: var(--green); }
+.variant-color-box {
+  width: 76px; height: 50px;
+  border: 2px solid var(--border);
+  transition: border-color 150ms;
+  display: block;
 }
+.variant-swatch-name {
+  font-size: 0.68rem; font-family: var(--display); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gray-lt); text-align: center; max-width: 76px;
+  line-height: 1.3;
+}
+.variant-swatch.active .variant-swatch-name { color: var(--green); }
+/* Keep old .variant-dot for backwards compat (hidden) */
+.variant-dot { display: none; }
 
 .pdp-config-group {
-  margin: 0 0 24px;
+  margin-bottom: 0;
 }
 .pdp-config-label {
   font-size: 0.78rem;
@@ -1870,9 +1917,54 @@ ul { list-style: none; }
   background: rgba(68,214,44,0.04);
 }
 
+/* ─── Product Detail: Bonus / Gift With Purchase ─────────────── */
+.pdp-bonus {
+  margin-bottom: 28px; padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.pdp-bonus-label {
+  display: inline-block;
+  background: #b8860b;
+  color: var(--white);
+  font-family: var(--display);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin-bottom: 14px;
+}
+.pdp-bonus-items { display: flex; flex-direction: column; gap: 10px; }
+.pdp-bonus-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; background: #0d0d0d; border: 1px solid var(--border);
+}
+.pdp-bonus-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: #1a1a1a; display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.pdp-bonus-info { flex: 1; }
+.pdp-bonus-info h4 {
+  font-family: var(--display); font-size: 0.82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: 2px; color: var(--white);
+}
+.pdp-bonus-info p { font-size: 0.72rem; color: var(--gray); line-height: 1.4; }
+.pdp-bonus-value {
+  font-family: var(--display); font-size: 0.78rem; font-weight: 700;
+  color: var(--green); white-space: nowrap;
+}
+
+/* ─── Product Detail: Config group separators ─────────────────── */
+.pdp-config-group {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
 /* ─── Product Detail: Protection / Warranty Upsell ──────────── */
 .pdp-protection {
-  margin: 28px 0 32px; padding: 20px;
+  margin: 28px 0 0; padding: 20px;
   background: var(--dark); border: 1px solid var(--border);
 }
 .pdp-protection-title {

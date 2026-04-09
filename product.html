@@ -90,6 +90,8 @@
       <div id="pdpBadge" style="margin-bottom:16px"></div>
       <h1 class="pdp-name" id="pdpName">Loading…</h1>
       <p class="pdp-sub" id="pdpSub"></p>
+      <!-- Bonus With Purchase (laptops only) -->
+      <div id="pdpBonus"></div>
       <!-- Color / variant selector injected here -->
       <div id="pdpVariants"></div>
       <div id="pdpOptionGroups"></div>
@@ -194,11 +196,20 @@
   </div>
 </footer>
 
-<!-- ── Sticky Buy Bar ── -->
+<!-- ── Sticky Buy Bar — 3-column commerce rail ── -->
 <div class="pdp-buy-bar">
-  <span class="pdp-buy-bar-name" id="buyBarName"></span>
-  <span class="pdp-buy-bar-price" id="buyBarPrice"></span>
-  <button class="btn-green" id="buyBarBtn" style="padding:10px 24px;font-size:.85rem">Buy Now — <span id="buyBarPriceInline"></span></button>
+  <div class="pdp-buy-bar-left">
+    <span class="pdp-buy-bar-name" id="buyBarName"></span>
+    <span class="pdp-buy-bar-points">Earn up to <span id="buyBarPoints">—</span> Phantm Points</span>
+  </div>
+  <div class="pdp-buy-bar-delivery">
+    <p>Order now, <span class="delivery-free">ships free</span> in 2–4 business days</p>
+    <p style="color:var(--gray)">Available at select retailers</p>
+  </div>
+  <div class="pdp-buy-bar-right">
+    <span class="pdp-buy-bar-price" id="buyBarPrice"></span>
+    <button class="btn-green" id="buyBarBtn" style="padding:12px 32px;font-size:.88rem;letter-spacing:.1em">Add to Cart</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
@@ -364,12 +375,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Text fields ── */
   document.getElementById("pdpName").textContent  = p.name;
-  document.getElementById("pdpSub").textContent   = p.sub;
+  document.getElementById("pdpSub").innerHTML     = `${p.sub} &nbsp;<a href="store.html?cat=${p.cat}" style="color:var(--green);font-size:.88em;font-weight:600">Learn More &gt;</a>`;
   document.getElementById("pdpPrice").textContent = fmt(p.price);
   document.getElementById("subnavPrice").textContent    = fmt(p.price);
   document.getElementById("buyBarName").textContent     = p.name;
   document.getElementById("buyBarPrice").textContent    = fmt(p.price);
-  document.getElementById("buyBarPriceInline").textContent = fmt(p.price);
+  const pts = Math.round(p.price * 45);
+  const buyBarPts = document.getElementById("buyBarPoints");
+  if (buyBarPts) buyBarPts.textContent = pts.toLocaleString();
 
   /* ── Video label ── */
   const videoFn = PDP_VIDEO[p.tag];
@@ -432,17 +445,45 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pdp-compare").style.display = "none";
   }
 
-  /* ── Color / Variant Selector ── */
+  /* ── Bonus With Purchase (laptops) ── */
+  const BONUS_ITEMS = {
+    Laptop: [
+      { icon:"🎮", name:"Phantm Game Pass — 1 Month", desc:"Play 100+ titles on your new Phantm Blade. Redeemable within 30 days.", value:"Worth $14.99" },
+      { icon:"🛡️", name:"Phantm Assurance — 30-Day Trial", desc:"30-day free trial of Phantm Care coverage. Cancel any time.", value:"Free Trial" },
+    ],
+  };
+  const bonusItems = BONUS_ITEMS[p.tag];
+  if (bonusItems) {
+    document.getElementById("pdpBonus").innerHTML = `
+      <div class="pdp-bonus">
+        <span class="pdp-bonus-label">Bonus With Purchase</span>
+        <div class="pdp-bonus-items">
+          ${bonusItems.map(b => `
+            <div class="pdp-bonus-item">
+              <div class="pdp-bonus-icon">${b.icon}</div>
+              <div class="pdp-bonus-info">
+                <h4>${b.name}</h4>
+                <p>${b.desc}</p>
+              </div>
+              <span class="pdp-bonus-value">${b.value}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  /* ── Color / Variant Selector — large box tiles ── */
   const variants = COLOR_OPTIONS[p.tag];
   if (variants && variants.length > 1) {
     document.getElementById("pdpVariants").innerHTML = `
       <div class="pdp-variants">
-        <p class="pdp-variants-label">Color / Design — <span id="selectedVariant">${variants[0].name}</span></p>
+        <p class="pdp-variants-label">Color / Design &nbsp;<span id="selectedVariant">${variants[0].name}</span></p>
         <div class="pdp-variant-swatches">
           ${variants.map((v, i) => `
             <button class="variant-swatch${i === 0 ? " active" : ""}" data-variant="${v.name}">
-              <span class="variant-dot" style="background:${v.hex}"></span>
-              ${v.name}
+              <span class="variant-color-box" style="background:${v.hex}"></span>
+              <span class="variant-swatch-name">${v.name}</span>
             </button>
           `).join("")}
         </div>
