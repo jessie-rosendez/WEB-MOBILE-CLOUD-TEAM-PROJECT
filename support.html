@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Support | Phantm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    @keyframes badgeFlash { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
+    .badge-flash { animation: badgeFlash 350ms ease; }
+
+    .support-hero {
+      background: var(--dark);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .support-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .support-hero p {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    /* Search bar (visual only) */
+    .support-search {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    .support-search input {
+      flex: 1;
+      background: #111;
+      border: none;
+      color: var(--white);
+      padding: 14px 16px;
+      font-size: .95rem;
+      font-family: var(--sans);
+      outline: none;
+    }
+    .support-search input::placeholder { color: var(--gray); }
+    .support-search button {
+      background: var(--green);
+      border: none;
+      color: var(--black);
+      padding: 14px 20px;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .support-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+    }
+
+    /* Topic cards */
+    .support-topics h2 {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 48px;
+    }
+    .topic-card {
+      background: var(--dark);
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      cursor: pointer;
+      transition: background 150ms;
+    }
+    .topic-card:hover { background: #141414; }
+    .topic-icon {
+      width: 40px; height: 40px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green);
+    }
+    .topic-icon svg { width: 20px; height: 20px; }
+    .topic-card h3 {
+      font-family: var(--display);
+      font-size: .92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px;
+    }
+    .topic-card p { font-size: .82rem; color: var(--gray); line-height: 1.5; }
+
+    /* FAQ */
+    .support-faq h2 {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      text-align: left;
+      padding: 18px 0;
+      font-family: var(--display);
+      font-size: .92rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-q:hover { color: var(--green); }
+    .faq-chevron { transition: transform 200ms; flex-shrink: 0; color: var(--gray); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--green); }
+    .faq-a {
+      display: none;
+      padding: 0 0 20px;
+      font-size: .88rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* Contact sidebar */
+    .support-contact { }
+    .support-contact h2 {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .contact-card {
+      background: var(--dark);
+      padding: 28px 24px;
+      margin-bottom: 2px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      flex-shrink: 0;
+      border: 1px solid var(--green);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green);
+    }
+    .contact-icon svg { width: 20px; height: 20px; }
+    .contact-card h3 {
+      font-family: var(--display);
+      font-size: .88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px;
+    }
+    .contact-card p { font-size: .82rem; color: var(--gray); line-height: 1.5; margin-bottom: 12px; }
+    .contact-note {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--dark);
+      border-left: 3px solid var(--border);
+      font-size: .8rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    @media(max-width:1024px) {
+      .support-body { grid-template-columns: 1fr; }
+      .topic-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <div class="announce-bar">
+    <p>Phantm Spectre X — Early Backer pricing now available.&nbsp;&nbsp;<a href="product.html?id=spectre-x">Learn More &gt;</a></p>
+  </div>
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-mark">PH</div>
+        <span class="logo-name">Phantm</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="store.html">Store</a></li>
+        <li><a href="store.html?cat=PC">PC</a></li>
+        <li><a href="store.html?cat=Console">Console</a></li>
+        <li><a href="store.html?cat=Mobile">Mobile</a></li>
+        <li><a href="store.html?cat=Lifestyle">Furniture &amp; Lifestyle</a></li>
+        <li><a href="support.html" class="active">Support</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <a class="nav-icon-btn" href="cart.html" aria-label="Cart">
+          <svg width="22" height="20" viewBox="0 0 22 20" fill="none"><path d="M1 1h3l2.2 10.5a2 2 0 002 1.5h9.2a2 2 0 001.96-1.6L21 5H5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17.5" r="1.5" fill="currentColor"/><circle cx="17" cy="17.5" r="1.5" fill="currentColor"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M1 1h20M1 8h20M1 15h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<div class="support-hero">
+  <h1>Support</h1>
+  <p>Get help with your Phantm gear — orders, warranties, drivers, and everything in between.</p>
+  <div class="support-search">
+    <input type="text" placeholder="Search support topics…"/>
+    <button>Search</button>
+  </div>
+</div>
+
+<!-- ── Body ── -->
+<div class="support-body">
+
+  <div class="support-main">
+
+    <!-- Topics -->
+    <div class="support-topics">
+      <h2>Browse Topics</h2>
+      <div class="topic-grid">
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 3h14v11H3z" stroke="currentColor" stroke-width="1.5"/><path d="M7 17h6M10 14v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div>
+            <h3>Orders &amp; Shipping</h3>
+            <p>Track your order, update your address, or check estimated delivery times.</p>
+          </div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 100 12A6 6 0 0010 2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 18v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div>
+            <h3>Warranty &amp; Returns</h3>
+            <p>All Phantm products include a 2-year limited warranty. Start a return or claim here.</p>
+          </div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 5V4a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div>
+            <h3>Drivers &amp; Software</h3>
+            <p>Download the latest firmware, Chroma SDK drivers, and Phantm configuration software.</p>
+          </div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div>
+            <h3>Setup Guides</h3>
+            <p>Step-by-step setup instructions for every Phantm product category.</p>
+          </div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div>
+            <h3>Account &amp; Orders</h3>
+            <p>Manage your Phantm Rewards account, order history, and payment methods.</p>
+          </div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M4 4h12v9H4z" stroke="currentColor" stroke-width="1.5"/><path d="M8 17h4M10 13v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div>
+            <h3>Compatibility</h3>
+            <p>Check which Phantm products are compatible with your platform, OS, or setup.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="support-faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-q">How do I track my order?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">Once your order ships, you will receive a confirmation email with a tracking number. You can also log in to your Phantm account and view live shipment status under Order History. Note: tracking may take up to 24 hours to activate after dispatch.</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What is Phantm's return policy?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">Phantm accepts returns within 30 days of delivery for unused products in original packaging. Opened products may be subject to a restocking fee. To start a return, contact support with your order number. The Phantm Spectre X chair requires freight return shipping — see the warranty page for details.</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is the Phantm Spectre X available to ship now?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">The Phantm Spectre X is currently in Early Backer pre-order. Early Backer units are estimated to ship in Q3 2026. Placing an order now locks in the Early Backer price. Full production pricing will be higher at general release.</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How does Phantm's 2-year warranty work?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">All Phantm hardware is covered by a 2-year limited warranty from the date of purchase. The warranty covers manufacturing defects, hardware failures, and dead-on-arrival units. It does not cover physical damage, water damage, or unauthorized modifications. To file a claim, contact support with your order number and a description of the issue.</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do Phantm products work on Mac and Linux?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">Most Phantm peripherals (mice, keyboards, headsets) work on Mac and Linux as plug-and-play HID devices. Advanced features like per-key RGB programming and polling rate adjustment require the Phantm Configuration software, which is currently Windows-only. Mac support is on our roadmap.</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Where can I download Phantm software and firmware?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <p class="faq-a">Phantm Configuration software and all firmware updates are available in the Downloads section of your Phantm account. You can also find product-specific drivers by searching your product name on the Support page. Always update firmware before contacting support for performance issues.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact sidebar -->
+  <aside class="support-contact">
+    <h2>Contact Us</h2>
+
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 8 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h3>Email Support</h3>
+        <p>Response within 1 business day. Best for order issues, warranty claims, and billing.</p>
+        <a class="btn-green" href="#" style="display:inline-flex;padding:10px 20px;font-size:.8rem">Send a Message</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 012-2h1.5l1.5 4-1.5 1a11 11 0 005 5l1-1.5 4 1.5v1.5a2 2 0 01-2 2A15 15 0 013 5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div>
+        <h3>Live Chat</h3>
+        <p>Available Mon–Fri, 9am–6pm EST. Fastest way to resolve order and shipping issues.</p>
+        <a class="btn-outline" href="#" style="display:inline-flex;padding:10px 20px;font-size:.8rem">Start Chat</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C6.1 2 3 5.1 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.9-3.1-7-7-7z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div>
+        <h3>Phantm HQ</h3>
+        <p>Herbert Business School<br/>Coral Gables, FL 33146<br/>United States</p>
+      </div>
+    </div>
+
+    <div class="contact-note">
+      <strong style="color:var(--white)">Note:</strong> This is a BTE 400 class project prototype. Contact forms and chat are not active. In a live store, all support channels would be fully functional.
+    </div>
+  </aside>
+
+</div>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="store.html">All Products</a></li>
+          <li><a href="store.html?cat=PC">PC</a></li>
+          <li><a href="store.html?cat=Console">Console</a></li>
+          <li><a href="store.html?cat=Mobile">Mobile</a></li>
+          <li><a href="store.html?cat=Lifestyle">Furniture &amp; Lifestyle</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="support.html">Get Help</a></li>
+          <li><a href="support.html">Warranty &amp; Returns</a></li>
+          <li><a href="support.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Phantm</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Settings</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-tagline">For Gamers. By Gamers.™</span>
+      <span class="footer-legal">© 2026 Phantm. BTE 400 Spring 2026 Class Project.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll(".faq-q").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item");
+      const wasOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+      if (!wasOpen) item.classList.add("open");
+    });
+  });
+</script>
+</body>
+</html>
