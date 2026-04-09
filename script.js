@@ -194,52 +194,7 @@ function initNav() {
 function initStore() {
   const grid = document.getElementById("productGrid");
   const tabs = document.getElementById("categoryTabs");
-  const showcase = document.getElementById("categoryShowcase");
   if (!grid || !tabs) return;
-
-  /* ── Featured carousel: "Fresh Off The Line" — NEW-badged products ── */
-  const featuredContainer = document.getElementById("storeFeatured");
-  if (featuredContainer) {
-    const featured = PRODUCTS.filter(p => p.badge === "NEW").slice(0, 8);
-    featuredContainer.innerHTML = `
-      <div class="store-featured">
-        <div class="store-featured-header">
-          <h2>Fresh Off The Line</h2>
-          <a href="store.html">View All &gt;</a>
-        </div>
-        <p class="store-featured-sub">Our newest drops — just launched and ready to ship.</p>
-        <div class="carousel-track" id="carouselTrack">
-          ${featured.map(p => {
-            const href = `product.html?id=${p.id}`;
-            return `
-            <div class="carousel-card" style="--card-glow:${p.glow}">
-              <a href="${href}" class="carousel-card-visual" data-cimg="src/images/${p.id}.jpg" data-ctag="${p.tag}">
-                ${getIcon(p.tag)}
-                ${p.badge ? `<span class="cc-badge-overlay">${p.badge}</span>` : ""}
-              </a>
-              <div class="carousel-card-info">
-                <h4>${p.name}</h4>
-                <p class="cc-sub">${p.sub}</p>
-                <p class="cc-price">${fmt(p.price)}</p>
-              </div>
-              <div class="carousel-card-cta">
-                <a class="cc-learn" href="${href}">Learn More</a>
-                <button class="cc-buy" data-buy="${p.id}">Buy</button>
-              </div>
-            </div>`;
-          }).join("")}
-        </div>
-      </div>
-    `;
-    /* Swap SVG for real images on carousel cards */
-    featuredContainer.querySelectorAll(".carousel-card-visual[data-cimg]").forEach(el => {
-      const img = new Image();
-      img.onload = () => {
-        el.innerHTML = `<img src="${el.dataset.cimg}" alt="" style="width:70%;max-width:160px;object-fit:contain;filter:drop-shadow(0 0 16px var(--card-glow))"/>`;
-      };
-      img.src = el.dataset.cimg;
-    });
-  }
 
   // Read ?cat= from URL to support nav deep-links (e.g. store.html?cat=PC)
   const urlCat = new URLSearchParams(location.search).get("cat") || "All";
@@ -250,7 +205,6 @@ function initStore() {
     <button class="tab-btn${c===activeCat?" active":""}" data-cat="${c}">${c}</button>
   `).join("");
 
-  renderShowcase(activeCat);
   renderGrid(activeCat);
 
   function switchTab(cat) {
@@ -258,7 +212,6 @@ function initStore() {
     tabs.querySelectorAll(".tab-btn").forEach(b => {
       b.classList.toggle("active", b.dataset.cat === resolved);
     });
-    renderShowcase(resolved);
     renderGrid(resolved);
   }
 
@@ -309,56 +262,6 @@ function initStore() {
     });
   }
 
-  function renderShowcase(cat) {
-    if (!showcase) return;
-    const data = CATEGORY_SHOWCASES[cat] || CATEGORY_SHOWCASES.All;
-    const products = (data.products || [])
-      .map(id => PRODUCTS.find(p => p.id === id))
-      .filter(Boolean);
-
-    showcase.innerHTML = `
-      <section class="category-showcase category-showcase--${data.theme}">
-        <div class="category-showcase-copy">
-          <p class="category-showcase-kicker">${data.kicker}</p>
-          <h2>${data.title}</h2>
-          <p>${data.body}</p>
-        </div>
-        <div class="category-showcase-stage">
-          ${products.map((p, index) => `
-            <a class="showcase-product-card showcase-product-card--${index === 0 ? "lead" : "support"}" href="product.html?id=${p.id}" style="--card-glow:${p.glow}">
-              <span class="showcase-card-badge">${p.badge || p.tag}</span>
-              <div class="showcase-product-visual" data-showcase-img="src/images/${p.id}.jpg" data-showcase-id="${p.id}">
-                ${getIcon(p.tag)}
-              </div>
-              <div class="showcase-product-info">
-                <h3>${p.name}</h3>
-                <p>${p.sub}</p>
-              </div>
-            </a>
-          `).join("")}
-        </div>
-        ${data.panels ? `
-          <div class="category-showcase-panels">
-            ${data.panels.map(panel => `
-              <a class="category-showcase-panel" href="${panel.href}">
-                <h3>${panel.title}</h3>
-                <p>${panel.sub}</p>
-                <span>${panel.action} &gt;</span>
-              </a>
-            `).join("")}
-          </div>
-        ` : ""}
-      </section>
-    `;
-
-    showcase.querySelectorAll(".showcase-product-visual[data-showcase-img]").forEach(el => {
-      const img = new Image();
-      img.onload = () => {
-        el.innerHTML = `<img src="${el.dataset.showcaseImg}" alt="" style="width:72%;max-width:260px;object-fit:contain;filter:drop-shadow(0 0 26px var(--card-glow))"/>`;
-      };
-      img.src = el.dataset.showcaseImg;
-    });
-  }
 }
 
 /* ─── Cart Page ──────────────────────────────────────────── */
