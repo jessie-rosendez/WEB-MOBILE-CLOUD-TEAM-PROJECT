@@ -1546,7 +1546,7 @@ ul { list-style: none; }
 }
 .pdp-media-column {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 74px minmax(0, 1fr);
   gap: 18px;
   align-items: start;
 }
@@ -1598,6 +1598,7 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 14px;
+  grid-column: 1 / -1;
 }
 .pdp-visual-shell {
   background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
