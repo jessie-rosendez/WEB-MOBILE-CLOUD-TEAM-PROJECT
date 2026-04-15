@@ -322,40 +322,20 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("heroGlow").style.cssText = `--glow-color:${p.glow}`;
   document.querySelector(".pdp-hero").style.setProperty("--glow-color", p.glow);
 
-  /* ── Color filter map: hex → CSS filter to simulate colorway ── */
-  const HEX_FILTER = {
-    "#111":    "none",
-    "#b0b4b8": "grayscale(0.9) brightness(1.3) contrast(1.05)",
-    "#ddd":    "grayscale(1) brightness(2.0)",
-    "#44D62C": "sepia(1) hue-rotate(65deg) saturate(4.5) brightness(1.1)",
-    "#0b3f18": "sepia(1) hue-rotate(95deg) saturate(8) brightness(0.55)",
-    "#e9ecef": "grayscale(1) brightness(2.1)",
-    "#f2aebf": "sepia(1) hue-rotate(295deg) saturate(2) brightness(1.2)",
-    "#c9ccd1": "grayscale(1) brightness(1.5)",
-  };
-
   /* ── Media: single product image ── */
   const visual = document.getElementById("pdpVisual");
   document.getElementById("pdpThumbRail").style.display = "none";
 
-  let activeColorFilter = "none";
-
-  const renderProductImage = () => {
-    const glow = `drop-shadow(0 0 40px ${p.glow})`;
-    const combined = activeColorFilter === "none" ? glow : `${activeColorFilter} ${glow}`;
-    const imgEl = visual.querySelector("img");
-    if (imgEl) { imgEl.style.filter = combined; return; }
+  (() => {
     const img = new Image();
     img.onload = () => {
-      visual.innerHTML = `<img src="src/images/${p.id}.jpg" alt="${p.name}" style="filter:${combined}; transition:filter 0.3s ease"/>`;
+      visual.innerHTML = `<img src="src/images/${p.id}.jpg" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
     };
     img.onerror = () => {
-      visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow}">${getIcon(p.tag)}</div>`;
+      visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow}">${getIcon(p.tag)}<span class="pdp-fallback-caption">${p.name}</span></div>`;
     };
     img.src = `src/images/${p.id}.jpg`;
-  };
-
-  renderProductImage();
+  })();
 
   /* ── Badge ── */
   if (p.badge) {
@@ -463,37 +443,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-
-  /* ── Color / Variant Selector with CSS filter colorway simulation ── */
-  const variants = COLOR_OPTIONS[p.tag];
-  if (variants && variants.length > 1) {
-    document.getElementById("pdpVariants").innerHTML = `
-      <div class="pdp-variants">
-        <p class="pdp-variants-label">COLOR / DESIGN &nbsp;<span id="selectedVariant">${variants[0].name.toUpperCase()}</span></p>
-        <div class="pdp-variant-swatches">
-          ${variants.map((v, i) => `
-            <button class="variant-swatch${i === 0 ? " active" : ""}" data-variant="${v.name}" data-hex="${v.hex}">
-              <span class="variant-color-box" style="background:${v.hex}"></span>
-              <span class="variant-swatch-name">${v.name}</span>
-            </button>
-          `).join("")}
-        </div>
-      </div>
-    `;
-    document.getElementById("pdpVariants").addEventListener("click", e => {
-      const sw = e.target.closest(".variant-swatch");
-      if (!sw) return;
-      document.querySelectorAll("#pdpVariants .variant-swatch").forEach(b => b.classList.remove("active"));
-      sw.classList.add("active");
-      document.getElementById("selectedVariant").textContent = sw.dataset.variant.toUpperCase();
-      activeColorFilter = HEX_FILTER[sw.dataset.hex] || "none";
-      const imgEl = visual.querySelector("img");
-      if (imgEl) {
-        const glow = `drop-shadow(0 0 40px ${p.glow})`;
-        imgEl.style.filter = activeColorFilter === "none" ? glow : `${activeColorFilter} ${glow}`;
-      }
-    });
-  }
 
   /* ── Screenshot-style secondary option groups ── */
   const optionGroups = PDP_OPTION_GROUPS[p.tag] || [];
