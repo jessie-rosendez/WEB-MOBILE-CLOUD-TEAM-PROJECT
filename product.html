@@ -330,42 +330,15 @@ document.addEventListener("DOMContentLoaded", () => {
     src: index === 0 ? `src/images/${p.id}.jpg` : `src/images/${p.id}-${index + 1}.jpg`,
   }));
 
-  const renderMediaFrame = (frameIndex) => {
-    const frame = mediaFrames[frameIndex];
-    if (!frame) return;
-    thumbRail.querySelectorAll(".pdp-thumb").forEach((thumb, index) => {
-      thumb.classList.toggle("active", index === frameIndex);
-    });
+  /* hide unused thumb rail */
+  thumbRail.style.display = "none";
 
-    const img = new Image();
-    img.onload = () => {
-      visual.innerHTML = `<img src="${frame.src}" alt="${p.name} — ${frame.label}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
-    };
-    img.onerror = () => {
-      visual.innerHTML = `
-        <div class="pdp-visual-fallback" style="color:${p.glow}">
-          ${getIcon(p.tag)}
-          <span class="pdp-fallback-caption">${frame.label}</span>
-        </div>
-      `;
-    };
-    img.src = frame.src;
-  };
-
-  thumbRail.innerHTML = mediaFrames.map((frame, index) => `
-    <button class="pdp-thumb${index === 0 ? " active" : ""}" data-frame-index="${index}" aria-label="${frame.label}">
-      <span class="pdp-thumb-media">${getIcon(p.tag)}</span>
-      <span class="pdp-thumb-label">${index + 1}</span>
-    </button>
-  `).join("");
-
-  thumbRail.addEventListener("click", e => {
-    const thumb = e.target.closest(".pdp-thumb");
-    if (!thumb) return;
-    renderMediaFrame(Number(thumb.dataset.frameIndex));
-  });
-
-  renderMediaFrame(0);
+  /* inject product image directly — no async preloader */
+  visual.innerHTML = `<img
+    src="src/images/${p.id}.jpg"
+    alt="${p.name}"
+    style="width:100%;max-width:520px;display:block;border-radius:4px;filter:drop-shadow(0 0 40px ${p.glow})"
+  />`;
 
   /* ── Badge ── */
   if (p.badge) {

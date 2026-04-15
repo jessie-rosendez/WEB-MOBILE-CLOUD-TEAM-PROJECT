@@ -1545,10 +1545,8 @@ ul { list-style: none; }
   z-index: 2;
 }
 .pdp-media-column {
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
+  display: block;
+  width: 100%;
 }
 .pdp-thumb-rail {
   display: flex;
