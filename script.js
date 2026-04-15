@@ -103,7 +103,7 @@ const CATEGORY_SHOWCASES = {
   Lifestyle: {
     kicker: "Furniture & Lifestyle",
     title: "Gaming Chairs",
-    body: "Performance seating and battlestation essentials presented with the same showroom feel as the rest of the storefront, led by the Spectre X signature chair.",
+    body: "The Phantm Spectre X — the world's only gaming chair with a heated and cooling seat, a heated and cooling cup holder, full bed recline, and an 8-node massage system. Available exclusively at Phantm.",
     theme: "lifestyle",
     products: ["spectre-x", "hyperflux", "gigantus"],
     panels: [
@@ -474,15 +474,15 @@ const PDP_FEATURES = {
     ]
   },
   Chair: {
-    heading: "Built Different",
-    sub: "Every detail of the Spectre X was designed for the player who wants a sharper visual identity without sacrificing long-session comfort.",
+    heading: "Built Different. Available Nowhere Else.",
+    sub: "The Phantm Spectre X is the only gaming chair on the market that heats your seat, cools your drink, reclines into a full bed, and delivers a complete massage — engineered exclusively for Phantm.",
     cards: [
-      { title:"Adaptive Lumbar Spine",    body:"A four-zone adjustable lumbar system that adapts to your posture throughout long sessions." },
-      { title:"Reactive RGB Lighting",    body:"Programmable RGB lighting built into the base, visible from any angle in your setup." },
-      { title:"Hidden Gear Storage",      body:"A flush-fit sliding tray under the seat cushion for cable management and accessories." },
-      { title:"Modular Mount System",     body:"Snap-on side rails accept headset mount, controller holders, and phone arm accessories." },
-      { title:"Racing Shell Silhouette",  body:"Aggressive winged shoulders and bucket-seat profile for a sharper visual identity." },
-      { title:"4D Armrests",              body:"Height, pivot, depth, and lateral adjustment for ideal mouse and keyboard positioning." },
+      { title:"Heated & Cooling Seat",    body:"Dual-zone thermoelectric seat cushion lets you choose between warming heat or cooling relief — adjustable on the fly so every session feels exactly right." },
+      { title:"Heated & Cooling Cup Holder", body:"Built-in smart cup holder keeps your drink cold or hot depending on your preference, powered directly through the chair's USB hub. Never leave your setup for a refill again." },
+      { title:"Full Recline — Converts to Bed", body:"The Spectre X reclines completely flat into a full sleeping surface. Flip down the integrated leg rest and you have a bed-grade recline that no other gaming chair offers." },
+      { title:"Full-Body Massage System", body:"Eight embedded massage nodes across the lumbar, back, and seat deliver customizable vibration therapy. Choose from five massage patterns to relieve tension during long sessions or between matches." },
+      { title:"Adaptive Lumbar Spine",    body:"A four-zone adjustable lumbar system that adapts to your posture throughout the marathon sessions the Spectre X was built for." },
+      { title:"Modular Mount System",     body:"Snap-on side rails accept headset mount, controller holders, and phone arm accessories — the ultimate battlestation command center." },
     ]
   },
 };
@@ -605,13 +605,15 @@ const COMPARE_TABLES = {
   Chair: {
     cols: ["Phantm Spectre X","Razer Iskur V2","Razer Enki"],
     rows: [
-      { label:"Price",         vals:[null,"$499","$299"] },
-      { label:"Lumbar",        vals:["Adaptive 4-Zone","Built-In","—"] },
-      { label:"Under-Seat RGB",vals:[true,false,false] },
-      { label:"Hidden Storage",vals:[true,false,false] },
-      { label:"Modular Mounts",vals:[true,false,false] },
-      { label:"Armrests",      vals:["4D","4D","4D"] },
-      { label:"Max Load",      vals:["299 lbs","299 lbs","299 lbs"] },
+      { label:"Price",              vals:[null,"$499","$299"] },
+      { label:"Heated Seat",        vals:[true,false,false] },
+      { label:"Cooling Seat",       vals:[true,false,false] },
+      { label:"Heated/Cooling Cup Holder", vals:[true,false,false] },
+      { label:"Reclines to Full Bed",vals:[true,false,false] },
+      { label:"Massage System",     vals:["8-Node Full Body","—","—"] },
+      { label:"Adaptive Lumbar",    vals:["4-Zone","Built-In","—"] },
+      { label:"Modular Mounts",     vals:[true,false,false] },
+      { label:"Armrests",           vals:["4D","4D","4D"] },
     ]
   },
 };
