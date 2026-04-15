@@ -322,20 +322,50 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("heroGlow").style.cssText = `--glow-color:${p.glow}`;
   document.querySelector(".pdp-hero").style.setProperty("--glow-color", p.glow);
 
-  /* ── Media: single product image ── */
+  /* ── Media gallery: main frame + thumb rail ── */
   const visual = document.getElementById("pdpVisual");
-  document.getElementById("pdpThumbRail").style.display = "none";
+  const thumbRail = document.getElementById("pdpThumbRail");
+  const mediaFrames = (PDP_MEDIA_FRAMES[p.tag] || PDP_MEDIA_FRAMES.Laptop).map((label, index) => ({
+    label,
+    src: index === 0 ? `src/images/${p.id}.jpg` : `src/images/${p.id}-${index + 1}.jpg`,
+  }));
 
-  (() => {
+  const renderMediaFrame = (frameIndex) => {
+    const frame = mediaFrames[frameIndex];
+    if (!frame) return;
+    thumbRail.querySelectorAll(".pdp-thumb").forEach((thumb, index) => {
+      thumb.classList.toggle("active", index === frameIndex);
+    });
+
     const img = new Image();
     img.onload = () => {
-      visual.innerHTML = `<img src="src/images/${p.id}.jpg" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+      visual.innerHTML = `<img src="${frame.src}" alt="${p.name} — ${frame.label}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
     };
     img.onerror = () => {
-      visual.innerHTML = `<div class="pdp-visual-fallback" style="color:${p.glow}">${getIcon(p.tag)}<span class="pdp-fallback-caption">${p.name}</span></div>`;
+      visual.innerHTML = `
+        <div class="pdp-visual-fallback" style="color:${p.glow}">
+          ${getIcon(p.tag)}
+          <span class="pdp-fallback-caption">${frame.label}</span>
+        </div>
+      `;
     };
-    img.src = `src/images/${p.id}.jpg`;
-  })();
+    img.src = frame.src;
+  };
+
+  thumbRail.innerHTML = mediaFrames.map((frame, index) => `
+    <button class="pdp-thumb${index === 0 ? " active" : ""}" data-frame-index="${index}" aria-label="${frame.label}">
+      <span class="pdp-thumb-media">${getIcon(p.tag)}</span>
+      <span class="pdp-thumb-label">${index + 1}</span>
+    </button>
+  `).join("");
+
+  thumbRail.addEventListener("click", e => {
+    const thumb = e.target.closest(".pdp-thumb");
+    if (!thumb) return;
+    renderMediaFrame(Number(thumb.dataset.frameIndex));
+  });
+
+  renderMediaFrame(0);
 
   /* ── Badge ── */
   if (p.badge) {
@@ -443,6 +473,30 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  /* ── Color / Variant Selector — large box tiles ── */
+  const variants = COLOR_OPTIONS[p.tag];
+  if (variants && variants.length > 1) {
+    document.getElementById("pdpVariants").innerHTML = `
+      <div class="pdp-variants">
+        <p class="pdp-variants-label">Color / Design &nbsp;<span id="selectedVariant">${variants[0].name}</span></p>
+        <div class="pdp-variant-swatches">
+          ${variants.map((v, i) => `
+            <button class="variant-swatch${i === 0 ? " active" : ""}" data-variant="${v.name}">
+              <span class="variant-color-box" style="background:${v.hex}"></span>
+              <span class="variant-swatch-name">${v.name}</span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+    document.getElementById("pdpVariants").addEventListener("click", e => {
+      const sw = e.target.closest(".variant-swatch");
+      if (!sw) return;
+      document.querySelectorAll("#pdpVariants .variant-swatch").forEach(b => b.classList.remove("active"));
+      sw.classList.add("active");
+      document.getElementById("selectedVariant").textContent = sw.dataset.variant;
+    });
+  }
 
   /* ── Screenshot-style secondary option groups ── */
   const optionGroups = PDP_OPTION_GROUPS[p.tag] || [];
