@@ -336,19 +336,35 @@ document.addEventListener("DOMContentLoaded", () => {
     thumbRail.querySelectorAll(".pdp-thumb").forEach((thumb, index) => {
       thumb.classList.toggle("active", index === frameIndex);
     });
-    if (frameIndex === 0) {
-      visual.innerHTML = `<img src="${frame.src}" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
-    } else {
+
+    const img = new Image();
+    img.onload = () => {
+      visual.innerHTML = `<img src="${frame.src}" alt="${p.name} — ${frame.label}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+    };
+    img.onerror = () => {
       visual.innerHTML = `
         <div class="pdp-visual-fallback" style="color:${p.glow}">
           ${getIcon(p.tag)}
           <span class="pdp-fallback-caption">${frame.label}</span>
         </div>
       `;
-    }
+    };
+    img.src = frame.src;
   };
 
-  thumbRail.style.display = "none";
+  thumbRail.innerHTML = mediaFrames.map((frame, index) => `
+    <button class="pdp-thumb${index === 0 ? " active" : ""}" data-frame-index="${index}" aria-label="${frame.label}">
+      <span class="pdp-thumb-media">${getIcon(p.tag)}</span>
+      <span class="pdp-thumb-label">${index + 1}</span>
+    </button>
+  `).join("");
+
+  thumbRail.addEventListener("click", e => {
+    const thumb = e.target.closest(".pdp-thumb");
+    if (!thumb) return;
+    renderMediaFrame(Number(thumb.dataset.frameIndex));
+  });
+
   renderMediaFrame(0);
 
   /* ── Badge ── */
