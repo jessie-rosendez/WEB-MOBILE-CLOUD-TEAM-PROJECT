@@ -336,20 +336,16 @@ document.addEventListener("DOMContentLoaded", () => {
     thumbRail.querySelectorAll(".pdp-thumb").forEach((thumb, index) => {
       thumb.classList.toggle("active", index === frameIndex);
     });
-
-    const img = new Image();
-    img.onload = () => {
-      visual.innerHTML = `<img src="${frame.src}" alt="${p.name} — ${frame.label}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
-    };
-    img.onerror = () => {
+    if (frameIndex === 0) {
+      visual.innerHTML = `<img src="${frame.src}" alt="${p.name}" style="filter:drop-shadow(0 0 40px ${p.glow})"/>`;
+    } else {
       visual.innerHTML = `
         <div class="pdp-visual-fallback" style="color:${p.glow}">
           ${getIcon(p.tag)}
           <span class="pdp-fallback-caption">${frame.label}</span>
         </div>
       `;
-    };
-    img.src = frame.src;
+    }
   };
 
   thumbRail.innerHTML = mediaFrames.map((frame, index) => `
