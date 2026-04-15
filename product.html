@@ -348,19 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  thumbRail.innerHTML = mediaFrames.map((frame, index) => `
-    <button class="pdp-thumb${index === 0 ? " active" : ""}" data-frame-index="${index}" aria-label="${frame.label}">
-      <span class="pdp-thumb-media">${getIcon(p.tag)}</span>
-      <span class="pdp-thumb-label">${index + 1}</span>
-    </button>
-  `).join("");
-
-  thumbRail.addEventListener("click", e => {
-    const thumb = e.target.closest(".pdp-thumb");
-    if (!thumb) return;
-    renderMediaFrame(Number(thumb.dataset.frameIndex));
-  });
-
+  thumbRail.style.display = "none";
   renderMediaFrame(0);
 
   /* ── Badge ── */
